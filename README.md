@@ -1,4 +1,4 @@
-**原项目地址**：[github 地址](https://github.com/SSDWGG/MP_V2.git)
+**MP_V2项目地址**：[github 地址](https://github.com/SSDWGG/MP_V2.git)
 
 # MP_V2
 
