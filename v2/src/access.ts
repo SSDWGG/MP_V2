@@ -1,10 +1,15 @@
 /**
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */
-// 去拿线
-export default function access(initialState: { currentUser?: user | undefined }) {
+// export default function access(initialState: { currentUser?: user | undefined }) {
+//   const { currentUser } = initialState || {};
+//   return {
+//     canAdmin: currentUser && currentUser.userid === 1,
+//   };
+// }
+export default function access(initialState: { currentUser?: API.CurrentUser | undefined }) {
   const { currentUser } = initialState || {};
   return {
-    canAdmin: currentUser && currentUser.userid === 1,
+    canAdmin: currentUser && currentUser.access === 'admin',
   };
 }
