@@ -56,31 +56,25 @@
   },
 
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    icon: 'dashboard',
+    name: 'result',
+    icon: 'CheckCircleOutlined',
+    path: '/result',
     routes: [
       {
-        path: '/dashboard',
-        redirect: '/dashboard/analysis',
+        path: '/result',
+        redirect: '/result/success',
       },
       {
-        name: 'analysis',
+        name: 'success',
         icon: 'smile',
-        path: '/dashboard/analysis',
-        component: '@/pages/dashboard/analysis',
+        path: '/result/success',
+        component: '@/pages/result/success',
       },
       {
-        name: 'monitor',
+        name: 'fail',
         icon: 'smile',
-        path: '/dashboard/monitor',
-        component: '@/pages/dashboard/monitor',
-      },
-      {
-        name: 'workplace',
-        icon: 'smile',
-        path: '/dashboard/workplace',
-        component: '@/pages/dashboard/workplace',
+        path: '/result/fail',
+        component: '@/pages/result/fail',
       },
       {
         component: './404',
@@ -88,169 +82,37 @@
     ],
   },
   {
-    path: '/form',
-    icon: 'form',
-    name: 'form',
+    name: 'exception',
+    icon: 'warning',
+    path: '/exception',
     routes: [
       {
-        path: '/form',
-        redirect: '/form/step-form',
-      },
-
-      {
-        name: 'step-form',
-        icon: 'smile',
-        path: '/form/step-form',
-        component: '@/pages/form/step-form',
+        path: '/exception',
+        redirect: '/exception/403',
       },
       {
-        name: 'advanced-form',
+        name: '403',
         icon: 'smile',
-        path: '/form/advanced-form',
-        component: '@/pages/form/advanced-form',
+        path: '/exception/403',
+        component: '@/pages/exception/403',
+      },
+      {
+        name: '404',
+        icon: 'smile',
+        path: '/exception/404',
+        component: '@/pages/exception/404',
+      },
+      {
+        name: '500',
+        icon: 'smile',
+        path: '/exception/500',
+        component: '@/pages/exception/500',
       },
       {
         component: './404',
       },
     ],
   },
-  {
-    path: '/list',
-    icon: 'table',
-    name: 'list',
-    routes: [
-      {
-        path: '/list/search',
-        name: 'search-list',
-        component: '@/pages/list/search',
-        routes: [
-          {
-            path: '/list/search',
-            redirect: '/list/search/articles',
-          },
-          {
-            name: 'articles',
-            icon: 'smile',
-            path: '/list/search/articles',
-            component: '@/pages/list/search/articles',
-          },
-          {
-            name: 'projects',
-            icon: 'smile',
-            path: '/list/search/projects',
-            component: '@/pages/list/search/projects',
-          },
-          {
-            name: 'applications',
-            icon: 'smile',
-            path: '/list/search/applications',
-            component: '@/pages/list/search/applications',
-          },
-          {
-            component: './404',
-          },
-        ],
-      },
-      {
-        path: '/list',
-        redirect: '/list/card-list',
-      },
-
-      {
-        name: 'card-list',
-        icon: 'smile',
-        path: '/list/card-list',
-        component: '@/pages/list/card-list',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    icon: 'profile',
-    routes: [
-      {
-        path: '/profile',
-        redirect: '/profile/basic',
-      },
-      {
-        name: 'basic',
-        icon: 'smile',
-        path: '/profile/basic',
-        component: '@/pages/profile/basic',
-      },
-      {
-        name: 'advanced',
-        icon: 'smile',
-        path: '/profile/advanced',
-        component: '@/pages/profile/advanced',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  // {
-  //   name: 'result',
-  //   icon: 'CheckCircleOutlined',
-  //   path: '/result',
-  //   routes: [
-  //     {
-  //       path: '/result',
-  //       redirect: '/result/success',
-  //     },
-  //     {
-  //       name: 'success',
-  //       icon: 'smile',
-  //       path: '/result/success',
-  //       component: '@/pages/result/success',
-  //     },
-  //     {
-  //       name: 'fail',
-  //       icon: 'smile',
-  //       path: '/result/fail',
-  //       component: '@/pages/result/fail',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'exception',
-  //   icon: 'warning',
-  //   path: '/exception',
-  //   routes: [
-  //     {
-  //       path: '/exception',
-  //       redirect: '/exception/403',
-  //     },
-  //     {
-  //       name: '403',
-  //       icon: 'smile',
-  //       path: '/exception/403',
-  //       component: '@/pages/exception/403',
-  //     },
-  //     {
-  //       name: '404',
-  //       icon: 'smile',
-  //       path: '/exception/404',
-  //       component: '@/pages/exception/404',
-  //     },
-  //     {
-  //       name: '500',
-  //       icon: 'smile',
-  //       path: '/exception/500',
-  //       component: '@/pages/exception/500',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
 
   // 个人主页
   {
