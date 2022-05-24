@@ -55,144 +55,144 @@
     ],
   },
 
-  // {
-  //   path: '/dashboard',
-  //   name: 'dashboard',
-  //   icon: 'dashboard',
-  //   routes: [
-  //     {
-  //       path: '/dashboard',
-  //       redirect: '/dashboard/analysis',
-  //     },
-  //     {
-  //       name: 'analysis',
-  //       icon: 'smile',
-  //       path: '/dashboard/analysis',
-  //       component: '@/pages/dashboard/analysis',
-  //     },
-  //     {
-  //       name: 'monitor',
-  //       icon: 'smile',
-  //       path: '/dashboard/monitor',
-  //       component: '@/pages/dashboard/monitor',
-  //     },
-  //     {
-  //       name: 'workplace',
-  //       icon: 'smile',
-  //       path: '/dashboard/workplace',
-  //       component: '@/pages/dashboard/workplace',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/form',
-  //   icon: 'form',
-  //   name: 'form',
-  //   routes: [
-  //     {
-  //       path: '/form',
-  //       redirect: '/form/step-form',
-  //     },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    icon: 'dashboard',
+    routes: [
+      {
+        path: '/dashboard',
+        redirect: '/dashboard/analysis',
+      },
+      {
+        name: 'analysis',
+        icon: 'smile',
+        path: '/dashboard/analysis',
+        component: '@/pages/dashboard/analysis',
+      },
+      {
+        name: 'monitor',
+        icon: 'smile',
+        path: '/dashboard/monitor',
+        component: '@/pages/dashboard/monitor',
+      },
+      {
+        name: 'workplace',
+        icon: 'smile',
+        path: '/dashboard/workplace',
+        component: '@/pages/dashboard/workplace',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/form',
+    icon: 'form',
+    name: 'form',
+    routes: [
+      {
+        path: '/form',
+        redirect: '/form/step-form',
+      },
 
-  //     {
-  //       name: 'step-form',
-  //       icon: 'smile',
-  //       path: '/form/step-form',
-  //       component: '@/pages/form/step-form',
-  //     },
-  //     {
-  //       name: 'advanced-form',
-  //       icon: 'smile',
-  //       path: '/form/advanced-form',
-  //       component: '@/pages/form/advanced-form',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/list',
-  //   icon: 'table',
-  //   name: 'list',
-  //   routes: [
-  //     {
-  //       path: '/list/search',
-  //       name: 'search-list',
-  //       component: '@/pages/list/search',
-  //       routes: [
-  //         {
-  //           path: '/list/search',
-  //           redirect: '/list/search/articles',
-  //         },
-  //         {
-  //           name: 'articles',
-  //           icon: 'smile',
-  //           path: '/list/search/articles',
-  //           component: '@/pages/list/search/articles',
-  //         },
-  //         {
-  //           name: 'projects',
-  //           icon: 'smile',
-  //           path: '/list/search/projects',
-  //           component: '@/pages/list/search/projects',
-  //         },
-  //         {
-  //           name: 'applications',
-  //           icon: 'smile',
-  //           path: '/list/search/applications',
-  //           component: '@/pages/list/search/applications',
-  //         },
-  //         {
-  //           component: './404',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       path: '/list',
-  //       redirect: '/list/card-list',
-  //     },
+      {
+        name: 'step-form',
+        icon: 'smile',
+        path: '/form/step-form',
+        component: '@/pages/form/step-form',
+      },
+      {
+        name: 'advanced-form',
+        icon: 'smile',
+        path: '/form/advanced-form',
+        component: '@/pages/form/advanced-form',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/list',
+    icon: 'table',
+    name: 'list',
+    routes: [
+      {
+        path: '/list/search',
+        name: 'search-list',
+        component: '@/pages/list/search',
+        routes: [
+          {
+            path: '/list/search',
+            redirect: '/list/search/articles',
+          },
+          {
+            name: 'articles',
+            icon: 'smile',
+            path: '/list/search/articles',
+            component: '@/pages/list/search/articles',
+          },
+          {
+            name: 'projects',
+            icon: 'smile',
+            path: '/list/search/projects',
+            component: '@/pages/list/search/projects',
+          },
+          {
+            name: 'applications',
+            icon: 'smile',
+            path: '/list/search/applications',
+            component: '@/pages/list/search/applications',
+          },
+          {
+            component: './404',
+          },
+        ],
+      },
+      {
+        path: '/list',
+        redirect: '/list/card-list',
+      },
 
-  //     {
-  //       name: 'card-list',
-  //       icon: 'smile',
-  //       path: '/list/card-list',
-  //       component: '@/pages/list/card-list',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/profile',
-  //   name: 'profile',
-  //   icon: 'profile',
-  //   routes: [
-  //     {
-  //       path: '/profile',
-  //       redirect: '/profile/basic',
-  //     },
-  //     {
-  //       name: 'basic',
-  //       icon: 'smile',
-  //       path: '/profile/basic',
-  //       component: '@/pages/profile/basic',
-  //     },
-  //     {
-  //       name: 'advanced',
-  //       icon: 'smile',
-  //       path: '/profile/advanced',
-  //       component: '@/pages/profile/advanced',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
+      {
+        name: 'card-list',
+        icon: 'smile',
+        path: '/list/card-list',
+        component: '@/pages/list/card-list',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    icon: 'profile',
+    routes: [
+      {
+        path: '/profile',
+        redirect: '/profile/basic',
+      },
+      {
+        name: 'basic',
+        icon: 'smile',
+        path: '/profile/basic',
+        component: '@/pages/profile/basic',
+      },
+      {
+        name: 'advanced',
+        icon: 'smile',
+        path: '/profile/advanced',
+        component: '@/pages/profile/advanced',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
   // {
   //   name: 'result',
   //   icon: 'CheckCircleOutlined',
