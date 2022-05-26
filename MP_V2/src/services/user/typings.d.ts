@@ -7,6 +7,7 @@ declare namespace UserType {
     username: string;
     password: string;
     email: string;
+    phone: number;
   }
 
   interface ResLogin extends ResBase {

@@ -9,33 +9,8 @@
 export default {
   dev: {
     // 和nginx一样有优先排序问题需要注意
-    '/api/ryw/antpro/': {
-      target: 'http://localhost:3000/',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
-
-    '/allgoodsinfo': {
-      target: 'http://119.3.145.125:9000/',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
-  },
-  test: {
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
-  },
-  pre: {
-    '/api/': {
-      target: 'your pre url',
+    '/v2/': {
+      target: 'http://localhost:9000/',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

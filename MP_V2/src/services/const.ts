@@ -9,9 +9,12 @@ interface user {
   gender?: string;
   signature?: string;
   geographic?: string;
-  createTime?: number;
-  isAdmin?: string;
+  admin?: string;
   address?: string;
+  createTime?: string;
+  endTime?: string;
+  version?: number;
+  deleted?: number;
 }
 interface todo {
   todoid: number;

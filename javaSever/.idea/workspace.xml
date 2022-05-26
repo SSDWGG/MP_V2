@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/ant-design-pro/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/ant-design-pro/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/ant-design-pro/login.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/ant-design-pro/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/services/const.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/swagger/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/swagger/pet.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/swagger/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/swagger/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/swagger/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/user/typings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/services/user/typings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/tests/PuppeteerEnvironment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/tests/beforeTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/tests/getBrowser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/tests/run-tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/tests/setupTests.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UserConteroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UserConteroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/WebConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -230,7 +249,7 @@
       <workItem from="1652177960272" duration="97000" />
       <workItem from="1653451620749" duration="795000" />
       <workItem from="1653453015536" duration="12129000" />
-      <workItem from="1653469677279" duration="7285000" />
+      <workItem from="1653469677279" duration="12042000" />
     </task>
     <servers />
   </component>
@@ -253,17 +272,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

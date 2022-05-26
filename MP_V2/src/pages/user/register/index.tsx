@@ -1,9 +1,9 @@
+import { addUser } from '@/services/user';
+import { Button, Form, Input, Modal, Popover, Progress, Result, Select } from 'antd';
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
-import { Form, Button, Input, Popover, Progress, Select, Modal, Result } from 'antd';
+import { useEffect, useState } from 'react';
 import { history, Link } from 'umi';
 import styles from './style.less';
-import { addUser } from '@/services/user';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -78,7 +78,10 @@ const Register: FC = () => {
   };
 
   const onFinish = async (values: UserType.ParamsAddUser) => {
-    await addUser(values);
+    const p = { ...values };
+    // delete p.confirm;
+
+    await addUser(p);
     Modal.success({
       title: null,
       icon: false,
@@ -234,7 +237,7 @@ const Register: FC = () => {
             </Select>
             <FormItem
               style={{ width: '80%' }}
-              name="mobile"
+              name="phone"
               rules={[
                 {
                   required: true,
