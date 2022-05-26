@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/JWTUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/entity/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/interceptors/JWTInterceptors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/mapper/UsersMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/1467068952348721153tximg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/nulltximg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/FinalprojectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/MP_V2_Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UserConteroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UserConteroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/hander/MyMateObjectHander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/hander/MyMateObjectHander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/util/MD5Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/MD5Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/util/makeDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/makeDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ryw/finalproject/FinalprojectApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ryw/finalproject/FinalprojectApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UserConteroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UserConteroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +230,7 @@
       <workItem from="1652177960272" duration="97000" />
       <workItem from="1653451620749" duration="795000" />
       <workItem from="1653453015536" duration="12129000" />
-      <workItem from="1653469677279" duration="6459000" />
+      <workItem from="1653469677279" duration="7285000" />
     </task>
     <servers />
   </component>
