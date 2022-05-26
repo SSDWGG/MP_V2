@@ -2,20 +2,28 @@ package com.ryw.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.serializer.ToStringSerializer;
+import com.auth0.jwt.exceptions.AlgorithmMismatchException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ryw.controller.util.JWTUtils;
 import com.ryw.entity.User;
 import com.ryw.entity.Userinfo;
 import com.ryw.entity.Userorder;
 import com.ryw.mapper.UserMapper;
 import com.ryw.mapper.UserinfoMapper;
 import com.ryw.mapper.UserorderMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
+@Slf4j
 @RestController                             //返回值字符
 public class LoginController {
     @Autowired
@@ -24,6 +32,7 @@ public class LoginController {
     private UserinfoMapper userinfoMapper;
     @Autowired
     private UserorderMapper userorderMapper;
+
 
     @CrossOrigin            //所有方法跨域
     @RequestMapping("/login")           //用户和管理员登录
@@ -102,8 +111,54 @@ public class LoginController {
     @RequestMapping("/test")
     public String test()
     {
-       return "test success";
+
+        Map<String, String> payload = new HashMap<>();
+        payload.put("id", "hahahha");
+        payload.put("name", "hahahha");
+        payload.put("password", "hahahha");
+        // 生成jwt令牌
+        String token = JWTUtils.getToken(payload);
+        log.info("成功！生成token！");
+        log.info(token);
+
+        return token;
     }
 
-
+    @RequestMapping("/qqqq")
+    public void qqqq(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        // 验证令牌  交给拦截器去做
+        // 只需要在这里处理自己的业务逻辑
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        log.info("用户id：[{}]",verify.getClaim("id").asString());
+        log.info("用户名字：[{}]",verify.getClaim("name").asString());
+        map.put("state", true);
+        map.put("msg", "请求成功");
+    }
+    @RequestMapping("/wwww")
+    public void wwww(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        // 验证令牌  交给拦截器去做
+        // 只需要在这里处理自己的业务逻辑
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        log.info("用户id：[{}]",verify.getClaim("id").asString());
+        log.info("用户名字：[{}]",verify.getClaim("name").asString());
+        map.put("state", true);
+        map.put("msg", "请求成功");
+    }
+    @RequestMapping("/zzzz")
+    public void zzzz(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        // 验证令牌  交给拦截器去做
+        // 只需要在这里处理自己的业务逻辑
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.verify(token);
+        log.info("用户id：[{}]",verify.getClaim("id").asString());
+        log.info("用户名字：[{}]",verify.getClaim("name").asString());
+        map.put("state", true);
+        map.put("msg", "请求成功");
+    }
 }
+

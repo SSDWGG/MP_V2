@@ -3,16 +3,17 @@ package com.ryw.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ryw.entity.Goods;
 import com.ryw.entity.User;
 import com.ryw.entity.Userinfo;
 import com.ryw.mapper.GoodsMapper;
 import com.ryw.mapper.UserMapper;
 import com.ryw.mapper.UserinfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,53 +30,6 @@ public class UserConteroller {
     GoodsMapper goodsMapper;
 
     @CrossOrigin
-    @RequestMapping("/allUser")              // 分页查询  和全部数据条数
-    public String getUserList(@RequestParam("pageNum") int pageNum  ,
-                              @RequestParam("pageSize") int pageSize ){   //接收传来的参数，这里了封装一个实体类
-
-        Page<User> page = new Page<>(pageNum,pageSize);
-        userMapper.selectPage(page, null);
-        List<User> users  = page.getRecords();  //分页查询出的用户数据
-        HashMap<String, Object> res = new HashMap<>();
-        long numbers = page.getTotal();// 总条数
-        res.put("numbers",numbers);
-        res.put("data",users);
-//        System.out.println("总条数："+numbers);
-        String users_json = JSON.toJSONString(res);
-        return users_json;
-    }
-
-    @RequestMapping("/addUser")         //管理员直接添加用户
-    public String addUser(@RequestParam("username") String username,
-                          @RequestParam("password") String password,
-                          @RequestParam("email") String email,
-                          User user){
-        //姓名邮箱都不得重复
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",username).or().eq("email",email);
-        User usertarge = userMapper.selectOne(wrapper);//字段无重复，可以添加注册用户
-        if (usertarge == null) {
-            //用户名不重复，放入数据库
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setEmail(email);
-            int result = userMapper.insert(user);
-            if(result!=0){
-
-                /*拿到注册的id*/
-                QueryWrapper<User> wrapper2 = new QueryWrapper<>();
-                wrapper2.eq("email",email);
-                User usertarge2 = userMapper.selectOne(wrapper2);
-                Long id = usertarge2.getId();
-                /*自动生成usrinfo信息*/
-                setuserinfo(id);
-
-                return "insertsuccess";     //插入成功   代码  insertsuccess
-            }
-            return   "0";           //插入操作失败    代码0
-        }
-        return "00" ;                 //用户名或者邮箱重复  代码00
-    }
 
 
     @RequestMapping("/attributechange")         //切换属性
@@ -84,19 +38,25 @@ public class UserConteroller {
                                   @RequestParam("targe") Boolean targe){
        int count = 0;
         User user = userMapper.selectById(id);
-        if(name.equals("admin")){                     //做不同属性名的判断
-                    int targeadmin = targe?1:0;          //布尔值转数字01
-                    user.setAdmin(targeadmin);
-                    count =  userMapper.updateById(user);
-        }else if(name.equals("deleted")){            //不能只是删除，还要取反的
-                    int targedeleted = targe?1:0;
-                   count =  userMapper.changedeleteByid(id,targedeleted);
-        }else if(name.equals("goodsdeleted")){           //商品的上下架
-            int targedeleted = targe?1:0;
-            count =  goodsMapper.issell(id,targedeleted);
+        switch (name) {
+            case "admin":                      //做不同属性名的判断
+                int targeadmin = targe ? 1 : 0;          //布尔值转数字01
+
+                user.setAdmin(targeadmin);
+                count = userMapper.updateById(user);
+                break;
+            case "deleted": {            //不能只是删除，还要取反的
+                int targedeleted = targe ? 1 : 0;
+                count = userMapper.changedeleteByid(id, targedeleted);
+                break;
+            }
+            case "goodsdeleted": {           //商品的上下架
+                int targedeleted = targe ? 1 : 0;
+                count = goodsMapper.issell(id, targedeleted);
+                break;
+            }
         }
-        String str = count >0?"success":"error";
-        return str;
+        return count >0?"success":"error";
     }
 
 
@@ -119,7 +79,6 @@ public class UserConteroller {
                     arrayList.add(userinfo);        //把符合条件的放入最后传送的数组
                 }
            }
-
         }
         HashMap<String, Object> res = new HashMap<>();
         res.put("data",userlist);

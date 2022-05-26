@@ -1,4 +1,8 @@
 package com.ryw.finalproject;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.entity.*;
@@ -7,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class FinalprojectApplicationTests {
@@ -164,5 +165,34 @@ class FinalprojectApplicationTests {
         userMapper.updateById(user);
     }
 
+    @Test
+    void contextLoads() {
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        Calendar instance = Calendar.getInstance();
+        // 20秒后令牌token失效
+        instance.add(Calendar.SECOND,20000);
+
+        String token = JWT.create()
+                .withHeader(map) // header可以不写，因为默认值就是它
+                .withClaim("userId", 21)  //payload
+                .withClaim("username", "xiaoshuang")
+                .withExpiresAt(instance.getTime()) // 指定令牌的过期时间
+                .sign(Algorithm.HMAC256("XIAOSHUANG"));//签名
+
+        System.out.println(token);
+    }
+    @Test
+    public void test(){
+        // 通过签名生成验证对象
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256("XIAOSHUANG")).build();
+
+        DecodedJWT verify = jwtVerifier.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NTM0ODYxMTQsInVzZXJJZCI6MjEsInVzZXJuYW1lIjoieGlhb3NodWFuZyJ9.Cbu-Lq72m14xLE1Y24XtJ3KKuoo99uCxBE1-wUDHVn8");
+        System.out.println(verify.getClaim("userId"));
+        System.out.println(verify.getClaim("username"));
+        System.out.println("令牌过期时间："+verify.getExpiresAt());
+
+    }
 
 }

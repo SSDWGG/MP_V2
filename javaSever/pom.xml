@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ryw</groupId>
-    <artifactId>finalproject</artifactId>
+    <artifactId>MP_V2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>finalproject</name>
-    <description>finalproject</description>
+    <name>MP_V2</name>
+    <description>MP_V2</description>
     <properties>
         <java.version>1.8</java.version>
 <!--        <maven-jar-plugin.version>2.6.3</maven-jar-plugin.version>-->
@@ -72,6 +72,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+<!--        jwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.14.0</version>
         </dependency>
     </dependencies>
     <build>

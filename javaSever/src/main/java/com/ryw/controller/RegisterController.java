@@ -5,7 +5,7 @@ import com.ryw.entity.User;
 import com.ryw.entity.Userinfo;
 import com.ryw.mapper.UserMapper;
 import com.ryw.mapper.UserinfoMapper;
-import com.ryw.util.MD5Utils;
+import com.ryw.controller.util.MD5Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
