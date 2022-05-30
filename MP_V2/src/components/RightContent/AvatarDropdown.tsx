@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import { getTokenKey } from '@/common/utils';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import React, { useCallback } from 'react';
 import { history, useModel } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import type { MenuInfo } from 'rc-menu/lib/interface';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -35,7 +36,9 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       if (key === 'logout') {
         // 清空页面用户信息，并且失效token
         setInitialState((s) => ({ ...s, currentUser: undefined }));
-        // 退出登录，需要发送一个失效token的请求
+        localStorage.removeItem(getTokenKey('ryw'));
+
+        // 退出登录（清空缓存在本地的token）
         loginOut();
         return;
       }

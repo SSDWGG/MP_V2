@@ -81,6 +81,7 @@
       },
     ],
   },
+
   {
     name: 'exception',
     icon: 'warning',
@@ -142,72 +143,6 @@
     ],
   },
 
-  // 测试功能
-  {
-    name: 'test',
-    icon: 'user',
-    path: '/test',
-    routes: [
-      {
-        path: '/test',
-        redirect: '/test/toast',
-      },
-      {
-        name: 'toast',
-        icon: 'smile',
-        path: '/test/toast',
-        component: '@/pages/testpage/toast',
-      },
-
-      {
-        component: './404',
-      },
-    ],
-  },
-  // mrtcExample
-  {
-    path: '/mrtcExample',
-    name: 'mrtcExample',
-    layout: false,
-    icon: 'smile',
-    // hideInMenu: true,
-    routes: [
-      {
-        path: '/mrtcExample',
-        redirect: '/mrtcExample/home',
-      },
-      {
-        path: '/mrtcExample/home',
-        name: 'home',
-        component: './mrtcExample/components/home',
-      },
-      {
-        path: '/mrtcExample/multiStream',
-        name: 'multiStream',
-        component: './mrtcExample/components/multiStream',
-      },
-      {
-        path: '/mrtcExample/screenShare',
-        name: 'screenShare',
-        component: './mrtcExample/components/desktopShare',
-      },
-      {
-        path: '/mrtcExample/multiInput',
-        name: 'multiInput',
-        component: './mrtcExample/components/multiInput',
-      },
-      {
-        path: '/mrtcExample/audience',
-        name: 'audience',
-        component: './mrtcExample/components/audience',
-      },
-      {
-        path: '/mrtcExample/mobilePush',
-        name: 'mobilePush',
-        component: './mrtcExample/components/mobilePush',
-      },
-    ],
-  },
   //未匹配跳转404
   {
     component: './404',

@@ -2,10 +2,10 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { message, notification } from 'antd';
 import { history, RequestConfig, RunTimeLayoutConfig } from 'umi';
-import Footer from './components/Footer';
-import RightContent from './components/RightContent';
 import type { RequestOptionsInit, ResponseError } from 'umi-request';
 import { getTokenKey } from './common/utils';
+import Footer from './components/Footer';
+import RightContent from './components/RightContent';
 import { queryCurrentUser } from './services/user';
 
 // const isDev = process.env.NODE_ENV === 'development';
@@ -32,18 +32,22 @@ export async function getInitialState(): Promise<{
   }
 
   const fetchUserInfo = async () => {
+    console.log(localToken);
+
     const msg = await queryCurrentUser(localToken);
+    console.log(msg);
+
     if (!!msg) {
       return msg;
     } else {
       // token无效的去登录页
       history.push(loginPath);
       message.error('账号已禁用，请联系管理员');
-      localStorage.removeItem(getTokenKey('ryw'));
+      // localStorage.removeItem(getTokenKey('ryw'));
       return undefined;
     }
   };
-  // 有token走非登陆页的验证token  （刷新的情况）
+  // 有token走非登陆页的验证token  （刷新，或者直接访问非开放页面的情况）
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
 
@@ -80,14 +84,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     footerRender: () => <Footer />,
     title: initialState?.currentUser?.username,
 
-    // onPageChange: () => {
-    //   // 直接登录
-    //   const { location } = history;
-    //   // 如果没有登录，重定向到 login
-    //   if (!initialState?.currentUser && location.pathname !== loginPath) {
-    //     history.push(loginPath);
-    //   }
-    // },
+    onPageChange: () => {
+      // 直接登录
+      const { location } = history;
+      // 如果没有登录，重定向到 login
+      if (!initialState?.currentUser && location.pathname !== loginPath) {
+        history.push(loginPath);
+      }
+    },
     links: [],
     menuHeaderRender: undefined,
     // 自定义 403 页面

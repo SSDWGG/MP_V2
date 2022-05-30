@@ -35,25 +35,7 @@ public class LoginController {
 
 
     @CrossOrigin            //所有方法跨域
-    @RequestMapping("/login")           //用户和管理员登录
-    public String userLogin(@RequestParam("username") String username,
-                            @RequestParam("password") String password)
-    {  //接收传来的参数，参数是user对象 参数格式要一致
-        String str = "error";
-        HashMap<String, Object> map = new HashMap<>(); // 自定义要查的条件
-        map.put("username",username);
-        map.put("password",password);
-        List<User> users = userMapper.selectByMap(map);
-        if (!users.isEmpty()) {
-            str = "normaluser";             //设置为普通用户
 
-            if(users.get(0).getAdmin()==1){    //判断是否是管理员 （管理员的username不能重复），用户email不能重复
-                str = "admin";
-            }
-        }
-//        System.out.println(str);
-        return str;
-    }
 
     @RequestMapping("/getuserallinfo")           //获取用户所有信息
     public String userLogin(@RequestParam("username") String username,

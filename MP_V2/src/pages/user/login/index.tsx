@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
 import { Button, Form, Input, message, Tooltip } from 'antd';
+import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
 import style from './index.less';
-import { getTokenKey } from '@/common/utils';
 
 interface FormValues {
   username: string;
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     const token_key = getTokenKey('ryw');
     try {
       const loginRes = await login(values);
-      localStorage.setItem(token_key, loginRes.token);
+      localStorage.setItem(token_key, loginRes);
       try {
         await fetchUserInfo();
       } catch (error) {
@@ -54,10 +54,9 @@ const Login: React.FC = () => {
     <div className={style.loginPage}>
       <div className="login__left-text">
         <div className="login-page__welcome">
-          {/* 定位是个人管理，v1不考虑多用户模式 */}
-          <h1>WGG的私人管理平台</h1>
-          <p className="login-page__welcome_EnglishTitle">Wgg Personal management platform</p>
-          <p>全数字化管理平台</p>
+          <h1>多功能全数字化平台</h1>
+          <p className="login-page__welcome_EnglishTitle">Versatile and fully digital platform</p>
+          <p>全数字化管理</p>
         </div>
         <div className="login-page__logo">
           <img src="/login.png" />

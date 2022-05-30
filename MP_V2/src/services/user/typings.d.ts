@@ -9,9 +9,4 @@ declare namespace UserType {
     email: string;
     phone: number;
   }
-
-  interface ResLogin extends ResBase {
-    data: user[];
-    token: string;
-  }
 }

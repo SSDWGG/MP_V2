@@ -1,12 +1,12 @@
-import { history as umiHistory } from 'umi';
-import type { History } from 'umi';
+import { message, Modal } from 'antd';
 // import copy from 'copy-to-clipboard';
 import produce from 'immer';
-import { message, Modal } from 'antd';
 import { sampleSize } from 'lodash';
+import type { History } from 'umi';
+import { history as umiHistory } from 'umi';
 
-export * from './is';
 export * from './interval';
+export * from './is';
 export const liveRouteReg = /live\/(\w+?)\//;
 export const mobileReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
 export const numberReg = /^[+]{0,1}(\d+)$/;
@@ -192,7 +192,7 @@ export function debounce(fun: SourceFunction, delay: number = 500): TargetFuncti
   };
 }
 export function getTokenKey(Params: string) {
-  return `${Params}_RywPersonalAntProProject_token`;
+  return `${Params}_V2_token`;
 }
 //导出
 export async function downFile(result: any, fileName: string) {
