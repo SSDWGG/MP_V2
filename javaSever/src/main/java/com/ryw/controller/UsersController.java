@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.controller.util.JWTUtils;
 import com.ryw.entity.User;
 import com.ryw.entity.Users;
+import com.ryw.hander.MyPasswordEncoder;
 import com.ryw.mapper.UsersMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,13 @@ public class UsersController {
 
     @RequestMapping("/v2/user/quickAddUser")         //快速添加账号（无需验证码）
     public String addUser(@RequestBody Users users ){
+
+
+
+//        System.out.print( MyPasswordEncoder.encode("123"));
+//        System.out.print(MyPasswordEncoder.matches("13333",MyPasswordEncoder.encode("123")));
+
+
         HashMap<String, Object> resMap = new HashMap<>();
         //姓名邮箱电话都不得重复
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
@@ -50,9 +58,10 @@ public class UsersController {
                 .or().eq("phone",users.getPhone());
         Users userdata = usersMapper.selectOne(wrapper);//字段无重复，可以添加注册用户
         if (userdata == null) {
-            //需要进行不重复校验，进行密码加密存入数据库
+            //进行密码加密存入数据库
+            users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
-            users.setTitle("user");
+            users.setTitle("developer");
             users.setSignature("生命就像一盒巧克力，结果往往出人意料");
              usersMapper.insert(users);
             resMap.put("state", "success");
@@ -69,7 +78,7 @@ public class UsersController {
     {
         HashMap<String, Object> map = new HashMap<>(); // 自定义要查的条件
         map.put("username",username);
-        map.put("password",password);
+        map.put("password",MyPasswordEncoder.encode(password));
         List<Users> users = usersMapper.selectByMap(map);
         if (!users.isEmpty()) {
             //        正常情况下期望只能检索出一个帐号,存入唯一id

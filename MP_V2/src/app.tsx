@@ -35,8 +35,6 @@ export async function getInitialState(): Promise<{
     console.log(localToken);
 
     const msg = await queryCurrentUser(localToken);
-    console.log(msg);
-
     if (!!msg) {
       return msg;
     } else {
@@ -87,8 +85,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {
       // 直接登录
       const { location } = history;
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      // 如果没有登录（且非登录注册页面），重定向到 login
+      if (!initialState?.currentUser && location.pathname !== '/user/register') {
         history.push(loginPath);
       }
     },

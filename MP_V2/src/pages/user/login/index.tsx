@@ -24,7 +24,7 @@ const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {
+    if (!!userInfo) {
       message.success('登录成功！正在为您跳转主页...');
       await setInitialState((s) => ({
         ...s,
@@ -36,15 +36,17 @@ const Login: React.FC = () => {
   async function onFinish(values: FormValues) {
     setSubmitting(true);
     const token_key = getTokenKey('ryw');
-    try {
-      const loginRes = await login(values);
+
+    const loginRes = await login(values);
+
+    if (!!loginRes) {
       localStorage.setItem(token_key, loginRes);
       try {
         await fetchUserInfo();
       } catch (error) {
         message.error('账号暂无权限，请联系管理员！');
       }
-    } catch (error) {
+    } else {
       message.error('登录失败，请重试！');
     }
     setSubmitting(false);
@@ -97,7 +99,6 @@ const Login: React.FC = () => {
                   if (!value) {
                     return Promise.reject('请输入您的密码');
                   }
-
                   return Promise.resolve();
                 },
               }),

@@ -1,75 +1,14 @@
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 // import copy from 'copy-to-clipboard';
 import produce from 'immer';
 import { sampleSize } from 'lodash';
-import type { History } from 'umi';
-import { history as umiHistory } from 'umi';
 
 export * from './interval';
 export * from './is';
 export const liveRouteReg = /live\/(\w+?)\//;
 export const mobileReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
 export const numberReg = /^[+]{0,1}(\d+)$/;
-const { confirm } = Modal;
-export const history: History = {
-  ...umiHistory,
-  push: (params) => {
-    const mid = getMediaCenterId();
-    if (!mid) {
-      message.info('频道id不能为空');
-      return;
-    }
-    if (typeof params === 'string') {
-      let pathname = params;
-      if (!params.includes('?')) {
-        pathname = `${params}?mid=${mid}`;
-      } else if (!params.includes('mid=')) {
-        pathname = `${params}&mid=${mid}`;
-      }
-      umiHistory.push(pathname);
-    } else {
-      params.state &&
-        (params.state = {
-          ...params.state,
-          mid: mid,
-        });
-      params.query &&
-        (params.query = {
-          ...params.query,
-          mid: mid,
-        });
-      umiHistory.push(params);
-    }
-  },
-  replace: (params) => {
-    const mid = getMediaCenterId();
-    if (!mid) {
-      message.info('频道id不能为空');
-      return;
-    }
-    if (typeof params === 'string') {
-      let pathname = params;
-      if (!params.includes('?')) {
-        pathname = `${params}?mid=${mid}`;
-      } else if (!params.includes('mid=')) {
-        pathname = `${params}&mid=${mid}`;
-      }
-      umiHistory.replace(pathname);
-    } else {
-      params.state &&
-        (params.state = {
-          ...params.state,
-          mid: mid,
-        });
-      params.query &&
-        (params.query = {
-          ...params.query,
-          mid: mid,
-        });
-      umiHistory.replace(params);
-    }
-  },
-};
+
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -134,32 +73,7 @@ export async function handleParams(p: any, request: any, isFilter: boolean = tru
     total: res.data.total,
   };
 }
-export function getMediaCenterId() {
-  const mid = (umiHistory.location.query?.mid as string) || '';
-  if (!mid) {
-    console.error('频道 id 不能为空');
-  }
-  return mid;
-}
 
-export function switchRoute(path: string, roomId?: string): void {
-  let toPath = path;
-  if (roomId) {
-    toPath = toPath.replace(':roomId', roomId);
-  }
-  if (sessionStorage.getItem('isUploading') === 'isUploading') {
-    confirm({
-      title: '离开后任务将终止，确定关闭？',
-      content: '有文件正在上传',
-      onOk() {
-        history.push(toPath);
-      },
-      onCancel() {},
-    });
-  } else {
-    history.push(toPath);
-  }
-}
 interface SourceFunction {
   (...args: any[]): any;
 }
@@ -209,10 +123,7 @@ export async function downFile(result: any, fileName: string) {
   message.success('导出成功');
 }
 export function getLocation(url: string) {
-  // url  类似 console/login?xxx=xxx  watch/{channelId}?xxx=xxx
-  return isProd()
-    ? `${location.protocol}//${location.hostname}/${url}`
-    : `https://mdb-f2e.dev.mudu.tv/${url}`;
+  return isProd() ? `${location.protocol}//${location.hostname}/${url}` : `https://xxxxxxxx/${url}`;
 }
 
 export function isProd(): boolean {
@@ -233,10 +144,6 @@ export const formatter = {
     return _maxLength - count;
   },
 };
-export function getPublicPath(path: string) {
-  return `${isProd() ? '/console/' : '/'}${path}`;
-}
-
 // 毫秒转HH:mm:ss
 export function millisecondFormatDate(ms: number, isMs = false) {
   const seconds = isMs ? ms / 1000 : ms;
