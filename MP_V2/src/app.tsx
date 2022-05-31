@@ -32,9 +32,8 @@ export async function getInitialState(): Promise<{
   }
 
   const fetchUserInfo = async () => {
-    console.log(localToken);
-
-    const msg = await queryCurrentUser(localToken);
+    const Token = localStorage.getItem(getTokenKey('ryw'));
+    const msg = await queryCurrentUser(Token);
     if (!!msg) {
       return msg;
     } else {

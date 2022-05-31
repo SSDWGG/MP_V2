@@ -12,7 +12,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'WGG',
+  title: 'WGG_V2',
   pwa: false,
   logo: '/rabbit.jpg',
 

@@ -26,6 +26,7 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (!!userInfo) {
       message.success('登录成功！正在为您跳转主页...');
+      // refresh(); 切换账号登录，主动刷新intistate内容
       await setInitialState((s) => ({
         ...s,
         currentUser: userInfo,

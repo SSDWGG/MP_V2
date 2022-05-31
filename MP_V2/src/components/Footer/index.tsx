@@ -18,22 +18,21 @@ export default () => {
         {
           key: 'Ren',
           title: 'Ren',
-          // href: 'https://pro.ant.design',
-          href: '#',
+          href: 'https://github.com/SSDWGG',
+
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: '#',
-          // href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/SSDWGG',
           blankTarget: true,
         },
         {
-          key: 'wgg',
-          title: 'wgg',
-          // href: 'https://ant.design',
-          href: '#',
+          key: 'WGG',
+          title: 'WGG',
+          href: 'https://github.com/SSDWGG',
+
           blankTarget: true,
         },
       ]}
