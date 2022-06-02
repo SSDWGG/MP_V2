@@ -8,7 +8,7 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import type { ProFormInstance } from '@ant-design/pro-form';
-import { AddTodo, updateTodo } from '@/services/todo';
+// import { AddTodo, updateTodo } from '@/services/todo';
 import moment from 'moment';
 
 interface CreateFormProps {
@@ -37,7 +37,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
       ?.validateFieldsReturnFormatValue?.()
       .then(async (value) => {
         if (modalType === 1) {
-          await AddTodo(value);
+          // await AddTodo(value);
           message.success({
             content: '添加成功',
           });
@@ -45,7 +45,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
           value.todoid = info.todoid;
           value.infactendTime =
             value.schedule >= 100 ? moment(Date.now()).format('YYYY-MM-DD HH:mm') : '';
-          await updateTodo(value);
+          // await updateTodo(value);
           message.success({
             content: '修改成功',
           });

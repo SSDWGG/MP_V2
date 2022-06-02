@@ -9,20 +9,27 @@ interface user {
   gender?: string;
   signature?: string;
   geographic?: string;
-  admin?: string;
+  admin?: number;
   address?: string;
+
   createTime?: string;
-  endTime?: string;
+  updateTime?: string;
   version?: number;
   deleted?: number;
 }
 interface todo {
   todoid: number;
+  userid: number;
   todotitle: string;
   tododescribe: string;
-  beginTime: string;
-  endTime: string;
   okflag: number;
   infactendTime: string;
+  beginTime: string;
+  wantendTime: string;
   schedule: number;
+
+  createTime?: string;
+  updateTime?: string;
+  version?: number;
+  deleted?: number;
 }

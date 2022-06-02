@@ -8,16 +8,14 @@ const PageHeaderContent: FC<{ currentUser: Partial<user> }> = ({ currentUser }) 
   if (!loading) {
     return <Skeleton avatar paragraph={{ rows: 1 }} active />;
   }
-
   const nowdate = new Date();
   let helloContent = '';
-  if (nowdate.getDate() >= 5 && nowdate.getDate() < 9)
-    helloContent = `早晨好☕   ${currentUser.username}`;
-  if (nowdate.getDate() >= 9 && nowdate.getDate() < 12) helloContent = `上午好 ☕ `;
-  if (nowdate.getDate() >= 12 && nowdate.getDate() < 18) helloContent = `下午好 ☕ `;
-  if (nowdate.getDate() >= 18 && nowdate.getDate() < 20) helloContent = `傍晚好 ☕ `;
-  if (nowdate.getDate() >= 20 && nowdate.getDate() < 23) helloContent = `晚间好 ☕  `;
-  if (nowdate.getDate() >= 23 || nowdate.getDate() < 5) helloContent = `夜已深啦 ❤️️ 尽早休息  `;
+  if (nowdate.getHours() >= 5 && nowdate.getHours() < 9) helloContent = `早晨好☕  `;
+  if (nowdate.getHours() >= 9 && nowdate.getHours() < 12) helloContent = `上午好 ☕ `;
+  if (nowdate.getHours() >= 12 && nowdate.getHours() < 18) helloContent = `下午好 ☕ `;
+  if (nowdate.getHours() >= 18 && nowdate.getHours() < 20) helloContent = `傍晚好 ☕ `;
+  if (nowdate.getHours() >= 20 && nowdate.getHours() < 23) helloContent = `晚间好 ☕  `;
+  if (nowdate.getHours() >= 23 || nowdate.getHours() < 5) helloContent = `夜已深啦 ❤️️ 尽早休息  `;
 
   return (
     <div className={styles.pageHeaderContent}>

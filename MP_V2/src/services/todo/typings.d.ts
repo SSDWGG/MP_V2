@@ -5,8 +5,4 @@ declare namespace TodoType {
     beginTime: number;
     endTime: number;
   }
-
-  interface ResGetTodosList extends ResBase {
-    data: todo[];
-  }
 }

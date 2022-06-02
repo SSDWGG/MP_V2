@@ -43,14 +43,7 @@ public class UsersController {
 
     @RequestMapping("/v2/user/quickAddUser")         //快速添加账号（无需验证码）
     public String addUser(@RequestBody Users users ){
-
-
-
-//        System.out.print( MyPasswordEncoder.encode("123"));
-//        System.out.print(MyPasswordEncoder.matches("13333",MyPasswordEncoder.encode("123")));
-
-
-        HashMap<String, Object> resMap = new HashMap<>();
+     HashMap<String, Object> resMap = new HashMap<>();
         //姓名邮箱电话都不得重复
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         wrapper.eq("username",users.getUsername())

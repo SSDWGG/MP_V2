@@ -7,9 +7,9 @@
 //     canAdmin: currentUser && currentUser.userid === 1,
 //   };
 // }
-export default function access(initialState: { currentUser?: API.CurrentUser | undefined }) {
+export default function access(initialState: { currentUser?: user | undefined }) {
   const { currentUser } = initialState || {};
   return {
-    canAdmin: currentUser && currentUser.access === 'admin',
+    canAdmin: currentUser && currentUser.admin === 1,
   };
 }

@@ -9,4 +9,5 @@
 
 项目正在开发中...
 
+创建antd pro项目  npx create-umi myapp
 <br/>

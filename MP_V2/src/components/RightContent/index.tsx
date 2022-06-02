@@ -1,7 +1,8 @@
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Space, Tooltip } from 'antd';
 import React from 'react';
-import { useModel } from 'umi';
+import { Link, useModel } from 'umi';
+import HeaderSearch from '../HeaderSearch';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
 
@@ -9,8 +10,6 @@ export type SiderTheme = 'light' | 'dark';
 
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-
-  console.log(initialState);
 
   if (!initialState || !initialState.settings) {
     return null;
@@ -26,34 +25,30 @@ const GlobalHeaderRight: React.FC = () => {
   return (
     <Space className={className}>
       {/* 搜索之后可以做成个人项目链接跳转 */}
-      {/* <HeaderSearch
+      <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
-        // defaultValue="umi ui"
+        placeholder="Hit me up if you need"
         options={[
           {
-            label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>,
-            value: 'umi ui',
+            label: <Link to="https://github.com/SSDWGG">github</Link>,
+            value: 'https://github.com/SSDWGG',
           },
-          // {
-          //   label: <a href="next.ant.design">Ant Design</a>,
-          //   value: 'Ant Design',
-          // },
-          // {
-          //   label: <a href="https://protable.ant.design/">Pro Table</a>,
-          //   value: 'Pro Table',
-          // },
-          // {
-          //   label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
-          //   value: 'Pro Layout',
-          // },
+          {
+            label: <a href="https://github.com/SSDWGG">vx</a>,
+            value: '13616549486',
+          },
+          {
+            label: <a href="https://github.com/SSDWGG">email</a>,
+            value: '1982549567@qq.com',
+          },
         ]}
-        onSearch={(value) => {
-          console.log('inputSearch', value);
+        onSearch={() => {
+          // 点击搜索跳转外页
+          window.location.href = 'https://github.com/SSDWGG';
         }}
-      /> */}
+      />
 
-      <Tooltip title="tips : 祝你开心每一天！" className={styles.action}>
+      <Tooltip title="祝你开心每一天！" className={styles.action}>
         <QuestionCircleOutlined />
       </Tooltip>
       {/* <NoticeIconView /> */}

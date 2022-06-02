@@ -146,15 +146,20 @@ export const formatter = {
 };
 // 毫秒转HH:mm:ss
 export function millisecondFormatDate(ms: number, isMs = false) {
-  const seconds = isMs ? ms / 1000 : ms;
-  const padZero = (v: number) => {
-    if (v >= 10) return v.toString();
-    return `0${v}`;
-  };
-  const h = Math.floor((seconds / 3600) % 24);
-  const m = Math.floor((seconds / 60) % 60);
-  const s = Math.floor(seconds % 60);
-  return `${padZero(h)}小时${padZero(m)}分钟${padZero(s)}秒`;
+  // nan使用typeof判断是数字
+  if (typeof ms === 'number' && !isNaN(ms)) {
+    const seconds = isMs ? ms / 1000 : ms;
+    const padZero = (v: number) => {
+      if (v >= 10) return v.toString();
+      return `0${v}`;
+    };
+    const h = Math.floor((seconds / 3600) % 24);
+    const m = Math.floor((seconds / 60) % 60);
+    const s = Math.floor(seconds % 60);
+    return `${padZero(h)}小时${padZero(m)}分钟${padZero(s)}秒`;
+  } else {
+    return '暂无数据';
+  }
 }
 /**
  * 随机字符串（只包含大小写英文字母以及数字）
