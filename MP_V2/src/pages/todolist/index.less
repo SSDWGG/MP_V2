@@ -1,0 +1,165 @@
+@import '~antd/lib/style/themes/default.less';
+
+.pre {
+  margin: 12px 0;
+  padding: 12px 20px;
+  background: @input-bg;
+  box-shadow: @card-shadow;
+}
+
+
+.textOverflow() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+// mixins for clearfix
+// ------------------------
+.clearfix() {
+  zoom: 1;
+
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+
+.extraContent {
+  .clearfix();
+
+  float: right;
+  white-space: nowrap;
+
+  .statItem {
+    position: relative;
+    display: inline-block;
+    padding: 0 32px;
+
+    >p:first-child {
+      margin-bottom: 4px;
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      line-height: 22px;
+    }
+
+    >p {
+      margin: 0;
+      color: @heading-color;
+      font-size: 30px;
+      line-height: 38px;
+
+      >span {
+        color: @text-color-secondary;
+        font-size: 20px;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background-color: @border-color-split;
+      content: '';
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: @screen-xl) and (min-width: @screen-lg) {
+  .activeCard {
+    margin-bottom: 24px;
+  }
+
+  .members {
+    margin-bottom: 0;
+  }
+
+  .extraContent {
+    margin-left: -44px;
+
+    .statItem {
+      padding: 0 16px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .activeCard {
+    margin-bottom: 24px;
+  }
+
+  .members {
+    margin-bottom: 0;
+  }
+
+  .extraContent {
+    float: none;
+    margin-right: 0;
+
+    .statItem {
+      padding: 0 16px;
+      text-align: left;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .extraContent {
+    margin-left: -16px;
+  }
+
+  .projectList {
+    .projectGrid {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pageHeaderContent {
+    display: block;
+
+    .content {
+      margin-left: 0;
+    }
+  }
+
+  .extraContent {
+    .statItem {
+      float: none;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .projectList {
+    .projectGrid {
+      width: 100%;
+    }
+  }
+}
