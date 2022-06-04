@@ -5,4 +5,10 @@ declare namespace TodoType {
     beginTime: number;
     endTime: number;
   }
+
+  interface ParamsgetTodoListByQuery extends ParamsPageBase {
+    userid: number;
+    todotitle: string;
+    okflag: number;
+  }
 }

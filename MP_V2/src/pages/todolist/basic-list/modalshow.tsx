@@ -28,8 +28,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
   const { initialState } = useModel('@@initialState');
 
   const formRef = useRef<ProFormInstance>();
-  // value和initvalue会冲突，会默认采取受控的value
-  // const [sliderValue, setSliderValue] = useState<number>(0);
+
   const handleCancel = () => {
     onCancel?.();
   };
@@ -163,7 +162,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               name="schedule"
               label="任务进度"
               initialValue={1}
-              help="新任务默认为开始状态，初始进度设定为进度1"
+              help="新任务默认为开始状态，初始进度设定为进度1，进度为100任务将被完成"
               marks={{
                 0: '0',
                 20: '20',
@@ -248,18 +247,25 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                 );
               }}
             </ProFormDependency>
-            <ProFormSlider
-              name="schedule"
-              label="任务进度"
-              marks={{
-                0: '0',
-                20: '20',
-                40: '40',
-                60: '60',
-                80: '80',
-                100: '100',
+            <ProFormDependency name={['schedule']}>
+              {({ schedule }) => {
+                return (
+                  <ProFormSlider
+                    name="schedule"
+                    label="任务进度"
+                    help={schedule === 100 && <>当前进度被设置为100，任务将被完成</>}
+                    marks={{
+                      0: '0',
+                      20: '20',
+                      40: '40',
+                      60: '60',
+                      80: '80',
+                      100: '100',
+                    }}
+                  />
+                );
               }}
-            />
+            </ProFormDependency>
           </>
         );
       default:
@@ -268,7 +274,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
   };
   return (
     <Modal
-      width={600}
+      width={700}
       bodyStyle={{ paddingBottom: 0 }}
       destroyOnClose={true}
       maskClosable={false}

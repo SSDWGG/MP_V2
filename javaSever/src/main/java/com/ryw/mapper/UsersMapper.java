@@ -1,7 +1,6 @@
 package com.ryw.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ryw.entity.User;
 import com.ryw.entity.Users;
 import org.springframework.stereotype.Repository;
 

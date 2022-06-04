@@ -21,3 +21,14 @@ export const TodoTypeEnum = {
     status: 'Processing',
   },
 };
+
+export const todoSortSelectOption = [
+  {
+    label: '创建时间排序（晚->早）默认',
+    value: 1,
+  },
+  {
+    label: '剩余时间排序（少->多）',
+    value: 2,
+  },
+];

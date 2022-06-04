@@ -5,7 +5,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.controller.util.JWTUtils;
-import com.ryw.entity.User;
 import com.ryw.entity.Users;
 import com.ryw.hander.MyPasswordEncoder;
 import com.ryw.mapper.UsersMapper;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +52,7 @@ public class UsersController {
             //进行密码加密存入数据库
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
-            users.setTitle("developer");
+            users.setTitle("rookie");
             users.setSignature("生命就像一盒巧克力，结果往往出人意料");
              usersMapper.insert(users);
             resMap.put("state", "success");
@@ -89,10 +87,7 @@ public class UsersController {
     {
         try {
             DecodedJWT verify = JWTUtils.verify(token);
-
-            log.info("用户id：[{}]",verify.getClaim("userid").asString());
-
-
+//            log.info("用户id：[{}]",verify.getClaim("userid").asString());
 //          此处可以进行数据筛选返回（筛选掉密码等敏感信息）
             return  usersMapper.selectById(verify.getClaim("userid").asString());
         } catch (Exception e){

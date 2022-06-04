@@ -27,3 +27,15 @@ interface ResBase {
   code: string;
   message: string;
 }
+interface ParamsPageBase {
+  current: number;
+  pageSize: number;
+}
+
+/** 通用列表结构 */
+interface ResList<T> {
+  data: T[];
+  total: number;
+  pageSize: number;
+  current: number;
+}
