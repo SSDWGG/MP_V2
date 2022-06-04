@@ -25,7 +25,7 @@ export async function queryCurrentUser(token: string | null) {
 // 快速注册quickAddUser
 export async function addUser(params: UserType.ParamsAddUser) {
   // 需要验证username是否重复，协议个查重username的接口
-  return request<string>(`/v2/user/quickAddUser`, {
+  return request<{}>(`/v2/user/quickAddUser`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

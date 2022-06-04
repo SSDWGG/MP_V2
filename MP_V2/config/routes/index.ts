@@ -10,6 +10,48 @@
     component: '@/pages/todolist',
   },
   {
+    name: 'chat',
+    icon: 'CheckCircleOutlined',
+    path: '/chat',
+    routes: [
+      {
+        path: '/chat',
+        redirect: '/chat/room',
+      },
+      {
+        name: 'chatroom',
+        icon: 'smile',
+        path: '/chat/room',
+        component: '@/pages/chat/room',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
+  {
+    name: 'music',
+    icon: 'CheckCircleOutlined',
+    path: '/music',
+    routes: [
+      {
+        path: '/music',
+        redirect: '/music/list',
+      },
+      {
+        name: 'musiclist',
+        icon: 'smile',
+        path: '/music/list',
+        component: '@/pages/music/list',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
+  {
     path: '/user',
     layout: false,
     routes: [

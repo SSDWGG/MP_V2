@@ -8,8 +8,9 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import type { ProFormInstance } from '@ant-design/pro-form';
-// import { AddTodo, updateTodo } from '@/services/todo';
-import moment from 'moment';
+import { AddTodo, updateTodo } from '@/services/todo';
+import { useModel } from 'umi';
+import { formatTimesTampDate } from '@/common/utils';
 
 interface CreateFormProps {
   onCancel: () => void;
@@ -24,6 +25,7 @@ const enumText = {
 };
 const ModalShow: React.FC<CreateFormProps> = (props) => {
   const { onSubmit, onCancel, modalType, info } = props;
+  const { initialState } = useModel('@@initialState');
 
   const formRef = useRef<ProFormInstance>();
   // value和initvalue会冲突，会默认采取受控的value
@@ -36,21 +38,29 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (value) => {
-        if (modalType === 1) {
-          // await AddTodo(value);
-          message.success({
-            content: '添加成功',
-          });
-        } else if (modalType === 2) {
-          value.todoid = info.todoid;
-          value.infactendTime =
-            value.schedule >= 100 ? moment(Date.now()).format('YYYY-MM-DD HH:mm') : '';
-          // await updateTodo(value);
-          message.success({
-            content: '修改成功',
-          });
+        console.log(value);
+        // 先决条件限制
+        if (
+          !!value.beginTime &&
+          !!value.wantendTime &&
+          formatTimesTampDate(value.wantendTime) < formatTimesTampDate(value.beginTime)
+        ) {
+          message.warning('预期结束时间不能早于开始时间，请重新设置');
+        } else {
+          if (modalType === 1) {
+            await AddTodo(initialState?.currentUser?.userid as number, value);
+            message.success({
+              content: '添加成功',
+            });
+          } else if (modalType === 2) {
+            value.todoid = info.todoid;
+            await updateTodo(value);
+            message.success({
+              content: '修改成功',
+            });
+          }
+          onSubmit?.();
         }
-        onSubmit?.();
       })
       .catch(() => {});
   };
@@ -95,10 +105,9 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               name="tododescribe"
               label="任务描述"
               validateFirst
-              // rules={[{ required: true, message: '请输入任务描述' }]}
               fieldProps={{
                 showCount: true,
-                maxLength: 255,
+                maxLength: 120,
                 allowClear: true,
                 autoSize: { minRows: 3, maxRows: 6 },
                 placeholder: '请输入任务描述',
@@ -112,10 +121,16 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                   <ProFormDateTimePicker
                     name="beginTime"
                     label="开始时间"
-                    placeholder="请输入开始时间"
+                    placeholder="任务完成时该时间为必填， 建议填写该时间"
                     width={'xl'}
+                    fieldProps={{
+                      format: 'YYYY-MM-DD HH:mm:ss',
+                    }}
                     rules={[
-                      { required: schedule === 100, message: '任务被设置完成，请输入开始时间' },
+                      {
+                        required: schedule === 100,
+                        message: '任务将被设置完成，请输入任务最初开始时间',
+                      },
                     ]}
                   />
                 );
@@ -125,12 +140,19 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               {({ schedule }) => {
                 return (
                   <ProFormDateTimePicker
-                    name="endTime"
+                    name="wantendTime"
                     label="期望结束时间"
-                    placeholder="请输入期望结束时间"
+                    placeholder="任务完成时该时间为必填， 建议填写该时间"
                     width={'xl'}
+                    fieldProps={{
+                      format: 'YYYY-MM-DD HH:mm:ss',
+                      renderExtraFooter: () => <>请注意结束时间不要早于开始时间</>,
+                    }}
                     rules={[
-                      { required: schedule === 100, message: '任务被设置完成，请输入期望结束时间' },
+                      {
+                        required: schedule === 100,
+                        message: '任务将被设置完成，请输入任务最初期望结束时间',
+                      },
                     ]}
                   />
                 );
@@ -140,7 +162,8 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
             <ProFormSlider
               name="schedule"
               label="任务进度"
-              initialValue={20}
+              initialValue={1}
+              help="新任务默认为开始状态，初始进度设定为进度1"
               marks={{
                 0: '0',
                 20: '20',
@@ -178,7 +201,7 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               validateFirst
               fieldProps={{
                 showCount: true,
-                maxLength: 255,
+                maxLength: 120,
                 allowClear: true,
                 autoSize: { minRows: 3, maxRows: 6 },
                 placeholder: '请输入任务描述',
@@ -191,11 +214,14 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                   <ProFormDateTimePicker
                     name="beginTime"
                     label="开始时间"
-                    placeholder="请输入开始时间"
+                    placeholder="任务完成时该时间为必填， 建议填写该时间"
                     width={'xl'}
                     rules={[
-                      { required: schedule === 100, message: '任务被设置完成，请输入开始时间' },
+                      { required: schedule === 100, message: '任务将被设置完成，请输入开始时间' },
                     ]}
+                    fieldProps={{
+                      format: 'YYYY-MM-DD HH:mm:ss',
+                    }}
                   />
                 );
               }}
@@ -204,13 +230,20 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               {({ schedule }) => {
                 return (
                   <ProFormDateTimePicker
-                    name="endTime"
+                    name="wantendTime"
                     label="期望结束时间"
-                    placeholder="请输入期望结束时间"
+                    placeholder="任务完成时该时间为必填，建议填写该时间"
                     width={'xl'}
                     rules={[
-                      { required: schedule === 100, message: '任务被设置完成，请输入期望结束时间' },
+                      {
+                        required: schedule === 100,
+                        message: '任务将被设置完成，请输入期望结束时间',
+                      },
                     ]}
+                    fieldProps={{
+                      format: 'YYYY-MM-DD HH:mm:ss',
+                      renderExtraFooter: () => <>请注意结束时间不要早于开始时间哦</>,
+                    }}
                   />
                 );
               }}
@@ -218,12 +251,6 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
             <ProFormSlider
               name="schedule"
               label="任务进度"
-              // fieldProps={{
-              //   value: sliderValue,
-              //   onChange: (e: number) => {
-              //     setSliderValue(e);
-              //   },
-              // }}
               marks={{
                 0: '0',
                 20: '20',

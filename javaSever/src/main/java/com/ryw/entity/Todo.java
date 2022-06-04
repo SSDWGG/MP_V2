@@ -26,6 +26,10 @@ public class Todo {
     private String todotitle;
     private String tododescribe;
     private int okflag;
+    private String wantendTime;
+    private String beginTime;
+
+
     private String infactendTime;
     private double schedule;
 
@@ -82,6 +86,22 @@ public class Todo {
 
     public void setOkflag(int okflag) {
         this.okflag = okflag;
+    }
+
+    public String getWantendTime() {
+        return wantendTime;
+    }
+
+    public void setWantendTime(String wantendTime) {
+        this.wantendTime = wantendTime;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
     }
 
     public String getInfactendTime() {

@@ -6,3 +6,18 @@ export const TodoFlagType = {
   stop: 2,
   complete: 3,
 };
+export const TodoTypeEnum = {
+  0: { text: '未开始', status: 'Warning' },
+  1: {
+    text: '进行中',
+    status: 'Success',
+  },
+  2: {
+    text: '阻塞中',
+    status: 'Default',
+  },
+  3: {
+    text: '已完成',
+    status: 'Processing',
+  },
+};

@@ -1,16 +1,18 @@
 import { FC, useRef, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Alert, Button, Card, Col, Row } from 'antd';
+import { Alert, Button, Card, Col, message, Modal, Progress, Row } from 'antd';
 import Marquee from 'react-fast-marquee';
 import { PageContainer } from '@ant-design/pro-layout';
 import styles from './style.less';
 import Info from './titleinfo';
 import { averageTime, filterTimeTodo, getDoingNumByOkFlag } from '../utils/todoUtils';
-import { TodoFlagType } from '@/util/const';
+import { TodoFlagType, TodoTypeEnum } from '@/util/const';
 import { millisecondFormatDate } from '@/common/utils';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import ButtonGroup from 'antd/lib/button/button-group';
 import ModalShow from './modalshow';
+import moment from 'moment';
+import { deleteTodo, updateTodoType } from '@/services/todo';
 
 // 未开始0，进行中1，暂停2，完成3
 export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (props) => {
@@ -21,7 +23,7 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
   // const [dataType, setDataType] = useState<number>(1); //展示的列表数据类型 ，默认展示进行中
 
   const actionRef = useRef<ActionType>();
-  // const { confirm } = Modal;
+  const { confirm } = Modal;
 
   // const getTodoListData = async (type: number) => {
   //   let res;
@@ -52,118 +54,113 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
   const handleCancel = () => {
     setModalType(false);
   };
-  // const EffectEnum = {
-  //   0: { text: '未开始', status: 'Warning' },
-  //   1: {
-  //     text: '进行中',
-  //     status: 'Success',
-  //   },
-  //   2: {
-  //     text: '阻塞中',
-  //     status: 'Default',
-  //   },
-  //   3: {
-  //     text: '已完成',
-  //     status: 'Processing',
-  //   },
-  // };
 
   const columns: ProColumns<todo>[] = [
     {
       title: '任务标题',
       dataIndex: 'todotitle',
-      width: 200,
+      width: 160,
       ellipsis: true,
       valueType: 'text',
+      fieldProps: {
+        placeholder: '请输入任务标题',
+        maxLength: 32,
+      },
     },
     {
       title: '任务描述',
       dataIndex: 'tododescribe',
       width: 200,
+      hideInSearch: true,
       ellipsis: true,
     },
     {
       title: '开始时间',
       dataIndex: 'beginTime',
-      width: 160,
+      width: 180,
       ellipsis: true,
       valueType: 'text',
-      render: (_, item) => {
-        return item.beginTime || '未设定';
-      },
+      hideInSearch: true,
     },
     {
       title: '期待结束时间',
-      dataIndex: 'endTime',
-      width: 160,
+      dataIndex: 'wantendTime',
+      width: 180,
       ellipsis: true,
       valueType: 'text',
-      render: (_, item) => {
-        return item.wantendTime || '未设定';
-      },
+      hideInSearch: true,
     },
     {
       title: '实际结束时间',
       dataIndex: 'infactendTime',
-      width: 160,
+      width: 180,
       ellipsis: true,
       valueType: 'text',
+      hideInSearch: true,
       render: (_, item) => {
         return item.infactendTime || '暂未结束';
       },
     },
-    // {
-    //   title: '任务状态',
-    //   dataIndex: 'okflag',
-    //   width: 80,
-    //   ellipsis: true,
-    //   valueType: 'text',
-    //   valueEnum: EffectEnum,
-    // },
-    // {
-    //   title: '任务进度',
-    //   width: 150,
-    //   ellipsis: true,
-    //   render: (_, item) => {
-    //     return (
-    //       <>
-    //         {item.schedule === 0 && '未开始'}
-    //         {item.schedule > 0 && item.schedule < 100 && (
-    //           <Progress percent={item.schedule} size="small" status="active" />
-    //         )}
-    //         {item.schedule >= 100 && <Progress percent={100} size="small" />}
-    //       </>
-    //     );
-    //   },
-    // },
-    // {
-    //   title: '任务剩余时间（约）',
-    //   width: 150,
-    //   ellipsis: true,
-    //   render: (_, item) => {
-    //     let ms = moment(item.endTime).unix() - moment(Date.now()).unix();
-    //     return (
-    //       <>
-    //         {item.schedule >= 100 ? (
-    //           `已完成`
-    //         ) : (
-    //           <>
-    //             {ms / 3600 / 24 > 1 && `${(ms / 3600 / 24).toFixed(0)}天`}
-    //             {ms / 3600 / 24 < 1 && ms / 3600 / 24 > 0 && `${(ms / 3600).toFixed(0)}小时`}
-    //             {ms / 3600 < 1 && ms / 3600 / 24 > 0 && `${(ms / 60).toFixed(0)}分钟`}
-    //             {ms / 3600 / 24 < 0 && `已超时`}
-    //           </>
-    //         )}
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      title: '任务状态',
+      dataIndex: 'okflag',
+      width: 80,
+      ellipsis: true,
+      valueType: 'text',
+      fieldProps: {
+        placeholder: '请选择任务状态',
+        maxLength: 32,
+      },
+      valueEnum: TodoTypeEnum,
+    },
+    {
+      title: '任务进度',
+      width: 150,
+      ellipsis: true,
+      hideInSearch: true,
+      render: (_, item) => {
+        return (
+          <>
+            {item.schedule === 0 && '未开始'}
+            {item.schedule > 0 && item.schedule < 100 && (
+              <Progress percent={item.schedule} size="small" status="active" />
+            )}
+            {item.schedule >= 100 && <Progress percent={100} size="small" />}
+          </>
+        );
+      },
+    },
+    {
+      title: '任务预期剩余时间',
+      width: 150,
+      ellipsis: true,
+      hideInSearch: true,
+      render: (_, item) => {
+        let ms = moment(item.wantendTime).unix() - moment(Date.now()).unix();
+        return (
+          <>
+            {item.schedule >= 100 ? (
+              `已完成`
+            ) : !!item.wantendTime ? (
+              <>
+                {ms / 3600 / 24 > 1 && `${(ms / 3600 / 24).toFixed(0)}天`}
+                {ms / 3600 / 24 < 1 && ms / 3600 / 24 > 0 && `${(ms / 3600).toFixed(0)}小时`}
+                {ms / 3600 < 1 && ms / 3600 / 24 > 0 && `${(ms / 60).toFixed(0)}分钟`}
+                {ms / 3600 / 24 < 0 && `已超时`}
+              </>
+            ) : (
+              <>未设置预期结束时间</>
+            )}
+          </>
+        );
+      },
+    },
     // 操作
     {
       title: '操作',
       fixed: 'right',
-      width: 130,
-      search: false,
+      width: 160,
+      hideInSearch: true,
       dataIndex: 'option',
       render: (_, item) => {
         return (
@@ -184,15 +181,15 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
               type="ghost"
               size="small"
               onClick={() => {
-                // confirm({
-                //   title: '阻塞',
-                //   content: '确定要阻塞任务吗？',
-                //   onOk: async () => {
-                //     await updateTodoType(item.todoid, 2);
-                //     message.success('操作成功');
-                //     reloadTable();
-                //   },
-                // });
+                confirm({
+                  title: '阻塞',
+                  content: '确定要阻塞任务吗？',
+                  onOk: async () => {
+                    await updateTodoType(item, 2);
+                    message.success('操作成功');
+                    reloadTable();
+                  },
+                });
               }}
             >
               阻塞
@@ -202,15 +199,15 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
               type="dashed"
               size="small"
               onClick={() => {
-                // confirm({
-                //   title: '删除',
-                //   content: '确定要删除任务吗？',
-                //   onOk: async () => {
-                //     await deleteTodo(item.todoid);
-                //     message.success('删除成功');
-                //     reloadTable();
-                //   },
-                // });
+                confirm({
+                  title: '删除',
+                  content: '确定要删除任务吗？',
+                  onOk: async () => {
+                    await deleteTodo(item.todoid);
+                    message.success('删除成功');
+                    reloadTable();
+                  },
+                });
               }}
             >
               删除
@@ -297,9 +294,29 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
             scroll={{ x: 1200 }}
             dataSource={props.allTodoList}
             rowKey={(record) => `${record.todoid}`}
-            search={false}
             columnEmptyText="未设定"
             headerTitle="日程任务表"
+            search={{
+              optionRender: (searchConfig, formProps, dom) => [
+                ...dom.reverse(),
+                // <Button
+                //   key="tianjia"
+                //   type="primary"
+                //   onClick={() => {
+                //     // setModalType(1);
+                //   }}
+                // >
+                //   + 添加管理员
+                // </Button>,
+              ],
+            }}
+            form={{
+              layout: 'vertical',
+              autoFocusFirstInput: false,
+              labelCol: { span: 0 },
+              defaultCollapsed: false,
+              span: 6,
+            }}
             toolBarRender={() => [
               <Button
                 type="primary"

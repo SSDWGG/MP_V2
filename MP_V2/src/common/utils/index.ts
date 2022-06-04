@@ -161,6 +161,11 @@ export function millisecondFormatDate(ms: number, isMs = false) {
     return '暂无数据';
   }
 }
+
+//yyyy-MM-dd HH-mm-ss转时间戳
+export function formatTimesTampDate(formatTimeStr: string) {
+  return Date.parse(new Date(formatTimeStr) as unknown as string);
+}
 /**
  * 随机字符串（只包含大小写英文字母以及数字）
  * @param len 长度
