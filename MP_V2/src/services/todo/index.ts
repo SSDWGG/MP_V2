@@ -12,9 +12,19 @@ export async function getTodosList(userid: number) {
   });
 }
 
-// 条件查询列表todo
-export async function getTodoListByQuery(params: TodoType.ParamsgetTodoListByQuery) {
+// 条件查询列表todo  page分页情况下
+export async function getTodoListByQueryPage(params: TodoType.ParamsgetTodoListByQuery) {
   return request<ResList<todo>>(`/v2/todo/getTodoListByQuery`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+}
+// 条件查询列表todo 拖拽情况下
+export async function getTodoListByQuerySort(params: TodoType.ParamsgetTodoListByQuerySort) {
+  return request<ResList<todo>>(`/v2/todo/getTodoListByQuerySort`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

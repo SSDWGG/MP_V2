@@ -118,4 +118,22 @@ public class TodoController {
         resMap.put("data",todoList);
         return JSON.toJSONString(resMap);
     }
+
+    @RequestMapping("/v2/todo/getTodoListByQuerySort")              // 分页查询todo（条件查询）
+    public String getTodoListByQuerySort(
+                                     @RequestParam("userid") Long userid,
+                                     @RequestParam("todotitle") String todotitle,
+                                     @RequestParam("okflag") int okflag){
+        HashMap<String, Object> resMap = new HashMap<>();
+        QueryWrapper<Todo> wrapper = new QueryWrapper<>();
+        HashMap<String,Object> queryMap = new HashMap<>();
+        queryMap.put("userid",userid);
+        queryMap.put("todotitle",todotitle);
+        queryMap.put("okflag",okflag);
+        wrapper.allEq(queryMap, false);
+       List<Todo>  todoList = todoMapper.selectList(wrapper);
+        resMap.put("data",todoList);
+        return JSON.toJSONString(resMap);
+    }
+
 }

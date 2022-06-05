@@ -37,7 +37,6 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (value) => {
-        console.log(value);
         // 先决条件限制
         if (
           !!value.beginTime &&

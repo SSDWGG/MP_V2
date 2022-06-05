@@ -11,4 +11,9 @@ declare namespace TodoType {
     todotitle: string;
     okflag: number;
   }
+  interface ParamsgetTodoListByQuerySort {
+    userid: number;
+    todotitle: string;
+    okflag: number;
+  }
 }

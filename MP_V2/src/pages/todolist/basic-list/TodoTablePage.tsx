@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, message, Modal, Progress } from 'antd';
 import { useModel } from 'umi';
-import { deleteTodo, getTodoListByQuery, updateTodoType } from '@/services/todo';
+import { deleteTodo, getTodoListByQueryPage, updateTodoType } from '@/services/todo';
 import { PlusOutlined } from '@ant-design/icons';
 import { todoTableType, TodoTypeEnum } from '@/util/const';
 import ButtonGroup from 'antd/lib/button/button-group';
@@ -40,7 +40,7 @@ const TodoTablePage: React.FC<{
     // 默认查询正在进行中任务
     params.okflag = !!params.okflag ? params.okflag : 1;
     params.userid = initialState?.currentUser?.userid;
-    const res = await getTodoListByQuery(params as TodoType.ParamsgetTodoListByQuery);
+    const res = await getTodoListByQueryPage(params as TodoType.ParamsgetTodoListByQuery);
     return {
       // 这里使用分页来降低传输数据的体量，减少网络传输
       data: res.data,

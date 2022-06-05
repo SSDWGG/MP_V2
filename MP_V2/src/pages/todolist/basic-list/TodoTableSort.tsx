@@ -2,13 +2,17 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 're
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, message, Modal, Progress, Select } from 'antd';
 import { useModel } from 'umi';
-import { deleteTodo, getTodoListByQuery, updateTodoType } from '@/services/todo';
-import { PlusOutlined } from '@ant-design/icons';
+import { deleteTodo, getTodoListByQuerySort, updateTodoType } from '@/services/todo';
+import { MenuOutlined, PlusOutlined } from '@ant-design/icons';
 import { todoSortSelectOption, todoTableType, TodoTypeEnum } from '@/util/const';
 import ButtonGroup from 'antd/lib/button/button-group';
 import moment from 'moment';
 import ModalShow from './modalshow';
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+import { arrayMoveImmutable, useRefFunction } from '@ant-design/pro-components';
+import './style.less';
 
+const DragHandle = SortableHandle(() => <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />);
 const TodoTableSort: React.FC<{
   titlerefresh: () => void;
   setTableType: Dispatch<SetStateAction<number>>;
@@ -41,9 +45,9 @@ const TodoTableSort: React.FC<{
     // 使用了分页就无法使用table的数据排序和拖拽功能   也就是说如果使用了分页就必须做后端排序
     if (sortType == 1) {
       //创建时间排序（晚->早）默认
-      // const sortArr = todoList.sort(compare('beginTime', 1));
-      // setTodoList(sortArr);
-      // console.log(sortArr);
+      const sortArr = todoList.sort(compare('beginTime', 1));
+      setTodoList(sortArr);
+      console.log(sortArr, todoList);
     } else if (sortType == 2) {
       //  剩余时间排序（少->多）
     }
@@ -70,21 +74,22 @@ const TodoTableSort: React.FC<{
     // 默认查询正在进行中任务
     params.okflag = !!params.okflag ? params.okflag : 1;
     params.userid = initialState?.currentUser?.userid;
-    const res = await getTodoListByQuery(params as TodoType.ParamsgetTodoListByQuery);
+    const res = await getTodoListByQuerySort(params as TodoType.ParamsgetTodoListByQuery);
     setTodoList(res.data);
-    return {
-      // 这里使用分页来降低传输数据的体量，减少网络传输
-      data: res.data,
-      pageSize: res.pageSize,
-      current: res.current,
-      total: res.total,
-    };
+    return {};
   };
   const handleSelectChange = (value: number) => {
     setSortType(value);
   };
 
   const columns: ProColumns<todo>[] = [
+    {
+      title: '排序',
+      dataIndex: 'sort',
+      width: 60,
+      className: 'drag-visible',
+      render: () => <DragHandle />,
+    },
     {
       title: '任务标题',
       dataIndex: 'todotitle',
@@ -255,6 +260,35 @@ const TodoTableSort: React.FC<{
       },
     },
   ];
+
+  // 拖拽
+  const SortableItem = SortableElement((props: any) => <tr {...props} />);
+  const SortContainer = SortableContainer((props: any) => <tbody {...props} />);
+
+  const onSortEnd = useRefFunction(
+    ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+      if (oldIndex !== newIndex) {
+        const newData = arrayMoveImmutable([...todoList], oldIndex, newIndex).filter((el) => !!el);
+        setTodoList([...newData]);
+      }
+    },
+  );
+
+  const DraggableContainer = (props: any) => (
+    <SortContainer
+      useDragHandle
+      disableAutoscroll
+      helperClass="row-dragging"
+      onSortEnd={onSortEnd}
+      {...props}
+    />
+  );
+
+  const DraggableBodyRow = (props: any) => {
+    const { className, style, ...restProps } = props;
+    const index = todoList.findIndex((x) => x.todoid === restProps['data-row-key']);
+    return <SortableItem index={index} {...restProps} />;
+  };
   return (
     <>
       <ProTable<todo>
@@ -267,10 +301,7 @@ const TodoTableSort: React.FC<{
         // 做数据排序，必须受控（接口优化，减少每次改变排序都要请求，所以我把排序在前端进行（数据量小））
         dataSource={todoList}
         request={tableRequest}
-        pagination={{
-          showQuickJumper: true,
-          pageSize: 10,
-        }}
+        pagination={false}
         form={{
           layout: 'vertical',
           autoFocusFirstInput: false,
@@ -297,7 +328,6 @@ const TodoTableSort: React.FC<{
           />,
           <Button
             type="ghost"
-            // type="primary"
             key="add"
             onClick={() => {
               setModalType(1);
@@ -306,6 +336,12 @@ const TodoTableSort: React.FC<{
             <PlusOutlined /> 添加任务
           </Button>,
         ]}
+        components={{
+          body: {
+            wrapper: DraggableContainer,
+            row: DraggableBodyRow,
+          },
+        }}
       />
       <Button
         type="dashed"
