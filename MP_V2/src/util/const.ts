@@ -21,17 +21,25 @@ export const TodoTypeEnum = {
     status: 'Processing',
   },
 };
-
-export const todoSortSelectOption = [
+export const TodoTypefiltersEnum = [
   {
-    label: '创建时间排序（晚->早）默认',
+    text: '未开始',
+    value: 0,
+  },
+  {
+    text: '进行中',
     value: 1,
   },
   {
-    label: '剩余时间排序（少->多）',
+    text: '阻塞中',
     value: 2,
   },
+  {
+    text: '已完成',
+    value: 3,
+  },
 ];
+
 export const todoTableType = {
   page: 1,
   sort: 2,

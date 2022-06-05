@@ -11,7 +11,7 @@ import TodoTableSort from './TodoTableSort';
 
 // 未开始0，进行中1，暂停2，完成3
 export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (props) => {
-  const [tableType, setTableType] = useState<number>(todoTableType.page); //table展示类型（1 分页table，2 拖拽、排序table）
+  const [tableType, setTableType] = useState<number>(todoTableType.sort); //table展示类型（1 分页table，2 拖拽、排序table）
 
   return (
     <div className={styles.standardList}>

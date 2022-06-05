@@ -52,6 +52,12 @@ const TodoTablePage: React.FC<{
 
   const columns: ProColumns<todo>[] = [
     {
+      title: '序号',
+      dataIndex: 'index',
+      valueType: 'indexBorder',
+      width: 48,
+    },
+    {
       title: '任务标题',
       dataIndex: 'todotitle',
       width: 160,
@@ -76,6 +82,12 @@ const TodoTablePage: React.FC<{
       ellipsis: true,
       valueType: 'text',
       hideInSearch: true,
+      sorter: (a, b) => {
+        const aTime = new Date(a.beginTime).getTime(); // 需要先转换成时间戳
+        const bTime = new Date(b.beginTime).getTime();
+        return aTime > bTime ? 1 : -1;
+      },
+      defaultSortOrder: 'descend',
     },
     {
       title: '期待结束时间',
@@ -84,6 +96,12 @@ const TodoTablePage: React.FC<{
       ellipsis: true,
       valueType: 'text',
       hideInSearch: true,
+      sorter: (a, b) => {
+        const aTime = new Date(a.wantendTime).getTime(); // 需要先转换成时间戳
+        const bTime = new Date(b.wantendTime).getTime();
+        return aTime > bTime ? 1 : -1;
+      },
+      defaultSortOrder: 'descend',
     },
     {
       title: '实际结束时间',
@@ -92,6 +110,12 @@ const TodoTablePage: React.FC<{
       ellipsis: true,
       valueType: 'text',
       hideInSearch: true,
+      sorter: (a, b) => {
+        const aTime = new Date(a.infactendTime).getTime(); // 需要先转换成时间戳
+        const bTime = new Date(b.infactendTime).getTime();
+        return aTime > bTime ? 1 : -1;
+      },
+      defaultSortOrder: 'descend',
       render: (_, item) => {
         return item.infactendTime || '暂未结束';
       },
@@ -113,6 +137,12 @@ const TodoTablePage: React.FC<{
       width: 150,
       ellipsis: true,
       hideInSearch: true,
+      sorter: (a, b) => {
+        const aTime = new Date(a.schedule).getTime(); // 需要先转换成时间戳
+        const bTime = new Date(b.schedule).getTime();
+        return aTime > bTime ? 1 : -1;
+      },
+      defaultSortOrder: 'descend',
       render: (_, item) => {
         return (
           <>
@@ -130,6 +160,12 @@ const TodoTablePage: React.FC<{
       width: 150,
       ellipsis: true,
       hideInSearch: true,
+      sorter: (a, b) => {
+        const ams = moment(a.wantendTime).unix() - moment(Date.now()).unix();
+        const bms = moment(b.wantendTime).unix() - moment(Date.now()).unix();
+        return ams > bms ? 1 : -1;
+      },
+      defaultSortOrder: 'descend',
       render: (_, item) => {
         let ms = moment(item.wantendTime).unix() - moment(Date.now()).unix();
         return (
@@ -246,7 +282,7 @@ const TodoTablePage: React.FC<{
               props.setTableType(todoTableType.sort);
             }}
           >
-            切换展示拖拽/排序
+            切换展示拖拽表格
           </Button>,
 
           <Button

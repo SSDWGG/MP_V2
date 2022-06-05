@@ -8,7 +8,7 @@ const Music: React.FC = () => {
         breadcrumb: {},
       }}
     >
-      music
+      music 开发中...
     </PageContainer>
   );
 };
