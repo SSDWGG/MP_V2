@@ -32,3 +32,7 @@ export const todoSortSelectOption = [
     value: 2,
   },
 ];
+export const todoTableType = {
+  page: 1,
+  sort: 2,
+};

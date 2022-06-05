@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import { Button, message, Modal, Progress, Select } from 'antd';
 import { useModel } from 'umi';
 import { deleteTodo, getTodoListByQuery, updateTodoType } from '@/services/todo';
 import { PlusOutlined } from '@ant-design/icons';
-import { todoSortSelectOption, TodoTypeEnum } from '@/util/const';
+import { todoSortSelectOption, todoTableType, TodoTypeEnum } from '@/util/const';
 import ButtonGroup from 'antd/lib/button/button-group';
 import moment from 'moment';
 import ModalShow from './modalshow';
 
-const TodoTable: React.FC<{
+const TodoTableSort: React.FC<{
   titlerefresh: () => void;
+  setTableType: Dispatch<SetStateAction<number>>;
 }> = (props) => {
   const [modalType, setModalType] = useState<number | boolean>(false); //弹窗展示类型
   const [info, setInfo] = useState<todo>({} as todo); //传递给弹窗的数据默认值
@@ -37,9 +38,9 @@ const TodoTable: React.FC<{
   useEffect(() => {
     // 排序种类不多直接使用if else
 
+    // 使用了分页就无法使用table的数据排序和拖拽功能   也就是说如果使用了分页就必须做后端排序
     if (sortType == 1) {
       //创建时间排序（晚->早）默认
-      // 排序无效？？？
       // const sortArr = todoList.sort(compare('beginTime', 1));
       // setTodoList(sortArr);
       // console.log(sortArr);
@@ -262,7 +263,7 @@ const TodoTable: React.FC<{
         scroll={{ x: 1200 }}
         rowKey={(record) => `${record.todoid}`}
         columnEmptyText="未设定"
-        headerTitle="日程任务表"
+        headerTitle="日程任务表（拖拽/排序）"
         // 做数据排序，必须受控（接口优化，减少每次改变排序都要请求，所以我把排序在前端进行（数据量小））
         dataSource={todoList}
         request={tableRequest}
@@ -278,6 +279,15 @@ const TodoTable: React.FC<{
           span: 6,
         }}
         toolBarRender={() => [
+          <Button
+            type="ghost"
+            key="changeTableType"
+            onClick={() => {
+              props.setTableType(todoTableType.page);
+            }}
+          >
+            切换展示分页表格
+          </Button>,
           <Select
             style={{ width: 220 }}
             allowClear
@@ -316,4 +326,4 @@ const TodoTable: React.FC<{
     </>
   );
 };
-export default TodoTable;
+export default TodoTableSort;

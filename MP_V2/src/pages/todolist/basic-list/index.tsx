@@ -1,16 +1,19 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Alert, Card, Col, Row } from 'antd';
 import Marquee from 'react-fast-marquee';
 import { PageContainer } from '@ant-design/pro-layout';
 import styles from './style.less';
 import Info from './titleinfo';
 import { averageTime, filterTimeTodo, getDoingNumByOkFlag } from '../utils/todoUtils';
-import { TodoFlagType } from '@/util/const';
+import { TodoFlagType, todoTableType } from '@/util/const';
 import { millisecondFormatDate } from '@/common/utils';
-import TodoTable from './TodoTable';
+import TodoTablePage from './TodoTablePage';
+import TodoTableSort from './TodoTableSort';
 
 // 未开始0，进行中1，暂停2，完成3
 export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (props) => {
+  const [tableType, setTableType] = useState<number>(todoTableType.page); //table展示类型（1 分页table，2 拖拽、排序table）
+
   return (
     <div>
       <PageContainer
@@ -54,7 +57,12 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
               </Marquee>
             }
           />
-          <TodoTable titlerefresh={props.refresh} />
+          {tableType === todoTableType.page && (
+            <TodoTablePage titlerefresh={props.refresh} setTableType={setTableType} />
+          )}
+          {tableType === todoTableType.sort && (
+            <TodoTableSort titlerefresh={props.refresh} setTableType={setTableType} />
+          )}
         </div>
       </PageContainer>
     </div>
