@@ -17,13 +17,18 @@ export const filterTimeTodo = (todoArr: todo[], time = 7) => {
       moment(arr.infactendTime) < moment(Date.now()),
   );
 };
-// 周平均任务处理时间
+// 周平均任务完成时间
 export const averageTime = (todoArr: todo[], time = 7) => {
   // 筛选出一段时间内完成的任务
   const arr = filterTimeTodo(todoArr, time);
   let num = 0;
+  let count = 0;
   arr.forEach((item) => {
-    num += moment(item.infactendTime).unix() - moment(item.createTime).unix();
+    if (!!item.infactendTime) {
+      num += moment(item.infactendTime).unix() - moment(item.beginTime).unix();
+      count++;
+    }
   });
-  return num / arr.length;
+
+  return num / count;
 };

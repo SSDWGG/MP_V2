@@ -1,4 +1,4 @@
-import { addUser } from '@/services/user';
+import { addUser, checkhave } from '@/services/user';
 import { MobileReg, PasswordReg } from '@/util/const';
 import ProForm, { ProFormInstance, ProFormText } from '@ant-design/pro-form';
 import { Button, Modal, Result } from 'antd';
@@ -16,7 +16,17 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
-
+  // 用户名重复性校验  用户注册，用户名不得重复
+  const checkAlreadyHave = async (rule: any, value: any) => {
+    const params = {
+      [rule.field]: value,
+    };
+    const res = await checkhave(params);
+    if (res >= 1) {
+      return Promise.reject(`已被占用，请尝试其他用户名`);
+    }
+    return Promise.resolve();
+  };
   const validateAndGetFormatValue = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
@@ -33,11 +43,16 @@ const Register: FC = () => {
           <Result
             status="success"
             title={
-              <div className={styles.title}>
-                <span>账户：{values.username} 注册成功</span>
+              <div>
+                <div>注册成功</div>
+                {values.username.length > 3 ? (
+                  <span>您的账户名：{values.username.slice(0, 3)}... </span>
+                ) : (
+                  <span>账户名：{values.username} </span>
+                )}{' '}
               </div>
             }
-            subTitle="激活邮件已发送到你的邮箱中，邮件有效期为24小时。请及时登录邮箱，点击邮件中的链接激活帐户。"
+            subTitle="激活邮件已发送到您的邮箱中，请及时查收。（测试中）"
           />
         ),
       });
@@ -84,9 +99,9 @@ const Register: FC = () => {
                   pattern: /^\S.*$/,
                   message: '首字符不能为空格',
                 },
-                // {
-                //   validator: checkAlreadyHave,
-                // },
+                {
+                  validator: checkAlreadyHave,
+                },
               ]}
               allowClear
             />

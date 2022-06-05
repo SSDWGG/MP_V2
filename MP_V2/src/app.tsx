@@ -32,8 +32,7 @@ export async function getInitialState(): Promise<{
   }
 
   const fetchUserInfo = async () => {
-    const Token = localStorage.getItem(getTokenKey('ryw'));
-    const msg = await queryCurrentUser(Token);
+    const msg = await queryCurrentUser();
     if (!!msg) {
       return msg;
     } else {
@@ -138,7 +137,12 @@ const requestTokenInterceptor = (url: string, options: RequestOptionsInit) => {
     url: `${url}`,
     options: {
       ...options,
-      headers: { ...headers, Authorization: `Bearer ${token || ''}`, isolate: 'none' },
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${token || ''}`,
+        isolate: 'none',
+        token: `${token || ''}`,
+      },
     },
   };
 };

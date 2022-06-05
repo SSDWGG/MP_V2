@@ -1,5 +1,7 @@
 import { request } from 'umi';
 
+// 在该页面程序改完后将该接口废除，后台计算并返回需要用到几个数据元
+// 获取全部该user的todo
 export async function getTodosList(userid: number) {
   return request<todo[]>(`/v2/todo/getUserAllTodos`, {
     method: 'GET',
@@ -7,6 +9,27 @@ export async function getTodosList(userid: number) {
       'Content-Type': 'application/json',
     },
     params: { userid },
+  });
+}
+
+// 条件查询列表todo  page分页情况下
+export async function getTodoListByQueryPage(params: TodoType.ParamsgetTodoListByQuery) {
+  return request<ResList<todo>>(`/v2/todo/getTodoListByQuery`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+}
+// 条件查询列表todo 拖拽情况下
+export async function getTodoListByQuerySort(params: TodoType.ParamsgetTodoListByQuerySort) {
+  return request<ResList<todo>>(`/v2/todo/getTodoListByQuerySort`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
   });
 }
 export async function AddTodo(userid: number, todo: TodoType.ParamsAddTodo) {
@@ -37,24 +60,6 @@ export async function deleteTodo(todoid: number) {
     data: { todoid },
   });
 }
-// export async function getTodosListByType(okflag: number) {
-//   return request<TodoType.ResGetTodosList>(`/api/ryw/antpro/getTodosListByOkFlag`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     params: { okflag },
-//   });
-// }
-// export async function getTodosListByTitle(todotitle: string) {
-//   return request<TodoType.ResGetTodosList>(`/api/ryw/antpro/getTodosListByTitle`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     params: { todotitle },
-//   });
-// }
 export async function updateTodoType(todo: todo, okflag: number) {
   return request<String>(`/v2/todo/updateTodoType`, {
     method: 'PUT',
