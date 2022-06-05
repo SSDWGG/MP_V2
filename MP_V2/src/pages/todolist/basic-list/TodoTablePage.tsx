@@ -101,7 +101,6 @@ const TodoTablePage: React.FC<{
         const bTime = new Date(b.wantendTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
     },
     {
       title: '实际结束时间',
@@ -115,7 +114,7 @@ const TodoTablePage: React.FC<{
         const bTime = new Date(b.infactendTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+
       render: (_, item) => {
         return item.infactendTime || '暂未结束';
       },
@@ -142,7 +141,7 @@ const TodoTablePage: React.FC<{
         const bTime = new Date(b.schedule).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+
       render: (_, item) => {
         return (
           <>
@@ -165,7 +164,7 @@ const TodoTablePage: React.FC<{
         const bms = moment(b.wantendTime).unix() - moment(Date.now()).unix();
         return ams > bms ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+
       render: (_, item) => {
         let ms = moment(item.wantendTime).unix() - moment(Date.now()).unix();
         return (

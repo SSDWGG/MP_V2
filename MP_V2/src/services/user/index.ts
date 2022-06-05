@@ -12,19 +12,17 @@ export async function login(params: UserType.ParamsLogin) {
 }
 
 // 拿到当前的用户的信息
-export async function queryCurrentUser(token: string | null) {
+export async function queryCurrentUser() {
   return request<user>(`/v2/user/CurrentUser`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    params: { token },
   });
 }
 
 // 快速注册quickAddUser
 export async function addUser(params: UserType.ParamsAddUser) {
-  // 需要验证username是否重复，协议个查重username的接口
   return request<{}>(`/v2/user/quickAddUser`, {
     method: 'POST',
     headers: {
@@ -32,5 +30,16 @@ export async function addUser(params: UserType.ParamsAddUser) {
     },
     data: params,
     // params,
+  });
+}
+
+export async function checkhave(params: any) {
+  // 重复性校验，返回数据库中存在的个数
+  return request<number>(`/v2/user/checkhave`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
   });
 }
