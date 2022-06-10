@@ -40,6 +40,7 @@ export default defineConfig({
   manifest: {
     basePath: '/todolist',
   },
+
   // Fast Refresh 热更新
   fastRefresh: {},
 

@@ -1,7 +1,7 @@
 ﻿export default [
   {
     path: '/',
-    redirect: '/user',
+    redirect: '/todolist',
   },
   {
     path: '/user',
@@ -94,12 +94,12 @@
         path: '/account/center',
         component: '@/pages/account/center',
       },
-      // {
-      //   name: 'settings',
-      //   icon: 'smile',
-      //   path: '/account/settings',
-      //   component: '@/pages/account/settings',
-      // },
+      {
+        name: 'settings',
+        icon: 'smile',
+        path: '/account/settings',
+        component: '@/pages/account/settings',
+      },
       {
         component: './404',
       },

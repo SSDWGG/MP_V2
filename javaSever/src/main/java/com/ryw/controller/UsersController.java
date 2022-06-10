@@ -5,7 +5,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.controller.util.JWTUtils;
-import com.ryw.entity.Todo;
 import com.ryw.entity.Users;
 import com.ryw.hander.MyPasswordEncoder;
 import com.ryw.mapper.UsersMapper;
@@ -54,8 +53,8 @@ public class UsersController {
             //进行密码加密存入数据库
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
-            users.setTitle("rookie");
-            users.setSignature("生命就像一盒巧克力，结果往往出人意料");
+            users.setTitle("初来乍到的新人");
+            users.setSignature("在醒着的时间里，追求你认为最有意义的~");
              usersMapper.insert(users);
             resMap.put("state", "success");
             return JSON.toJSONString(resMap);
@@ -100,14 +99,21 @@ public class UsersController {
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）
     @RequestMapping("/v2/user/checkhave")
-    public int checkhave( @RequestBody Users users)
+    public List<Users> checkhave(@RequestBody Users users)
     {
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         HashMap<String,Object> queryMap = new HashMap<>();
         queryMap.put("username",users.getUsername());
         wrapper.allEq(queryMap, false);
         List<Users> usersList = usersMapper.selectList(wrapper);
-        return usersList.toArray().length;
+        return usersList;
+    }
 
+    @RequestMapping("/v2/user/updateUser")         //更新user信息
+    public String updateUser(@RequestBody Users users,HttpServletRequest request){
+        HashMap<String, Object> resMap = new HashMap<>();
+        usersMapper.updateById(users);
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
     }
 }

@@ -27,6 +27,7 @@ interface todo {
   beginTime: string;
   wantendTime: string;
   schedule: number;
+  remark: string;
 
   createTime?: string;
   updateTime?: string;

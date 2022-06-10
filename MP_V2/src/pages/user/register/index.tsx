@@ -22,7 +22,7 @@ const Register: FC = () => {
       [rule.field]: value,
     };
     const res = await checkhave(params);
-    if (res >= 1) {
+    if (res.length >= 1) {
       return Promise.reject(`已被占用，请尝试其他用户名`);
     }
     return Promise.resolve();

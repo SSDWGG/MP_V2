@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Button, message, Modal, Progress } from 'antd';
+import { Button, message, Modal, Progress, Tooltip } from 'antd';
 import { useModel } from 'umi';
 import { deleteTodo, getTodoListByQuerySort, updateTodoType } from '@/services/todo';
 import { MenuOutlined, PlusOutlined } from '@ant-design/icons';
@@ -22,34 +22,6 @@ const TodoTableSort: React.FC<{
   const actionRef = useRef<ActionType>();
   const { confirm } = Modal;
   const [todoList, setTodoList] = useState<todo[]>([] as todo[]); //请求得到的列表数据
-
-  //对象一级属性排序函数的参考函数，正逆序由 -1 和1 决定
-  // const compare = (prop: string | number, sort = 1) => {
-  //   return function (obj1: any, obj2: any) {
-  //     var val1 = obj1[prop];
-  //     var val2 = obj2[prop];
-  //     if (val1 < val2) {
-  //       return sort;
-  //     } else if (val1 > val2) {
-  //       return -sort;
-  //     } else {
-  //       return 0;
-  //     }
-  //   };
-  // };
-  // useEffect(() => {
-  //   // 排序种类不多直接使用if else
-
-  //   // 使用了分页就无法使用table的数据排序和拖拽功能   也就是说如果使用了分页就必须做后端排序
-  //   if (sortType == 1) {
-  //     //创建时间排序（晚->早）默认
-  //     const sortArr = todoList.sort(compare('beginTime', 1));
-  //     setTodoList(sortArr);
-  //     console.log(sortArr, todoList);
-  //   } else if (sortType == 2) {
-  //     //  剩余时间排序（少->多）
-  //   }
-  // }, [sortType]);
 
   const reloadTable = () => {
     // 刷新表格内容
@@ -78,7 +50,9 @@ const TodoTableSort: React.FC<{
   };
 
   const DragHandle = SortableHandle(() => (
-    <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
+    <Tooltip placement="top" title="拖拽前请取消当前的其他排序">
+      <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
+    </Tooltip>
   ));
 
   // 拖拽
@@ -110,7 +84,7 @@ const TodoTableSort: React.FC<{
     {
       title: '拖拽排序',
       dataIndex: 'sort',
-      width: 60,
+      width: 80,
       className: 'drag-visible',
       hideInSearch: true,
       render: () => <DragHandle />,
@@ -145,7 +119,7 @@ const TodoTableSort: React.FC<{
         const bTime = new Date(b.beginTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
     },
     {
       title: '期待结束时间',

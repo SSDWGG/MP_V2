@@ -79,6 +79,7 @@ public class TodoController {
         todobefore.setBeginTime(aftertodo.getBeginTime());
         todobefore.setWantendTime(aftertodo.getWantendTime());
         todobefore.setSchedule(aftertodo.getSchedule());
+        todobefore.setRemark(aftertodo.getRemark());
         todoMapper.updateById(todobefore);
         HashMap<String, Object> resMap = new HashMap<>();
         resMap.put("state", "success");

@@ -35,8 +35,18 @@ export async function addUser(params: UserType.ParamsAddUser) {
 
 export async function checkhave(params: any) {
   // 重复性校验，返回数据库中存在的个数
-  return request<number>(`/v2/user/checkhave`, {
+  return request<user[]>(`/v2/user/checkhave`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+  });
+}
+// 更新userinfo
+export async function updateUser(params: user) {
+  return request<{}>(`/v2/user/updateUser`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

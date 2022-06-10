@@ -45,7 +45,7 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
         showIcon={false}
         message={
           <Marquee pauseOnHover gradient={false}>
-            成功的道路并不拥挤，因为能坚持的人不多。
+            成功的道路并不拥挤，因为坚持的人并不多。
           </Marquee>
         }
       />

@@ -85,7 +85,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       const { location } = history;
       // 如果没有登录（且非登录注册页面），重定向到 login
       if (!initialState?.currentUser && location.pathname !== '/user/register') {
-        history.push(loginPath);
+        history.replace(loginPath);
       }
     },
     links: [],

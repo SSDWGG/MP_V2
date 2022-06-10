@@ -28,8 +28,7 @@ public class Todo {
     private int okflag;
     private String wantendTime;
     private String beginTime;
-
-
+    private String remark;
     private String infactendTime;
     private double schedule;
 
@@ -47,6 +46,14 @@ public class Todo {
 
     //构造类和setget方法 和tostring方法
 
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Long getTodoid() {
         return todoid;

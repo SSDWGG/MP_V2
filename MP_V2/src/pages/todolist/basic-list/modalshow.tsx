@@ -157,6 +157,19 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               }}
             </ProFormDependency>
 
+            <ProFormTextArea
+              name="remark"
+              label="备注"
+              validateFirst
+              fieldProps={{
+                showCount: true,
+                maxLength: 120,
+                allowClear: true,
+                autoSize: { minRows: 1, maxRows: 6 },
+                placeholder: '添加备注',
+              }}
+              allowClear
+            />
             <ProFormSlider
               name="schedule"
               label="任务进度"
@@ -246,6 +259,19 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                 );
               }}
             </ProFormDependency>
+            <ProFormTextArea
+              name="remark"
+              label="备注"
+              validateFirst
+              fieldProps={{
+                showCount: true,
+                maxLength: 120,
+                allowClear: true,
+                autoSize: { minRows: 1, maxRows: 6 },
+                placeholder: '添加备注',
+              }}
+              allowClear
+            />
             <ProFormDependency name={['schedule']}>
               {({ schedule }) => {
                 return (
