@@ -109,11 +109,15 @@ public class UsersController {
         return usersList;
     }
 
-    @RequestMapping("/v2/user/updateUser")         //更新user信息
-    public String updateUser(@RequestBody Users users,HttpServletRequest request){
+    @RequestMapping("/v2/user/updateUser")         //更新user信息（不包括密码（需要加密））
+    public String updateUser(@RequestBody Users users){
+        if(users.getPassword()!=null){
+            users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
+        }
         HashMap<String, Object> resMap = new HashMap<>();
         usersMapper.updateById(users);
         resMap.put("state", "success");
         return JSON.toJSONString(resMap);
     }
+
 }

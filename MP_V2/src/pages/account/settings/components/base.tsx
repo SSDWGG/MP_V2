@@ -6,14 +6,12 @@ import ProForm, {
   ProFormInstance,
   ProFormSelect,
   ProFormText,
-  ProFormTextArea,
 } from '@ant-design/pro-form';
 import { useModel } from 'umi';
 import cityData from '@/util/geographic/city.json';
 import provinceData from '@/util/geographic/province.json';
 
 import styles from './BaseView.less';
-import { MobileReg } from '@/util/const';
 import { checkhave, updateUser } from '@/services/user';
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
@@ -36,7 +34,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
 
 const BaseView: React.FC = () => {
   //  获取用户信息
-  const { initialState } = useModel('@@initialState');
+  const { initialState, refresh } = useModel('@@initialState');
   const formRef = useRef<ProFormInstance>();
 
   // 用户名重复性校验  用户注册，用户名不得重复
@@ -54,12 +52,19 @@ const BaseView: React.FC = () => {
   const handleFinish = async () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
-      p.geographic = `${p.province.label}-${p.city}`;
+      if (typeof p.province === 'object') p.geographic = `${p.province.label}-${p.city}`;
+      if (typeof p.province === 'string') {
+        const province = provinceData.find((item) => {
+          return item.id == p.province;
+        });
+
+        p.geographic = `${province?.name}-${p.city}`;
+      }
       p.userid = initialState?.currentUser?.userid;
       delete p.province;
       delete p.city;
-      console.log(p);
       await updateUser(p);
+      await refresh();
       message.success('更新基本信息成功');
     });
   };
@@ -69,7 +74,6 @@ const BaseView: React.FC = () => {
       return item.name === (arr as any)[0];
     });
 
-    console.log(province);
     return {
       province: province?.id,
       city: (arr as any)[1],
@@ -95,9 +99,7 @@ const BaseView: React.FC = () => {
                 children: '更新基本信息',
               },
             }}
-            initialValues={{
-              ...initialState?.currentUser,
-            }}
+            initialValues={initialState?.currentUser}
             hideRequiredMark
           >
             <ProFormText
@@ -124,35 +126,48 @@ const BaseView: React.FC = () => {
               ]}
               allowClear
             />
-
             <ProFormText
-              name="phone"
-              label="手机号"
-              validateFirst
-              rules={[
-                { required: true, message: '请输入手机号' },
-                {
-                  pattern: MobileReg,
-                  message: '请输入正确的11位手机号',
-                },
-              ]}
+              name="title"
+              label="身份"
+              validateFirst //阻塞校验
               fieldProps={{
-                maxLength: 11,
+                maxLength: 20,
                 showCount: true,
-                placeholder: '请输入手机号',
+                placeholder: '请输入身份',
               }}
-              allowClear
-            />
-            <ProFormText
-              width="md"
-              name="email"
-              label="邮箱"
               rules={[
                 {
                   required: true,
-                  message: '请输入您的邮箱!',
+                  message: '请输入身份',
+                },
+                {
+                  pattern: /^\S.*$/,
+                  message: '首字符不能为空格',
                 },
               ]}
+              allowClear
+            />
+            <ProFormText
+              name="gender"
+              label="性别"
+              width="md"
+              validateFirst //阻塞校验
+              fieldProps={{
+                maxLength: 12,
+                showCount: true,
+                placeholder: '请输入您的性别',
+              }}
+              rules={[
+                {
+                  required: true,
+                  message: '请输入您的性别',
+                },
+                {
+                  pattern: /^\S.*$/,
+                  message: '首字符不能为空格',
+                },
+              ]}
+              allowClear
             />
             {/* 地区前端固定写中国 */}
             <ProFormSelect
@@ -174,6 +189,7 @@ const BaseView: React.FC = () => {
               ]}
             />
 
+            {/* 所在省市有点bug，但是最近不打算修改，之后还是考虑直接使用组件 */}
             <ProForm.Group title="所在省市" size={8}>
               <ProFormSelect
                 rules={[
@@ -185,6 +201,7 @@ const BaseView: React.FC = () => {
                 width="sm"
                 fieldProps={{
                   labelInValue: true,
+                  defaultValue: getGeographicInit().province,
                 }}
                 initialValue={getGeographicInit().province}
                 name="province"
@@ -204,6 +221,9 @@ const BaseView: React.FC = () => {
                     <ProFormSelect
                       params={{
                         key: province?.value,
+                      }}
+                      fieldProps={{
+                        defaultValue: getGeographicInit().city,
                       }}
                       initialValue={getGeographicInit().city}
                       name="city"
@@ -232,28 +252,8 @@ const BaseView: React.FC = () => {
                 }}
               </ProFormDependency>
             </ProForm.Group>
-            <ProFormText
-              width="md"
-              name="address"
-              label="街道地址"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入您的街道地址!',
-                },
-              ]}
-            />
-            <ProFormTextArea
-              name="signature"
-              label="个人格言"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入个人格言!',
-                },
-              ]}
-              placeholder="个人格言"
-            />
+
+            <ProFormText width="md" name="address" label="街道地址" />
           </ProForm>
         </div>
         <div className={styles.right}>

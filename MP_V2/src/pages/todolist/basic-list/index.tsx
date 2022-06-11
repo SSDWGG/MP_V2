@@ -8,10 +8,12 @@ import { TodoFlagType, todoTableType } from '@/util/const';
 import { millisecondFormatDate } from '@/common/utils';
 import TodoTablePage from './TodoTablePage';
 import TodoTableSort from './TodoTableSort';
+import { useModel } from 'umi';
 
 // 未开始0，进行中1，暂停2，完成3
 export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (props) => {
   const [tableType, setTableType] = useState<number>(todoTableType.sort); //table展示类型（1 分页table，2 拖拽、排序table）
+  const { initialState } = useModel('@@initialState');
 
   return (
     <div className={styles.standardList}>
@@ -45,7 +47,9 @@ export const BasicList: FC<{ allTodoList: todo[]; refresh: () => void }> = (prop
         showIcon={false}
         message={
           <Marquee pauseOnHover gradient={false}>
-            成功的道路并不拥挤，因为坚持的人并不多。
+            {`${
+              initialState?.currentUser?.scrolltip || '成功的道路并不拥挤，因为坚持的人并不多。'
+            }`}
           </Marquee>
         }
       />

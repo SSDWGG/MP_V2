@@ -26,9 +26,16 @@ public class Users {
     private String avatar;
     private String title;
     private String phone;
+    private String gender;
     private String signature;
     private String geographic;
     private String address;
+
+    private String scrolltip;
+    private String tags;
+    private String todoclassify;
+
+
     private  int admin;
 
 
@@ -53,6 +60,38 @@ public class Users {
 
     public void setUserid(Long userid) {
         this.userid = userid;
+    }
+
+    public String getScrolltip() {
+        return scrolltip;
+    }
+
+    public void setScrolltip(String scrolltip) {
+        this.scrolltip = scrolltip;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getTodoclassify() {
+        return todoclassify;
+    }
+
+    public void setTodoclassify(String todoclassify) {
+        this.todoclassify = todoclassify;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getUsername() {

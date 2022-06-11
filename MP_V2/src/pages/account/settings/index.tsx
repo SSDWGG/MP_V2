@@ -2,10 +2,9 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
 import BaseView from './components/base';
-import BindingView from './components/binding';
-import NotificationView from './components/notification';
 import SecurityView from './components/security';
 import styles from './style.less';
+import Todo from './components/todo';
 
 const { Item } = Menu;
 
@@ -20,9 +19,6 @@ const Settings: React.FC = () => {
     base: '基本设置',
     security: '安全设置',
     todo: '日程表设置',
-
-    // binding: '账号绑定',
-    // notification: '新消息通知',
   };
 
   const [initConfig, setInitConfig] = useState<SettingsState>({
@@ -70,12 +66,8 @@ const Settings: React.FC = () => {
       case 'security':
         return <SecurityView />;
       case 'todo':
-        return <SecurityView />;
+        return <Todo />;
 
-      case 'binding':
-        return <BindingView />;
-      case 'notification':
-        return <NotificationView />;
       default:
         return null;
     }

@@ -11,6 +11,9 @@ interface user {
   geographic?: string;
   admin?: number;
   address?: string;
+  scrolltip?: string;
+  todoclassify?: string;
+  tags?: string;
 
   createTime?: string;
   updateTime?: string;
