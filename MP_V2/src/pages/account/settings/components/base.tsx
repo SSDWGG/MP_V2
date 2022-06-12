@@ -70,14 +70,17 @@ const BaseView: React.FC = () => {
   };
   const getGeographicInit = () => {
     const arr = initialState?.currentUser?.geographic?.split('-');
-    const province = provinceData.find((item) => {
-      return item.name === (arr as any)[0];
-    });
 
-    return {
-      province: province?.id,
-      city: (arr as any)[1],
-    };
+    if (!!arr) {
+      const province = provinceData.find((item) => {
+        return item.name === (arr as any)[0];
+      });
+      return {
+        province: province?.id,
+        city: (arr as any)[1],
+      };
+    }
+    return {};
   };
 
   return (

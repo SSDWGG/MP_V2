@@ -1,17 +1,94 @@
 import { updateUser } from '@/services/user';
+import { PlusOutlined } from '@ant-design/icons';
 import ProForm, { ProFormInstance, ProFormTextArea } from '@ant-design/pro-form';
-import { message } from 'antd';
-import React, { useRef } from 'react';
+import { Divider, Input, InputRef, message, Tag } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
 import { useModel } from 'umi';
+import { TweenOneGroup } from 'rc-tween-one';
+
 const TodoSetting: React.FC = () => {
   const { initialState, refresh } = useModel('@@initialState');
   const formRef = useRef<ProFormInstance>();
+
+  const [todoclassify, settodoclassify] = useState<string[]>(
+    !!initialState?.currentUser?.todoclassify
+      ? (initialState?.currentUser?.todoclassify?.split('-') as string[])
+      : [],
+  );
+  const [inputVisible, setInputVisible] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef<InputRef>(null);
+
+  useEffect(() => {
+    if (inputVisible) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    settodoclassify(
+      !!initialState?.currentUser?.todoclassify
+        ? (initialState?.currentUser?.todoclassify?.split('-') as string[])
+        : [],
+    );
+  }, [initialState]);
+
+  const handleClose = (removedTag: string) => {
+    const newtodoclassify = todoclassify.filter((tag) => tag !== removedTag);
+    settodoclassify(newtodoclassify);
+  };
+
+  const showInput = () => {
+    setInputVisible(true);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputConfirm = () => {
+    if (inputValue && todoclassify.indexOf(inputValue) === -1) {
+      todoclassify.length >= 5
+        ? message.warning('标签数量达到上限')
+        : inputValue.length > 12
+        ? message.warning('标签内容长度需小于12字符')
+        : settodoclassify([...todoclassify, inputValue]);
+    }
+    setInputVisible(false);
+    setInputValue('');
+  };
+
+  const forMap = (tag: string) => {
+    const tagElem = (
+      <Tag
+        closable
+        color={'processing'}
+        onClose={(e) => {
+          e.preventDefault();
+          handleClose(tag);
+        }}
+      >
+        {tag}
+      </Tag>
+    );
+    return (
+      <span key={tag} style={{ display: 'inline-block' }}>
+        {tagElem}
+      </span>
+    );
+  };
+
+  const tagChild = !!todoclassify ? todoclassify.map(forMap) : [];
+
   const handleFinish = async () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
       p.userid = initialState?.currentUser?.userid;
       delete p.province;
       delete p.city;
+
+      // 这里使用-来分割   可以在输入的时候限定不能使用这个特殊字符
+      p.todoclassify = todoclassify.join('-');
       await updateUser(p);
       await refresh();
       message.success('更新基本信息成功');
@@ -60,18 +137,40 @@ const TodoSetting: React.FC = () => {
         ]}
         placeholder="个人格言"
       />
-      {/* <ProFormTextArea
-        name="11111"
-        label="日程分类"
-        width="lg"
-        rules={[
-          {
-            required: true,
-            message: '请输入个人格言!',
-          },
-        ]}
-        placeholder="个人格言"
-      /> */}
+      <Divider dashed />
+
+      <div style={{ marginBottom: 16 }}>
+        <TweenOneGroup
+          enter={{
+            scale: 0.8,
+            opacity: 0,
+            type: 'from',
+            duration: 100,
+          }}
+          leave={{ opacity: 0, width: 0, scale: 0, duration: 200 }}
+          appear={false}
+        >
+          {tagChild}
+        </TweenOneGroup>
+      </div>
+      {inputVisible && (
+        <Input
+          ref={inputRef}
+          type="text"
+          size="small"
+          style={{ width: 78 }}
+          value={inputValue}
+          onChange={handleInputChange}
+          onBlur={handleInputConfirm}
+          onPressEnter={handleInputConfirm}
+        />
+      )}
+      {!inputVisible && (
+        <Tag onClick={showInput} className="site-tag-plus" color={'processing'}>
+          <PlusOutlined /> 添加分类标签
+        </Tag>
+      )}
+      <Divider style={{ marginTop: 16 }} dashed />
     </ProForm>
   );
 };

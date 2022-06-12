@@ -33,13 +33,13 @@ export async function getInitialState(): Promise<{
 
   const fetchUserInfo = async () => {
     const msg = await queryCurrentUser();
-    if (!!msg) {
+    if (!!msg.userid) {
       return msg;
     } else {
       // token无效的去登录页
-      history.push(loginPath);
+      history.replace(loginPath);
       message.error('账号已禁用，请联系管理员');
-      // localStorage.removeItem(getTokenKey('ryw'));
+      localStorage.removeItem(getTokenKey('ryw'));
       return undefined;
     }
   };
