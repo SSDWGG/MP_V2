@@ -106,7 +106,6 @@ const errorHandler = (error: ResponseError) => {
   if (!request || request.options.skipErrorHandler) throw error;
   if (response && response.status) {
     const { status } = response;
-
     if (status === 401) {
       // 前进后退路由也进行判断
       const { query = {} } = history.location;

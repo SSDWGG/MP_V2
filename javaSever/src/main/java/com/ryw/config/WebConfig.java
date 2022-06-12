@@ -19,9 +19,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .allowedOrigins(
                         "http://localhost:8000",   //本地端口跨域
                         "http://localhost:8001",   //本地端口跨域
-                        "http://119.3.145.125",   //公网ip访问
-                        "http://ssdwgg.xyz",   //域名1
-                        "http://www.ssdwgg.xyz",   //域名2
+                        "http://119.3.145.125:2231",   //公网ip访问
+                        "http://ssdwgg.xyz:2231",   //域名1
+                        "http://www.ssdwgg.xyz:2231",   //域名2
                         "null")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .maxAge(3600)
