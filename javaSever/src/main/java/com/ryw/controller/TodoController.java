@@ -4,10 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.entity.Todo;
+import com.ryw.entity.Users;
 import com.ryw.mapper.TodoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -80,6 +85,7 @@ public class TodoController {
         todobefore.setWantendTime(aftertodo.getWantendTime());
         todobefore.setSchedule(aftertodo.getSchedule());
         todobefore.setRemark(aftertodo.getRemark());
+        todobefore.setClassify(aftertodo.getClassify());
         todoMapper.updateById(todobefore);
         HashMap<String, Object> resMap = new HashMap<>();
         resMap.put("state", "success");
@@ -100,7 +106,8 @@ public class TodoController {
                               @RequestParam("pageSize") int pageSize,
                                      @RequestParam("userid") Long userid,
                                      @RequestParam("todotitle") String todotitle,
-                                     @RequestParam("okflag") int okflag){
+                                     @RequestParam("okflag") int okflag,
+                                     @RequestParam("classify") String classify){
         HashMap<String, Object> resMap = new HashMap<>();
         Page<Todo> page = new Page<>(current, pageSize);
         QueryWrapper<Todo> wrapper = new QueryWrapper<>();
@@ -108,7 +115,7 @@ public class TodoController {
         queryMap.put("userid",userid);
         queryMap.put("todotitle",todotitle);
         queryMap.put("okflag",okflag);
-
+        queryMap.put("classify",classify);
         wrapper.allEq(queryMap, false);
         todoMapper.selectPage(page, wrapper);
         List<Todo> todoList  = page.getRecords();  //分页查询出的用户数据
@@ -117,6 +124,7 @@ public class TodoController {
         resMap.put("pageSize",pageSize);
         resMap.put("total",numbers);
         resMap.put("data",todoList);
+
         return JSON.toJSONString(resMap);
     }
 
@@ -124,17 +132,22 @@ public class TodoController {
     public String getTodoListByQuerySort(
                                      @RequestParam("userid") Long userid,
                                      @RequestParam("todotitle") String todotitle,
-                                     @RequestParam("okflag") int okflag){
+                                     @RequestParam("okflag") int okflag,
+                                     @RequestParam("classify") String classify){
         HashMap<String, Object> resMap = new HashMap<>();
         QueryWrapper<Todo> wrapper = new QueryWrapper<>();
         HashMap<String,Object> queryMap = new HashMap<>();
         queryMap.put("userid",userid);
         queryMap.put("todotitle",todotitle);
         queryMap.put("okflag",okflag);
+        queryMap.put("classify",classify);
         wrapper.allEq(queryMap, false);
        List<Todo>  todoList = todoMapper.selectList(wrapper);
         resMap.put("data",todoList);
         return JSON.toJSONString(resMap);
     }
+
+
+
 
 }

@@ -31,6 +31,7 @@ interface todo {
   wantendTime: string;
   schedule: number;
   remark: string;
+  classify?: string;
 
   createTime?: string;
   updateTime?: string;

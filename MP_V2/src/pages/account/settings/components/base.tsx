@@ -12,25 +12,8 @@ import cityData from '@/util/geographic/city.json';
 import provinceData from '@/util/geographic/province.json';
 
 import styles from './BaseView.less';
-import { checkhave, updateUser } from '@/services/user';
-
-// 头像组件 方便以后独立，增加裁剪之类的功能
-const AvatarView = ({ avatar }: { avatar: string }) => (
-  <>
-    <div className={styles.avatar_title}>头像</div>
-    <div className={styles.avatar}>
-      <img src={avatar} alt="avatar" />
-    </div>
-    <Upload showUploadList={false}>
-      <div className={styles.button_view}>
-        <Button>
-          <UploadOutlined />
-          更换头像
-        </Button>
-      </div>
-    </Upload>
-  </>
-);
+import { avatarUpload, checkhave, updateUser } from '@/services/user';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 const BaseView: React.FC = () => {
   //  获取用户信息
@@ -260,7 +243,49 @@ const BaseView: React.FC = () => {
           </ProForm>
         </div>
         <div className={styles.right}>
-          <AvatarView avatar={initialState?.currentUser?.avatar as string} />
+          <>
+            <div className={styles.avatar_title}>头像</div>
+            <div className={styles.avatar}>
+              <img src={initialState?.currentUser?.avatar} alt="avatar" />
+            </div>
+            <Upload
+              showUploadList={false}
+              accept=".jpg,.jpeg,.png"
+              customRequest={({ file }) => {
+                avatarUpload(file as UploadFile, initialState?.currentUser?.userid as number);
+                // if (isSuccess(res?.code)) {
+                //   setLoading(false);
+                //   !!afterSave && afterSave();
+                //   !!afterUploadSuccessMessage
+                //     ? afterUploadSuccessMessage(res)
+                //     : message.success('上传成功');
+                // } else {
+                //   setLoading(false);
+                //   message.error('上传失败');
+                // }
+              }}
+              beforeUpload={(file) => {
+                let shouldUpload = false;
+                const isAccept = /\.(jpg|png|jpeg?g)$/.test(file.name.toLowerCase());
+                const isLt1M = !!file.size ? file.size / 1024 / 1024 < 10 : true;
+                if (!isAccept) {
+                  message.error('图片上传格式不正确，请使用.jpg,.jpeg,.png 结尾的图片文件');
+                } else if (!isLt1M) {
+                  message.error('图片需小于10MB!');
+                } else {
+                  shouldUpload = true;
+                }
+                return shouldUpload;
+              }}
+            >
+              <div className={styles.button_view}>
+                <Button>
+                  <UploadOutlined />
+                  更换头像
+                </Button>
+              </div>
+            </Upload>
+          </>{' '}
         </div>
       </>
     </div>

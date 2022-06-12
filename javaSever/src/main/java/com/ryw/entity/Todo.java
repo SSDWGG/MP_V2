@@ -30,6 +30,8 @@ public class Todo {
     private String beginTime;
     private String remark;
     private String infactendTime;
+    private String classify;
+
     private double schedule;
 
     @TableLogic //逻辑删除注解    (内部进行更新)
@@ -46,6 +48,14 @@ public class Todo {
 
     //构造类和setget方法 和tostring方法
 
+
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
+    }
 
     public String getRemark() {
         return remark;

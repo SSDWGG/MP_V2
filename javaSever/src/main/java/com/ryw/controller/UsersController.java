@@ -11,8 +11,11 @@ import com.ryw.mapper.UsersMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,4 +124,29 @@ public class UsersController {
         return JSON.toJSONString(resMap);
     }
 
+    @RequestMapping("/v2/user/avatarUpload")            //头像图片上传
+    public String uploadtximg(@RequestParam("file") MultipartFile file,
+                              @RequestParam("userid") MultipartFile userid){
+        File path = new File("/home/www/MP_V2/dist/avatar"); //项目存放的服务器地址
+        if(!path.exists()){
+            path.mkdir();
+        }
+        File tofile = new File(path,userid+"avatar.jpg"); //用id命名
+        try {
+            file.transferTo(tofile);
+//           存入users表中"/avatar/"+userid+"avatar.jpg"
+            QueryWrapper<Users> wrapper = new QueryWrapper<>();
+            wrapper.eq("userid",userid);
+            Users users = usersMapper.selectOne(wrapper);
+            users.setAvatar("/avatar/"+userid+"avatar.jpg");
+            int result= usersMapper.updateById(users);
+            if(result!=0){
+                return "success";
+            }
+            return "false";
+        }catch (IOException e){
+            e.printStackTrace();
+            return "false";
+        }
+    }
 }

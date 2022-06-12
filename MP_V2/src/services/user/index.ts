@@ -1,3 +1,4 @@
+import { UploadFile } from 'antd/lib/upload/interface';
 import { request } from 'umi';
 
 // 验证账号密码
@@ -51,5 +52,15 @@ export async function updateUser(params: user) {
       'Content-Type': 'application/json',
     },
     data: params,
+  });
+}
+
+export async function avatarUpload(file: UploadFile, userid: number) {
+  return request<{}>(`/v2/user/avatarUpload`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { file, userid },
   });
 }

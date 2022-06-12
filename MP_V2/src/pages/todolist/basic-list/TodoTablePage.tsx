@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Button, message, Modal, Progress } from 'antd';
+import { Button, message, Modal, Progress, Tag } from 'antd';
 import { useModel } from 'umi';
 import { deleteTodo, getTodoListByQueryPage, updateTodoType } from '@/services/todo';
 import { PlusOutlined } from '@ant-design/icons';
@@ -40,6 +40,8 @@ const TodoTablePage: React.FC<{
     // 默认查询正在进行中任务
     params.okflag = !!params.okflag ? params.okflag : 1;
     params.userid = initialState?.currentUser?.userid;
+    params.classify = !!params.classify ? params.classify : '';
+
     const res = await getTodoListByQueryPage(params as TodoType.ParamsgetTodoListByQuery);
     return {
       // 这里使用分页来降低传输数据的体量，减少网络传输
@@ -48,6 +50,15 @@ const TodoTablePage: React.FC<{
       current: res.current,
       total: res.total,
     };
+  };
+  const getOptions = () => {
+    const arr = initialState?.currentUser?.todoclassify?.split('-');
+    const options: { label: string; value: string }[] = [];
+    options.push({ label: '不选择分类', value: '不选择分类' });
+    arr?.forEach((item) => {
+      options.push({ label: item, value: item });
+    });
+    return options;
   };
 
   const columns: ProColumns<todo>[] = [
@@ -74,6 +85,21 @@ const TodoTablePage: React.FC<{
       width: 200,
       hideInSearch: true,
       ellipsis: true,
+    },
+    {
+      title: '任务分类',
+      dataIndex: 'classify',
+      width: 200,
+      ellipsis: true,
+      valueType: 'select',
+      fieldProps: {
+        placeholder: '请选择任务分类',
+        options: getOptions(),
+      },
+      params: {},
+      render: (_, item) => {
+        return !!item.classify ? <Tag color="blue">{item.classify}</Tag> : '暂无分类';
+      },
     },
     {
       title: '开始时间',
@@ -124,11 +150,13 @@ const TodoTablePage: React.FC<{
       dataIndex: 'okflag',
       width: 80,
       ellipsis: true,
-      valueType: 'text',
+      valueType: 'select',
       fieldProps: {
         placeholder: '请选择任务状态（默认进行中）',
         maxLength: 32,
+        defaultValue: ['进行中', 'Success'],
       },
+
       valueEnum: TodoTypeEnum,
     },
     {

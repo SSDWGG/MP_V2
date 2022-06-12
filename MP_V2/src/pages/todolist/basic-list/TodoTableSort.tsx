@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Button, message, Modal, Progress, Tooltip } from 'antd';
+import { Button, message, Modal, Progress, Tag, Tooltip } from 'antd';
 import { useModel } from 'umi';
 import { deleteTodo, getTodoListByQuerySort, updateTodoType } from '@/services/todo';
 import { MenuOutlined, PlusOutlined } from '@ant-design/icons';
@@ -39,18 +39,19 @@ const TodoTableSort: React.FC<{
     setModalType(false);
   };
   const tableRequest = async (params: any, sort: any, filter: any) => {
-    // console.log(params, sort, filter);
     params.todotitle = !!params.todotitle ? params.todotitle : '';
     // 默认查询正在进行中任务
     params.okflag = !!params.okflag ? params.okflag : 1;
     params.userid = initialState?.currentUser?.userid;
+    params.classify = !!params.classify ? params.classify : '';
+
     const res = await getTodoListByQuerySort(params as TodoType.ParamsgetTodoListByQuery);
     setTodoList(res.data);
     return {};
   };
 
   const DragHandle = SortableHandle(() => (
-    <Tooltip placement="top" title="拖拽前请取消当前的其他排序">
+    <Tooltip placement="top" title="拖拽前请取消当前的其他排序的列">
       <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
     </Tooltip>
   ));
@@ -80,6 +81,15 @@ const TodoTableSort: React.FC<{
     const index = todoList.findIndex((x) => x.todoid === restProps['data-row-key']);
     return <SortableItem index={index} {...restProps} />;
   };
+  const getOptions = () => {
+    const arr = initialState?.currentUser?.todoclassify?.split('-');
+    const options: { label: string; value: string }[] = [];
+    options.push({ label: '不选择分类', value: '不选择分类' });
+    arr?.forEach((item) => {
+      options.push({ label: item, value: item });
+    });
+    return options;
+  };
   const columns: ProColumns<todo>[] = [
     {
       title: '拖拽排序',
@@ -106,6 +116,21 @@ const TodoTableSort: React.FC<{
       width: 200,
       hideInSearch: true,
       ellipsis: true,
+    },
+    {
+      title: '任务分类',
+      dataIndex: 'classify',
+      width: 200,
+      ellipsis: true,
+      valueType: 'select',
+      fieldProps: {
+        placeholder: '请选择任务分类',
+        options: getOptions(),
+      },
+      params: {},
+      render: (_, item) => {
+        return !!item.classify ? <Tag color="blue">{item.classify}</Tag> : '暂无分类';
+      },
     },
     {
       title: '开始时间',
