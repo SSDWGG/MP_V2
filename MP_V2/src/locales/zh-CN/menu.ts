@@ -1,5 +1,6 @@
 export default {
   'menu.todolist': '日程表',
+  'menu.memorandum': '备忘录',
 
   'menu.chat': '聊天',
   'menu.chat.chatroom': '聊天室',

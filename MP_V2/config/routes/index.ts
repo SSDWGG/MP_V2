@@ -36,6 +36,12 @@
     component: '@/pages/todolist',
   },
   {
+    path: '/memorandum',
+    name: 'memorandum',
+    icon: 'CheckCircleOutlined',
+    component: '@/pages/memorandum',
+  },
+  {
     name: 'chat',
     icon: 'CheckCircleOutlined',
     path: '/chat',
