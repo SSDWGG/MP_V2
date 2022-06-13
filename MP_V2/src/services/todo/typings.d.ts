@@ -8,12 +8,14 @@ declare namespace TodoType {
 
   interface ParamsgetTodoListByQuery extends ParamsPageBase {
     userid: number;
-    todotitle: string;
-    okflag: number;
+    todotitle?: string;
+    okflag?: number;
+    classify?: string;
   }
   interface ParamsgetTodoListByQuerySort {
     userid: number;
-    todotitle: string;
-    okflag: number;
+    todotitle?: string;
+    okflag?: number;
+    classify?: string;
   }
 }

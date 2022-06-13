@@ -3,6 +3,7 @@ import { Modal, message } from 'antd';
 import ProForm, {
   ProFormDateTimePicker,
   ProFormDependency,
+  ProFormSelect,
   ProFormSlider,
   ProFormText,
   ProFormTextArea,
@@ -112,7 +113,23 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               }}
               allowClear
             />
+            <ProFormSelect
+              name="classify"
+              label="任务分类"
+              tooltip="在 个人设置->日程表设置 中增加任务分类项"
+              request={async () => {
+                const arr = initialState?.currentUser?.todoclassify?.split('-');
+                const options: { label: string; value: any }[] = [];
+                options.push({ label: '不选择分类', value: '不选择分类' });
+                arr?.forEach((item) => {
+                  options.push({ label: item, value: item });
+                });
 
+                return options;
+              }}
+              placeholder="请选择任务分类"
+              rules={[{ required: true, message: '请选择任务分类' }]}
+            />
             <ProFormDependency name={['schedule']}>
               {({ schedule }) => {
                 return (
@@ -157,6 +174,19 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               }}
             </ProFormDependency>
 
+            <ProFormTextArea
+              name="remark"
+              label="备注"
+              validateFirst
+              fieldProps={{
+                showCount: true,
+                maxLength: 120,
+                allowClear: true,
+                autoSize: { minRows: 1, maxRows: 6 },
+                placeholder: '添加备注',
+              }}
+              allowClear
+            />
             <ProFormSlider
               name="schedule"
               label="任务进度"
@@ -206,6 +236,23 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
               }}
               allowClear
             />
+            <ProFormSelect
+              name="classify"
+              label="任务分类"
+              tooltip="在 个人设置->日程表设置 中增加任务分类项"
+              request={async () => {
+                const arr = initialState?.currentUser?.todoclassify?.split('-');
+                const options: { label: string; value: any }[] = [];
+                options.push({ label: '不选择分类', value: '不选择分类' });
+                arr?.forEach((item) => {
+                  options.push({ label: item, value: item });
+                });
+
+                return options;
+              }}
+              placeholder="请选择任务分类"
+              rules={[{ required: true, message: '请选择任务分类' }]}
+            />
             <ProFormDependency name={['schedule']}>
               {({ schedule }) => {
                 return (
@@ -246,6 +293,19 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                 );
               }}
             </ProFormDependency>
+            <ProFormTextArea
+              name="remark"
+              label="备注"
+              validateFirst
+              fieldProps={{
+                showCount: true,
+                maxLength: 120,
+                allowClear: true,
+                autoSize: { minRows: 1, maxRows: 6 },
+                placeholder: '添加备注',
+              }}
+              allowClear
+            />
             <ProFormDependency name={['schedule']}>
               {({ schedule }) => {
                 return (

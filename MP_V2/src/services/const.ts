@@ -11,6 +11,9 @@ interface user {
   geographic?: string;
   admin?: number;
   address?: string;
+  scrolltip?: string;
+  todoclassify?: string;
+  tags?: string;
 
   createTime?: string;
   updateTime?: string;
@@ -27,6 +30,8 @@ interface todo {
   beginTime: string;
   wantendTime: string;
   schedule: number;
+  remark: string;
+  classify?: string;
 
   createTime?: string;
   updateTime?: string;

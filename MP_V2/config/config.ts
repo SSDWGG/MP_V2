@@ -40,12 +40,18 @@ export default defineConfig({
   manifest: {
     basePath: '/todolist',
   },
+
   // Fast Refresh 热更新
   fastRefresh: {},
 
   nodeModulesTransform: {
     type: 'none',
   },
+
+  // ... some config
+  // base: '/admin/',
+  publicPath: '/',
+
   // mfsu: {},
   // webpack5: {},
   // exportStatic: {},

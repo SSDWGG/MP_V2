@@ -5,15 +5,17 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ryw.controller.util.JWTUtils;
-import com.ryw.entity.Todo;
 import com.ryw.entity.Users;
 import com.ryw.hander.MyPasswordEncoder;
 import com.ryw.mapper.UsersMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +56,9 @@ public class UsersController {
             //进行密码加密存入数据库
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
-            users.setTitle("rookie");
-            users.setSignature("生命就像一盒巧克力，结果往往出人意料");
+            users.setTitle("初来乍到的新人");
+            users.setSignature("在醒着的时间里，追求你认为最有意义的~");
+            users.setScrolltip("成功的道路并不拥挤，因为坚持的人并不多。");
              usersMapper.insert(users);
             resMap.put("state", "success");
             return JSON.toJSONString(resMap);
@@ -100,14 +103,52 @@ public class UsersController {
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）
     @RequestMapping("/v2/user/checkhave")
-    public int checkhave( @RequestBody Users users)
+    public List<Users> checkhave(@RequestBody Users users)
     {
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         HashMap<String,Object> queryMap = new HashMap<>();
         queryMap.put("username",users.getUsername());
         wrapper.allEq(queryMap, false);
         List<Users> usersList = usersMapper.selectList(wrapper);
-        return usersList.toArray().length;
+        return usersList;
+    }
 
+    @RequestMapping("/v2/user/updateUser")         //更新user信息（不包括密码（需要加密））
+    public String updateUser(@RequestBody Users users){
+        if(users.getPassword()!=null){
+            users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
+        }
+        HashMap<String, Object> resMap = new HashMap<>();
+        usersMapper.updateById(users);
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+    }
+
+    @RequestMapping("/v2/user/avatarUpload")            //头像图片上传
+    public String uploadtximg(@RequestParam("file") MultipartFile file,
+                              HttpServletRequest request){
+System.out.print(file);
+        Long userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asLong();
+        File path = new File("/home/www/MP_V2/dist/avatar"); //项目存放的服务器地址
+        if(!path.exists()){
+            path.mkdir();
+        }
+        File tofile = new File(path,userid+"avatar.jpg"); //用id命名
+        try {
+            file.transferTo(tofile);
+//           存入users表中"/avatar/"+userid+"avatar.jpg"
+            QueryWrapper<Users> wrapper = new QueryWrapper<>();
+            wrapper.eq("userid",userid);
+            Users users = usersMapper.selectOne(wrapper);
+            users.setAvatar("/avatar/"+userid+"avatar.jpg");
+            int result= usersMapper.updateById(users);
+            if(result!=0){
+                return "success";
+            }
+            return "false";
+        }catch (IOException e){
+            e.printStackTrace();
+            return "false";
+        }
     }
 }

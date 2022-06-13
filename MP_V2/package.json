@@ -66,6 +66,7 @@
     "numeral": "^2.0.6",
     "nzh": "^1.0.3",
     "omit.js": "^2.0.2",
+    "rc-tween-one": "^3.0.6",
     "react": "^17.0.0",
     "react-dev-inspector": "^1.1.1",
     "react-dom": "^17.0.0",

@@ -1,0 +1,16 @@
+com/ryw/entity/Goods.class
+com/ryw/hander/MyMateObjectHander.class
+com/ryw/mapper/TodoMapper.class
+com/ryw/hander/MyPasswordEncoder.class
+com/ryw/controller/util/MD5Utils.class
+com/ryw/interceptors/JWTInterceptors.class
+com/ryw/mapper/UsersMapper.class
+com/ryw/config/MyBatisPlusConfig.class
+com/ryw/config/InterceptorConfig.class
+com/ryw/entity/Todo.class
+com/ryw/controller/util/JWTUtils.class
+com/ryw/controller/TodoController.class
+com/ryw/MP_V2_Application.class
+com/ryw/entity/Users.class
+com/ryw/controller/UsersController.class
+com/ryw/config/WebConfig.class

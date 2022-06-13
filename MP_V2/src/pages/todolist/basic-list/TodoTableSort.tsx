@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
-import { Button, message, Modal, Progress } from 'antd';
+import { Button, message, Modal, Progress, Tag, Tooltip } from 'antd';
 import { useModel } from 'umi';
 import { deleteTodo, getTodoListByQuerySort, updateTodoType } from '@/services/todo';
 import { MenuOutlined, PlusOutlined } from '@ant-design/icons';
@@ -23,34 +23,6 @@ const TodoTableSort: React.FC<{
   const { confirm } = Modal;
   const [todoList, setTodoList] = useState<todo[]>([] as todo[]); //请求得到的列表数据
 
-  //对象一级属性排序函数的参考函数，正逆序由 -1 和1 决定
-  // const compare = (prop: string | number, sort = 1) => {
-  //   return function (obj1: any, obj2: any) {
-  //     var val1 = obj1[prop];
-  //     var val2 = obj2[prop];
-  //     if (val1 < val2) {
-  //       return sort;
-  //     } else if (val1 > val2) {
-  //       return -sort;
-  //     } else {
-  //       return 0;
-  //     }
-  //   };
-  // };
-  // useEffect(() => {
-  //   // 排序种类不多直接使用if else
-
-  //   // 使用了分页就无法使用table的数据排序和拖拽功能   也就是说如果使用了分页就必须做后端排序
-  //   if (sortType == 1) {
-  //     //创建时间排序（晚->早）默认
-  //     const sortArr = todoList.sort(compare('beginTime', 1));
-  //     setTodoList(sortArr);
-  //     console.log(sortArr, todoList);
-  //   } else if (sortType == 2) {
-  //     //  剩余时间排序（少->多）
-  //   }
-  // }, [sortType]);
-
   const reloadTable = () => {
     // 刷新表格内容
     if (actionRef.current) {
@@ -67,18 +39,21 @@ const TodoTableSort: React.FC<{
     setModalType(false);
   };
   const tableRequest = async (params: any, sort: any, filter: any) => {
-    // console.log(params, sort, filter);
     params.todotitle = !!params.todotitle ? params.todotitle : '';
     // 默认查询正在进行中任务
     params.okflag = !!params.okflag ? params.okflag : 1;
     params.userid = initialState?.currentUser?.userid;
+    params.classify = !!params.classify ? params.classify : '';
+
     const res = await getTodoListByQuerySort(params as TodoType.ParamsgetTodoListByQuery);
     setTodoList(res.data);
     return {};
   };
 
   const DragHandle = SortableHandle(() => (
-    <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
+    <Tooltip placement="top" title="拖拽前请取消当前的其他排序的列">
+      <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
+    </Tooltip>
   ));
 
   // 拖拽
@@ -106,11 +81,20 @@ const TodoTableSort: React.FC<{
     const index = todoList.findIndex((x) => x.todoid === restProps['data-row-key']);
     return <SortableItem index={index} {...restProps} />;
   };
+  const getOptions = () => {
+    const arr = initialState?.currentUser?.todoclassify?.split('-');
+    const options: { label: string; value: string }[] = [];
+    options.push({ label: '不选择分类', value: '不选择分类' });
+    arr?.forEach((item) => {
+      options.push({ label: item, value: item });
+    });
+    return options;
+  };
   const columns: ProColumns<todo>[] = [
     {
       title: '拖拽排序',
       dataIndex: 'sort',
-      width: 60,
+      width: 80,
       className: 'drag-visible',
       hideInSearch: true,
       render: () => <DragHandle />,
@@ -134,6 +118,21 @@ const TodoTableSort: React.FC<{
       ellipsis: true,
     },
     {
+      title: '任务分类',
+      dataIndex: 'classify',
+      width: 200,
+      ellipsis: true,
+      valueType: 'select',
+      fieldProps: {
+        placeholder: '请选择任务分类',
+        options: getOptions(),
+      },
+      params: {},
+      render: (_, item) => {
+        return !!item.classify ? <Tag color="blue">{item.classify}</Tag> : '暂无分类';
+      },
+    },
+    {
       title: '开始时间',
       dataIndex: 'beginTime',
       width: 180,
@@ -145,7 +144,7 @@ const TodoTableSort: React.FC<{
         const bTime = new Date(b.beginTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
     },
     {
       title: '期待结束时间',

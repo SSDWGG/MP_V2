@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 import RightContent from './components/RightContent';
 import { queryCurrentUser } from './services/user';
 
-// const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
@@ -33,13 +32,13 @@ export async function getInitialState(): Promise<{
 
   const fetchUserInfo = async () => {
     const msg = await queryCurrentUser();
-    if (!!msg) {
+    if (!!msg.userid) {
       return msg;
     } else {
       // token无效的去登录页
-      history.push(loginPath);
+      history.replace(loginPath);
       message.error('账号已禁用，请联系管理员');
-      // localStorage.removeItem(getTokenKey('ryw'));
+      localStorage.removeItem(getTokenKey('ryw'));
       return undefined;
     }
   };
@@ -85,7 +84,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       const { location } = history;
       // 如果没有登录（且非登录注册页面），重定向到 login
       if (!initialState?.currentUser && location.pathname !== '/user/register') {
-        history.push(loginPath);
+        history.replace(loginPath);
       }
     },
     links: [],
@@ -100,13 +99,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
+  console.log(error);
   const { response, request, data } = error;
-
   // @ts-ignore
   if (!request || request.options.skipErrorHandler) throw error;
   if (response && response.status) {
     const { status } = response;
-
     if (status === 401) {
       // 前进后退路由也进行判断
       const { query = {} } = history.location;
@@ -132,7 +130,12 @@ const errorHandler = (error: ResponseError) => {
 const requestTokenInterceptor = (url: string, options: RequestOptionsInit) => {
   const { headers } = options;
   // 取浏览器中存储的token
+  // 服务器环境下url改变  http://119.3.145.125:9050
+
   const token = localStorage.getItem(getTokenKey('ryw'));
+  // console.log(token);
+  // console.log(token || '');
+
   return {
     url: `${url}`,
     options: {

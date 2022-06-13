@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/../MP_V2/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MP_V2/src/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/todolist/basic-list/TodoTableSort.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/todolist/basic-list/TodoTableSort.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/user/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/user/register/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/base.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/base.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/todo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/todo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/service-worker.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/约定.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
     </list>
@@ -252,7 +256,7 @@
       <workItem from="1653451620749" duration="795000" />
       <workItem from="1653453015536" duration="12129000" />
       <workItem from="1653469677279" duration="12802000" />
-      <workItem from="1653709059747" duration="43571000" />
+      <workItem from="1653709059747" duration="69222000" />
     </task>
     <servers />
   </component>
