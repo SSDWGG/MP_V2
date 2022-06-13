@@ -251,27 +251,19 @@ const BaseView: React.FC = () => {
             <Upload
               showUploadList={false}
               accept=".jpg,.jpeg,.png"
-              action="http://localhost:9050/v2/user/avatarUpload"
+              action="http://119.3.145.125:9050/v2/user/avatarUpload"
               headers={{
                 authorization: 'authorization-text',
                 token: localStorage.getItem(getTokenKey('ryw')) as string,
               }}
-              // customRequest={({ file }) => {
-              //   console.log(file);
-
-              // avatarUpload(file as UploadFile);
-              // if (isSuccess(res?.code)) {
-              //   setLoading(false);
-              //   !!afterSave && afterSave();
-              //   !!afterUploadSuccessMessage
-              //     ? afterUploadSuccessMessage(res)
-              // :
-              // message.success('上传头像正在开发调试中，感谢支持');
-              // } else {
-              //   setLoading(false);
-              //   message.error('上传失败');
-              // }
-              // }}
+              onChange={async (info) => {
+                if (info.file.status === 'done') {
+                  await refresh();
+                  message.success(`图片上传成功`);
+                } else if (info.file.status === 'error') {
+                  message.error(`图片上传失败`);
+                }
+              }}
               beforeUpload={(file) => {
                 let shouldUpload = false;
                 const isAccept = /\.(jpg|png|jpeg?g)$/.test(file.name.toLowerCase());

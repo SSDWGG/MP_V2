@@ -78,6 +78,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     footerRender: () => <Footer />,
     title: initialState?.currentUser?.username,
+    logo: initialState?.currentUser?.avatar || undefined,
 
     onPageChange: () => {
       // 直接登录

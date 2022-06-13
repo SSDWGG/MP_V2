@@ -125,10 +125,9 @@ public class UsersController {
     }
 
     @RequestMapping("/v2/user/avatarUpload")            //头像图片上传
-    public String uploadtximg(@RequestParam("file") MultipartFile file,
+    public String avatarUpload(@RequestParam("file") MultipartFile file,
                               HttpServletRequest request){
-System.out.print(file);
-        Long userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asLong();
+        String userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asString();
         File path = new File("/home/www/MP_V2/dist/avatar"); //项目存放的服务器地址
         if(!path.exists()){
             path.mkdir();
@@ -138,7 +137,7 @@ System.out.print(file);
             file.transferTo(tofile);
 //           存入users表中"/avatar/"+userid+"avatar.jpg"
             QueryWrapper<Users> wrapper = new QueryWrapper<>();
-            wrapper.eq("userid",userid);
+            wrapper.eq("userid",Long.parseLong(userid));
             Users users = usersMapper.selectOne(wrapper);
             users.setAvatar("/avatar/"+userid+"avatar.jpg");
             int result= usersMapper.updateById(users);
