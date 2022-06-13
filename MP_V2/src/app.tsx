@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 import RightContent from './components/RightContent';
 import { queryCurrentUser } from './services/user';
 
-// const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
@@ -100,8 +99,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
+  console.log(error);
   const { response, request, data } = error;
-
   // @ts-ignore
   if (!request || request.options.skipErrorHandler) throw error;
   if (response && response.status) {
@@ -131,7 +130,12 @@ const errorHandler = (error: ResponseError) => {
 const requestTokenInterceptor = (url: string, options: RequestOptionsInit) => {
   const { headers } = options;
   // 取浏览器中存储的token
+  // 服务器环境下url改变  http://119.3.145.125:9050
+
   const token = localStorage.getItem(getTokenKey('ryw'));
+  // console.log(token);
+  // console.log(token || '');
+
   return {
     url: `${url}`,
     options: {

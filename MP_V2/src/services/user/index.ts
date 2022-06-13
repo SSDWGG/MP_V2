@@ -55,12 +55,12 @@ export async function updateUser(params: user) {
   });
 }
 
-export async function avatarUpload(file: UploadFile, userid: number) {
+export async function avatarUpload(file: UploadFile) {
   return request<{}>(`/v2/user/avatarUpload`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    params: { file, userid },
+    params: file,
   });
 }

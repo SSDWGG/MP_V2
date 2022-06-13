@@ -47,6 +47,11 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+
+  // ... some config
+  // base: '/admin/',
+  publicPath: '/',
+
   // mfsu: {},
   // webpack5: {},
   // exportStatic: {},

@@ -166,6 +166,7 @@ const TodoSetting: React.FC = () => {
         />
       )}
       {!inputVisible && (
+        // 分类被修改之后，原先任务的分类依然适用
         <Tag onClick={showInput} className="site-tag-plus" color={'processing'}>
           <PlusOutlined /> 添加分类标签
         </Tag>

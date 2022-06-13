@@ -12,8 +12,8 @@ import cityData from '@/util/geographic/city.json';
 import provinceData from '@/util/geographic/province.json';
 
 import styles from './BaseView.less';
-import { avatarUpload, checkhave, updateUser } from '@/services/user';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { checkhave, updateUser } from '@/services/user';
+import { getTokenKey } from '@/common/utils';
 
 const BaseView: React.FC = () => {
   //  获取用户信息
@@ -144,10 +144,10 @@ const BaseView: React.FC = () => {
                 placeholder: '请输入您的性别',
               }}
               rules={[
-                {
-                  required: true,
-                  message: '请输入您的性别',
-                },
+                // {
+                //   required: true,
+                //   message: '请输入您的性别',
+                // },
                 {
                   pattern: /^\S.*$/,
                   message: '首字符不能为空格',
@@ -251,19 +251,27 @@ const BaseView: React.FC = () => {
             <Upload
               showUploadList={false}
               accept=".jpg,.jpeg,.png"
-              customRequest={({ file }) => {
-                avatarUpload(file as UploadFile, initialState?.currentUser?.userid as number);
-                // if (isSuccess(res?.code)) {
-                //   setLoading(false);
-                //   !!afterSave && afterSave();
-                //   !!afterUploadSuccessMessage
-                //     ? afterUploadSuccessMessage(res)
-                //     : message.success('上传成功');
-                // } else {
-                //   setLoading(false);
-                //   message.error('上传失败');
-                // }
+              action="http://localhost:9050/v2/user/avatarUpload"
+              headers={{
+                authorization: 'authorization-text',
+                token: localStorage.getItem(getTokenKey('ryw')) as string,
               }}
+              // customRequest={({ file }) => {
+              //   console.log(file);
+
+              // avatarUpload(file as UploadFile);
+              // if (isSuccess(res?.code)) {
+              //   setLoading(false);
+              //   !!afterSave && afterSave();
+              //   !!afterUploadSuccessMessage
+              //     ? afterUploadSuccessMessage(res)
+              // :
+              // message.success('上传头像正在开发调试中，感谢支持');
+              // } else {
+              //   setLoading(false);
+              //   message.error('上传失败');
+              // }
+              // }}
               beforeUpload={(file) => {
                 let shouldUpload = false;
                 const isAccept = /\.(jpg|png|jpeg?g)$/.test(file.name.toLowerCase());

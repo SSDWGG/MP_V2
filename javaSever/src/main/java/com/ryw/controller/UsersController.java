@@ -126,7 +126,9 @@ public class UsersController {
 
     @RequestMapping("/v2/user/avatarUpload")            //头像图片上传
     public String uploadtximg(@RequestParam("file") MultipartFile file,
-                              @RequestParam("userid") MultipartFile userid){
+                              HttpServletRequest request){
+System.out.print(file);
+        Long userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asLong();
         File path = new File("/home/www/MP_V2/dist/avatar"); //项目存放的服务器地址
         if(!path.exists()){
             path.mkdir();
