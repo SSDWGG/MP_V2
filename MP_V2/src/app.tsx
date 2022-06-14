@@ -32,8 +32,8 @@ export async function getInitialState(): Promise<{
 
   const fetchUserInfo = async () => {
     const msg = await queryCurrentUser();
-    if (!!msg.userid) {
-      return msg;
+    if (!!msg.data.userid) {
+      return msg.data;
     } else {
       // token无效的去登录页
       history.replace(loginPath);

@@ -88,17 +88,21 @@ public class UsersController {
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）
     @RequestMapping("/v2/user/CurrentUser")
-    public Users CurrentUser( HttpServletRequest request)
+    public Object CurrentUser(HttpServletRequest request)
     {
         try {
             DecodedJWT verify = JWTUtils.verify(request.getHeader("token"));
 //          此处可以进行数据筛选返回（筛选掉密码等敏感信息）
-            return  usersMapper.selectById(verify.getClaim("userid").asString());
+            Users users = usersMapper.selectById(verify.getClaim("userid").asString());
+            HashMap<String, Object> resMap = new HashMap<>();
+            resMap.put("data", users);
+            resMap.put("code", "200");
+            resMap.put("message", "success");
+            return JSON.toJSONString(resMap);
         } catch (Exception e){
             log.info("token异常");
             return null;
         }
-
     }
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）

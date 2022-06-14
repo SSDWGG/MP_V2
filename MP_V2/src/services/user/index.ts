@@ -14,7 +14,7 @@ export async function login(params: UserType.ParamsLogin) {
 
 // 拿到当前的用户的信息
 export async function queryCurrentUser() {
-  return request<user>(`/v2/user/CurrentUser`, {
+  return request<UserType.ResCurrentUser>(`/v2/user/CurrentUser`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

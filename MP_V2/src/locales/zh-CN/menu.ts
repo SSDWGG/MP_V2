@@ -1,4 +1,7 @@
 export default {
+  'menu.admin': '管理员',
+  'menu.admin.allUser': '账号管理',
+
   'menu.todolist': '日程表',
   'menu.memorandum': '备忘录',
 

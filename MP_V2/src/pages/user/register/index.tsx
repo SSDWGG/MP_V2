@@ -175,7 +175,7 @@ const Register: FC = () => {
               validateFirst
               label="确认密码"
               dependencies={['password']}
-              placeholder="请在再次输入密码"
+              placeholder="请再次输入密码"
               rules={[
                 {
                   required: true,

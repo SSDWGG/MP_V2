@@ -3,6 +3,7 @@
     path: '/',
     redirect: '/todolist',
   },
+  // 登录注册
   {
     path: '/user',
     layout: false,
@@ -30,17 +31,37 @@
     ],
   },
   {
+    path: '/admin',
+    name: 'admin',
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/admin/allUser',
+        name: 'allUser',
+        icon: 'smile',
+        component: '@/pages/admin/allUser',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  // 日程表
+  {
     path: '/todolist',
     name: 'todolist',
     icon: 'smile',
     component: '@/pages/todolist',
   },
+  // 备忘录
   {
     path: '/memorandum',
     name: 'memorandum',
     icon: 'CheckCircleOutlined',
     component: '@/pages/memorandum',
   },
+  // 聊天
   {
     name: 'chat',
     icon: 'CheckCircleOutlined',
@@ -62,6 +83,7 @@
       },
     ],
   },
+  // 音乐
   {
     name: 'music',
     icon: 'CheckCircleOutlined',
@@ -83,7 +105,6 @@
       },
     ],
   },
-
   // 个人主页
   {
     name: 'account',
