@@ -64,3 +64,14 @@ export async function avatarUpload(file: UploadFile) {
     params: file,
   });
 }
+
+// 查询全部用户 page分页情况下
+export async function getAllUsers(params: ParamsPageBase) {
+  return request<ResList<user>>(`/v2/user/getAllUser`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+}

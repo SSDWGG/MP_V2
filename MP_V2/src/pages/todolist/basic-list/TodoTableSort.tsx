@@ -85,6 +85,8 @@ const TodoTableSort: React.FC<{
     const arr = initialState?.currentUser?.todoclassify?.split('-');
     const options: { label: string; value: string }[] = [];
     options.push({ label: '不选择分类', value: '不选择分类' });
+    if (JSON.stringify(arr) === '[""]') return options;
+
     arr?.forEach((item) => {
       options.push({ label: item, value: item });
     });

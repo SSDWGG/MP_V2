@@ -84,11 +84,13 @@ const TodoSetting: React.FC = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
       p.userid = initialState?.currentUser?.userid;
+      p.admin = initialState?.currentUser?.admin;
       delete p.province;
       delete p.city;
 
       // 这里使用-来分割   可以在输入的时候限定不能使用这个特殊字符
       p.todoclassify = todoclassify.join('-');
+
       await updateUser(p);
       await refresh();
       message.success('更新基本信息成功');

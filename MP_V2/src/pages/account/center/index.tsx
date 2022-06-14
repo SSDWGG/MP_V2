@@ -30,6 +30,7 @@ const Center: React.FC = () => {
     updateUser({
       tags: tags.join('-'),
       userid: initialState?.currentUser?.userid as number,
+      admin: initialState?.currentUser?.admin,
     } as user);
     // 刷新initstate
     refresh();

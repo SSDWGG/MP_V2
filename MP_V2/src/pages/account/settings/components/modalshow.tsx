@@ -32,6 +32,8 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
       .then(async (value) => {
         const p = { ...value };
         p.userid = info.userid;
+        p.admin = info.admin;
+
         await updateUser(p);
         message.success({
           content: '修改成功',

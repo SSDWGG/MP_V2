@@ -44,6 +44,8 @@ const BaseView: React.FC = () => {
         p.geographic = `${province?.name}-${p.city}`;
       }
       p.userid = initialState?.currentUser?.userid;
+      p.admin = initialState?.currentUser?.admin;
+
       delete p.province;
       delete p.city;
       await updateUser(p);

@@ -39,6 +39,8 @@ public class UsersController {
         long numbers = page.getTotal();// 总条数
         resMap.put("total",numbers);
         resMap.put("data",usersList);
+        resMap.put("current",current);
+        resMap.put("pageSize",pageSize);
         return JSON.toJSONString(resMap);
     }
 
