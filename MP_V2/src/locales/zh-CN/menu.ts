@@ -7,7 +7,7 @@ export default {
 
   'menu.chat': '聊天',
   'menu.chat.room': '聊天室',
-  'menu.chat.adminRoom': '管理员联系',
+  'menu.chat.adminRoom': '管理员交流区',
   'menu.music': '音乐播放器',
   'menu.music.musiclist': '音乐库',
 
