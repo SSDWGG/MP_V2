@@ -5,6 +5,7 @@ import { Divider, Input, InputRef, message, Tag } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useModel } from 'umi';
 import { TweenOneGroup } from 'rc-tween-one';
+import { checkIllegalityStr } from '@/util/const';
 
 const TodoSetting: React.FC = () => {
   const { initialState, refresh } = useModel('@@initialState');
@@ -48,10 +49,12 @@ const TodoSetting: React.FC = () => {
 
   const handleInputConfirm = () => {
     if (inputValue && todoclassify.indexOf(inputValue) === -1) {
-      todoclassify.length >= 5
+      todoclassify.length >= 10
         ? message.warning('标签数量达到上限')
         : inputValue.length > 12
         ? message.warning('标签内容长度需小于12字符')
+        : checkIllegalityStr(inputValue)
+        ? message.warning('标签内容请使用中英文和数字')
         : settodoclassify([...todoclassify, inputValue]);
     }
     setInputVisible(false);

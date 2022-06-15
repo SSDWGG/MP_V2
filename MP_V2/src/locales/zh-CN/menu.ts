@@ -6,7 +6,8 @@ export default {
   'menu.memorandum': '备忘录',
 
   'menu.chat': '聊天',
-  'menu.chat.chatroom': '聊天室',
+  'menu.chat.room': '聊天室',
+  'menu.chat.adminRoom': '管理员联系',
   'menu.music': '音乐播放器',
   'menu.music.musiclist': '音乐库',
 

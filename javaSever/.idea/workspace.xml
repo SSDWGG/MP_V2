@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/services/user/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +248,7 @@
       <workItem from="1655135619094" duration="632000" />
       <workItem from="1655138617830" duration="148000" />
       <workItem from="1655138773036" duration="137000" />
-      <workItem from="1655173861932" duration="3922000" />
+      <workItem from="1655173861932" duration="4562000" />
     </task>
     <servers />
   </component>

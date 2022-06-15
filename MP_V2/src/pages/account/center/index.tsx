@@ -6,6 +6,7 @@ import { useModel } from 'umi';
 import styles from './Center.less';
 import { TweenOneGroup } from 'rc-tween-one';
 import { updateUser } from '@/services/user';
+import { checkIllegalityStr } from '@/util/const';
 
 const Center: React.FC = () => {
   //  获取用户信息
@@ -51,10 +52,12 @@ const Center: React.FC = () => {
 
   const handleInputConfirm = () => {
     if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags.length >= 5
+      tags.length >= 10
         ? message.warning('标签数量达到上限')
         : inputValue.length > 12
         ? message.warning('标签内容长度需小于12字符')
+        : checkIllegalityStr(inputValue)
+        ? message.warning('标签内容请使用中英文和数字')
         : setTags([...tags, inputValue]);
     }
     setInputVisible(false);

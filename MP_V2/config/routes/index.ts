@@ -72,11 +72,19 @@
         redirect: '/chat/room',
       },
       {
-        name: 'chatroom',
+        name: 'room',
         icon: 'smile',
         path: '/chat/room',
         component: '@/pages/chat/room',
       },
+      {
+        name: 'adminRoom',
+        icon: 'smile',
+        path: '/chat/adminRoom',
+        access: 'canAdmin',
+        component: '@/pages/chat/adminRoom',
+      },
+
       // 匹配不到路径自动跳转404
       {
         component: '404',
