@@ -16,12 +16,14 @@ const Memorandum: React.FC = () => {
       }}
       extraContent={
         <div>
-          <Statistic title="备忘录数" value={`0`} />
+          <Statistic title="备忘录数" value={`1`} />
         </div>
       }
       content={<PageHeaderContent currentUser={initialState?.currentUser as user} />}
     >
+      {/* 先使用text来存储，之后再做一个富文本的模式 */}
       <Projects />
+      开发中...
     </PageContainer>
   );
 };

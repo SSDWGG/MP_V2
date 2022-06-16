@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes" />
+    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/entity/Memo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/mapper/MemoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/data.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/style.less" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/style.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/entity/Goods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/entity/Goods.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,9 +95,9 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ryw.controller" />
       <recent name="com.ryw.mapper" />
       <recent name="com.ryw.entity" />
-      <recent name="com.ryw.controller" />
       <recent name="com.ryw.controller.util" />
     </key>
   </component>
@@ -246,7 +257,7 @@
       <workItem from="1655135619094" duration="632000" />
       <workItem from="1655138617830" duration="148000" />
       <workItem from="1655138773036" duration="137000" />
-      <workItem from="1655173861932" duration="5166000" />
+      <workItem from="1655173861932" duration="6574000" />
     </task>
     <servers />
   </component>

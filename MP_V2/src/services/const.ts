@@ -38,3 +38,15 @@ interface todo {
   version?: number;
   deleted?: number;
 }
+interface memo {
+  memoid: number;
+  userid: number;
+  title: string;
+  cover: string;
+  content: string;
+
+  createTime?: string;
+  updateTime?: string;
+  version?: number;
+  deleted?: number;
+}

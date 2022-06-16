@@ -6,12 +6,14 @@
     :global {
       .ant-card-meta-title {
         margin-bottom: 4px;
-        & > a {
+
+        &>a {
           display: inline-block;
           max-width: 100%;
           color: @heading-color;
         }
       }
+
       .ant-card-meta-description {
         height: 44px;
         overflow: hidden;
@@ -21,7 +23,7 @@
 
     &:hover {
       :global {
-        .ant-card-meta-title > a {
+        .ant-card-meta-title>a {
           color: @primary-color;
         }
       }
@@ -34,15 +36,20 @@
     margin-top: 16px;
     margin-bottom: -4px;
     line-height: 20px;
-    & > span {
+
+    &>span {
       flex: 1;
       color: @text-color-secondary;
       font-size: 12px;
     }
+
     .avatarList {
       flex: 0 1 auto;
+      // align-items: flex-end;
+      // justify-content: end;
     }
   }
+
   .cardList {
     margin-top: 24px;
   }
