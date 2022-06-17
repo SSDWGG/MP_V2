@@ -59,7 +59,7 @@ public class TodoController {
     }
 
     @RequestMapping("/v2/todo/updateTodo")         //修改todo
-    public String updateTodoType(@RequestBody Todo aftertodo){
+    public String updateTodo(@RequestBody Todo aftertodo){
 //      先根据id去查询对应的todo，然后在对应的todo上面做修改
        Todo todobefore =  todoMapper.selectById(aftertodo.getTodoid());
 //        任务完成

@@ -252,7 +252,7 @@ const TodoTableSort: React.FC<{
     {
       title: '操作',
       fixed: 'right',
-      width: 160,
+      width: 180,
       hideInSearch: true,
       dataIndex: 'option',
       render: (_, item) => {

@@ -5,11 +5,13 @@
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/entity/Users.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/controller/UsersController.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/mapper/TodoMapper.java
+/Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/controller/MemoController.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/interceptors/JWTInterceptors.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/entity/Todo.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/MP_V2_Application.java
+/Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/mapper/MemoMapper.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/controller/util/JWTUtils.java
-/Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/entity/Goods.java
+/Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/entity/Memo.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/hander/MyMateObjectHander.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/mapper/UsersMapper.java
 /Users/renshuaiweidemac/Desktop/MP_V2/javaSever/src/main/java/com/ryw/controller/TodoController.java

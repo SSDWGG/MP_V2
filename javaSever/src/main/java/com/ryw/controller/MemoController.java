@@ -29,11 +29,9 @@ public class MemoController {
 
     @Autowired
     MemoMapper memoMapper;
-
-
     @CrossOrigin
-    @RequestMapping("/v2/todo/getUserAllMemos")              // 获取指定用户的全部todos
-    public String getUserAllMemos(HttpServletRequest request ){   //接收传来的参数，这里了封装一个实体类
+    @RequestMapping("/v2/memo/getUserAllMemos")
+    public String getUserAllMemos(HttpServletRequest request ){
         try {
             DecodedJWT verify = JWTUtils.verify(request.getHeader("token"));
             QueryWrapper<Memo> wrapper = new QueryWrapper<>();
@@ -46,7 +44,40 @@ public class MemoController {
         }
 
     }
+    @RequestMapping("/v2/memo/getMemoByMemoid")
+    public String getMemoByMemoid(@RequestParam("memoid") Long memoid){
+            QueryWrapper<Memo> wrapper = new QueryWrapper<>();
+            wrapper.eq("memoid",memoid);
+             Memo memo = memoMapper.selectOne(wrapper);
+        return JSON.toJSONString(memo);
+    }
 
+//    增
+    @RequestMapping("/v2/memo/addMemo")
+    public String addMemo(@RequestBody Memo memo,HttpServletRequest request){
+        DecodedJWT verify = JWTUtils.verify(request.getHeader("token"));
+        memo.setUserid(Long.valueOf(verify.getClaim("userid").asString()));
+         memoMapper.insert(memo);
+        HashMap<String, Object> resMap = new HashMap<>();
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+        }
+//    删
+    @RequestMapping("/v2/memo/deleteMemoByMemoid")
+    public String deleteMemo(@RequestParam("memoid") Long memoid){
+        memoMapper.deleteById(memoid);
+        HashMap<String, Object> resMap = new HashMap<>();
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+    }
+//    改
+    @RequestMapping("/v2/memo/updateMemo")
+    public String updateMemo(@RequestBody Memo memo){
 
+        memoMapper.updateById(memo);
+        HashMap<String, Object> resMap = new HashMap<>();
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+    }
 
 }

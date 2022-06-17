@@ -16,13 +16,13 @@
         path: '/user/login',
         layout: false,
         name: 'login',
-        component: '@/pages/user/login',
+        component: './user/login',
       },
       {
         name: 'register',
         icon: 'smile',
         path: '/user/register',
-        component: '@/pages/user/register',
+        component: './user/register',
       },
       // 匹配不到路径自动跳转404
       {
@@ -40,7 +40,7 @@
         path: '/admin/allUser',
         name: 'allUser',
         icon: 'smile',
-        component: '@/pages/admin/allUser',
+        component: './admin/allUser',
       },
       {
         component: './404',
@@ -52,67 +52,89 @@
     path: '/todolist',
     name: 'todolist',
     icon: 'smile',
-    component: '@/pages/todolist',
+    component: './todolist',
   },
   // 备忘录
   {
     path: '/memorandum',
     name: 'memorandum',
     icon: 'CheckCircleOutlined',
-    component: '@/pages/memorandum',
+    routes: [
+      {
+        path: '/memorandum',
+        hideInMenu: true,
+        component: './memorandum',
+      },
+      {
+        name: 'addTextDetail',
+        path: '/memorandum/addTextDetail',
+        hideInMenu: true,
+        component: './memorandum/textDetail',
+      },
+      {
+        path: `/memorandum/editTextDetail/:memoid`,
+        name: 'editTextDetail',
+        hideInMenu: true,
+        component: './memorandum/textDetail',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
   },
   // 聊天
-  {
-    name: 'chat',
-    icon: 'CheckCircleOutlined',
-    path: '/chat',
-    routes: [
-      {
-        path: '/chat',
-        redirect: '/chat/room',
-      },
-      {
-        name: 'room',
-        icon: 'smile',
-        path: '/chat/room',
-        component: '@/pages/chat/room',
-      },
-      {
-        name: 'adminRoom',
-        icon: 'smile',
-        path: '/chat/adminRoom',
-        access: 'canAdmin',
-        component: '@/pages/chat/adminRoom',
-      },
+  // {
+  //   name: 'chat',
+  //   icon: 'CheckCircleOutlined',
+  //   path: '/chat',
+  //   routes: [
+  //     {
+  //       path: '/chat',
+  //       redirect: '/chat/room',
+  //     },
+  //     {
+  //       name: 'room',
+  //       icon: 'smile',
+  //       path: '/chat/room',
+  //       component: './chat/room',
+  //     },
+  //     {
+  //       name: 'adminRoom',
+  //       icon: 'smile',
+  //       path: '/chat/adminRoom',
+  //       access: 'canAdmin',
+  //       component: './chat/adminRoom',
+  //     },
 
-      // 匹配不到路径自动跳转404
-      {
-        component: '404',
-      },
-    ],
-  },
-  // 音乐
-  {
-    name: 'music',
-    icon: 'CheckCircleOutlined',
-    path: '/music',
-    routes: [
-      {
-        path: '/music',
-        redirect: '/music/list',
-      },
-      {
-        name: 'musiclist',
-        icon: 'smile',
-        path: '/music/list',
-        component: '@/pages/music/list',
-      },
-      // 匹配不到路径自动跳转404
-      {
-        component: '404',
-      },
-    ],
-  },
+  //     // 匹配不到路径自动跳转404
+  //     {
+  //       component: '404',
+  //     },
+  //   ],
+  // },
+  // // 音乐
+  // {
+  //   name: 'music',
+  //   icon: 'CheckCircleOutlined',
+  //   path: '/music',
+  //   routes: [
+  //     {
+  //       path: '/music',
+  //       redirect: '/music/list',
+  //     },
+  //     {
+  //       name: 'musiclist',
+  //       icon: 'smile',
+  //       path: '/music/list',
+  //       component: './music/list',
+  //     },
+  //     // 匹配不到路径自动跳转404
+  //     {
+  //       component: '404',
+  //     },
+  //   ],
+  // },
   // 个人主页
   {
     name: 'account',
@@ -127,20 +149,23 @@
         name: 'center',
         icon: 'smile',
         path: '/account/center',
-        component: '@/pages/account/center',
+        component: './account/center',
       },
       {
         name: 'settings',
         icon: 'smile',
         path: '/account/settings',
-        component: '@/pages/account/settings',
+        component: './account/settings',
       },
       {
         component: './404',
       },
     ],
   },
-
+  //未匹配跳转404
+  {
+    component: './404',
+  },
   // {
   //   name: 'result',
   //   icon: 'CheckCircleOutlined',
@@ -154,13 +179,13 @@
   //       name: 'success',
   //       icon: 'smile',
   //       path: '/result/success',
-  //       component: '@/pages/result/success',
+  //       component: './result/success',
   //     },
   //     {
   //       name: 'fail',
   //       icon: 'smile',
   //       path: '/result/fail',
-  //       component: '@/pages/result/fail',
+  //       component: './result/fail',
   //     },
   //     {
   //       component: './404',
@@ -181,28 +206,23 @@
   //       name: '403',
   //       icon: 'smile',
   //       path: '/exception/403',
-  //       component: '@/pages/exception/403',
+  //       component: './exception/403',
   //     },
   //     {
   //       name: '404',
   //       icon: 'smile',
   //       path: '/exception/404',
-  //       component: '@/pages/exception/404',
+  //       component: './exception/404',
   //     },
   //     {
   //       name: '500',
   //       icon: 'smile',
   //       path: '/exception/500',
-  //       component: '@/pages/exception/500',
+  //       component: './exception/500',
   //     },
   //     {
   //       component: './404',
   //     },
   //   ],
   // },
-
-  //未匹配跳转404
-  {
-    component: './404',
-  },
 ];

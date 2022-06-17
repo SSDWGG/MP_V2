@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-const ChatRoom: React.FC = () => {
+const AdminRoom: React.FC = () => {
   return (
     <PageContainer
       header={{
@@ -12,4 +12,4 @@ const ChatRoom: React.FC = () => {
     </PageContainer>
   );
 };
-export default ChatRoom;
+export default AdminRoom;

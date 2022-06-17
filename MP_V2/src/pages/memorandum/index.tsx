@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import PageHeaderContent from '@/components/PageHeaderContent';
-import { Statistic } from 'antd';
-import { useModel } from 'umi';
+import { Button, Card, Statistic } from 'antd';
+import { history, useModel } from 'umi';
 import Projects from './projects';
+import { getUserAllMemos } from '@/services/memo';
+import { PlusOutlined } from '@ant-design/icons';
 
 const Memorandum: React.FC = () => {
   const { initialState } = useModel('@@initialState');
+  const [memosData, setMemoData] = useState<memo[]>([]);
 
+  const getMemoDate = async () => {
+    const resMemo = await getUserAllMemos();
+    !!resMemo ? setMemoData(resMemo) : setMemoData([]);
+    return resMemo;
+  };
+
+  useEffect(() => {
+    getMemoDate();
+  }, []);
   return (
     <PageContainer
       header={{
@@ -16,14 +28,25 @@ const Memorandum: React.FC = () => {
       }}
       extraContent={
         <div>
-          <Statistic title="备忘录数" value={`1`} />
+          <Statistic title="备忘录数" value={`${memosData.length}`} />
         </div>
       }
       content={<PageHeaderContent currentUser={initialState?.currentUser as user} />}
     >
-      {/* 先使用text来存储，之后再做一个富文本的模式 */}
-      <Projects />
-      开发中...
+      <Card>
+        <Button
+          type="dashed"
+          onClick={() => {
+            history.push(`/memorandum/addTextDetail`);
+          }}
+          style={{ width: '100%', marginBottom: 15 }}
+        >
+          <PlusOutlined />
+          添加备忘录
+        </Button>
+        {/* 先使用text来存储，之后的版本再做富文本的模式 */}
+        <Projects memosData={memosData} />
+      </Card>
     </PageContainer>
   );
 };
