@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
-import { Card, Tag } from 'antd';
+import { Button, Card, message, Modal, Tag } from 'antd';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import { PageContainer } from '@ant-design/pro-layout';
 import { getAllUsers } from '@/services/user';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 const Music: React.FC = () => {
   const actionRef = useRef<ActionType>();
+  const { confirm } = Modal;
 
   const tableRequest = async (p: any) => {
     const params = { ...p };
@@ -17,6 +19,13 @@ const Music: React.FC = () => {
       current: res.current,
       total: res.total,
     };
+  };
+
+  const reloadTable = () => {
+    // 刷新表格内容
+    if (actionRef.current) {
+      actionRef.current.reload();
+    }
   };
 
   const columns: ProColumns<user>[] = [
@@ -63,6 +72,41 @@ const Music: React.FC = () => {
       dataIndex: 'geographic',
       width: 100,
       ellipsis: true,
+    },
+    // 操作
+    {
+      title: '操作',
+      fixed: 'right',
+      width: 180,
+      hideInSearch: true,
+      dataIndex: 'option',
+      render: (_, item) => {
+        return (
+          <ButtonGroup>
+            <Button
+              key="delete"
+              type="dashed"
+              size="small"
+              onClick={() => {
+                confirm({
+                  title: '限制登录',
+                  content: `确定要限制登录用户${item.username}吗？`,
+                  onOk: async () => {
+                    // await addblack({
+                    //   userid: item.userid,
+                    //   overTime: '2022-06-19 14:29:56',
+                    // } as black);
+                    message.success('操作成功');
+                    reloadTable();
+                  },
+                });
+              }}
+            >
+              限制登录
+            </Button>
+          </ButtonGroup>
+        );
+      },
     },
   ];
   return (

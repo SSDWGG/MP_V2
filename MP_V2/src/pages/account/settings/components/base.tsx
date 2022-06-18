@@ -146,10 +146,6 @@ const BaseView: React.FC = () => {
                 placeholder: '请输入您的性别',
               }}
               rules={[
-                // {
-                //   required: true,
-                //   message: '请输入您的性别',
-                // },
                 {
                   pattern: /^\S.*$/,
                   message: '首字符不能为空格',
@@ -157,6 +153,25 @@ const BaseView: React.FC = () => {
               ]}
               allowClear
             />
+            <ProFormText
+              name="watermark"
+              label="水印"
+              width="md"
+              validateFirst //阻塞校验
+              fieldProps={{
+                maxLength: 12,
+                showCount: true,
+                placeholder: '请输入水印内容',
+              }}
+              rules={[
+                {
+                  pattern: /^\S.*$/,
+                  message: '首字符不能为空格',
+                },
+              ]}
+              allowClear
+            />
+
             {/* 地区前端固定写中国 */}
             <ProFormSelect
               width="sm"

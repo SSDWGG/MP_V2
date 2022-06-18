@@ -7,6 +7,7 @@ interface user {
   title?: string;
   phone?: string;
   gender?: string;
+  watermark?: string;
   signature?: string;
   geographic?: string;
   admin?: number;
@@ -44,6 +45,16 @@ interface memo {
   title: string;
   cover: string;
   content: string;
+
+  createTime?: string;
+  updateTime?: string;
+  version?: number;
+  deleted?: number;
+}
+interface black {
+  blackid: number;
+  userid: number;
+  overTime: string;
 
   createTime?: string;
   updateTime?: string;

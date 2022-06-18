@@ -42,6 +42,8 @@ public class JWTInterceptors implements HandlerInterceptor {
         // 将map以json的形式响应到前台  map --> json  (jackson)
         String json = new ObjectMapper().writeValueAsString(map);
         response.setContentType("application/json;charset=UTF-8");
+//无权限
+        response.setStatus(403);
         response.getWriter().println(json);
         return false;
     }

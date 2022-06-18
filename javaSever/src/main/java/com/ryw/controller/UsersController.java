@@ -59,6 +59,7 @@ public class UsersController {
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
             users.setTitle("初来乍到的新人");
+            users.setWatermark(users.getUsername());
             users.setSignature("在醒着的时间里，追求你认为最有意义的~");
             users.setScrolltip("成功的道路并不拥挤，因为坚持的人并不多。");
              usersMapper.insert(users);

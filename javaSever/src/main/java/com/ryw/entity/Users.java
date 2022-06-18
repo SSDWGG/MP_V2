@@ -30,7 +30,7 @@ public class Users {
     private String signature;
     private String geographic;
     private String address;
-
+    private String watermark;
     private String scrolltip;
     private String tags;
     private String todoclassify;
@@ -53,6 +53,14 @@ public class Users {
 
     //构造类和setget方法 和tostring方法
 
+
+    public String getWatermark() {
+        return watermark;
+    }
+
+    public void setWatermark(String watermark) {
+        this.watermark = watermark;
+    }
 
     public Long getUserid() {
         return userid;
