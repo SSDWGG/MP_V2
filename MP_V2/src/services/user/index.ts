@@ -55,6 +55,16 @@ export async function updateUser(params: user) {
   });
 }
 
+// 更新userpassword
+export async function updateUserPassword(params: user) {
+  return request<{}>(`/v2/user/updateUserPassword`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+  });
+}
 export async function avatarUpload(file: UploadFile) {
   return request<{}>(`/v2/user/avatarUpload`, {
     method: 'PUT',

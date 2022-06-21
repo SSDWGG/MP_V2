@@ -34,9 +34,10 @@ public class Users {
     private String scrolltip;
     private String tags;
     private String todoclassify;
-
-
     private  int admin;
+
+    private String blackTime;
+
 
 
     @TableLogic //逻辑删除注解    (内部进行更新)
@@ -53,6 +54,14 @@ public class Users {
 
     //构造类和setget方法 和tostring方法
 
+
+    public String getBlackTime() {
+        return blackTime;
+    }
+
+    public void setBlackTime(String blackTime) {
+        this.blackTime = blackTime;
+    }
 
     public String getWatermark() {
         return watermark;

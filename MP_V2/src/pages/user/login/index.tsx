@@ -1,6 +1,7 @@
-import { getTokenKey } from '@/common/utils';
+import { formatTimesTampDate, getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
 import { Button, Form, Input, message, Tooltip } from 'antd';
+import moment from 'moment';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
 import style from './index.less';
@@ -24,14 +25,20 @@ const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
+
     if (!!userInfo) {
-      message.success('登录成功！正在为您跳转主页...');
-      // refresh(); 切换账号登录，主动刷新intistate内容
-      await setInitialState((s) => ({
-        ...s,
-        currentUser: userInfo,
-      }));
-      goto('/todolist');
+      // 账号密码正确，验证是否在黑名单中（这个黑名单的验证操作，最好由后端来做拦截验证，而不是前端请求验证，前端的时间获取是不安全的）
+      if (formatTimesTampDate(userInfo.blackTime) < Date.parse(new Date() as unknown as string)) {
+        message.success('登录成功！正在为您跳转主页...');
+        // refresh(); 切换账号登录，主动刷新intistate内容
+        await setInitialState((s) => ({
+          ...s,
+          currentUser: userInfo,
+        }));
+        goto('/todolist');
+      } else {
+        message.error(`账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`);
+      }
     }
   };
   async function onFinish(values: FormValues) {
@@ -42,13 +49,10 @@ const Login: React.FC = () => {
 
     if (!!loginRes) {
       localStorage.setItem(token_key, loginRes);
-      try {
-        await fetchUserInfo();
-      } catch (error) {
-        message.error('账号暂无权限，请联系管理员！');
-      }
+
+      await fetchUserInfo();
     } else {
-      message.error('登录失败，请重试！');
+      message.error('登录失败，请重新尝试输入账号密码！');
     }
     setSubmitting(false);
   }

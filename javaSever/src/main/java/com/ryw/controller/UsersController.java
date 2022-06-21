@@ -59,6 +59,8 @@ public class UsersController {
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
             users.setTitle("初来乍到的新人");
+            users.setAdmin(0);
+            users.setBlackTime("2000-01-01");
             users.setWatermark(users.getUsername());
             users.setSignature("在醒着的时间里，追求你认为最有意义的~");
             users.setScrolltip("成功的道路并不拥挤，因为坚持的人并不多。");
@@ -122,9 +124,16 @@ public class UsersController {
 
     @RequestMapping("/v2/user/updateUser")         //更新user信息（不包括密码（需要加密））
     public String updateUser(@RequestBody Users users){
-        if(users.getPassword()!=null){
-            users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
-        }
+       HashMap<String, Object> resMap = new HashMap<>();
+        usersMapper.updateById(users);
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+    }
+
+
+    @RequestMapping("/v2/user/updateUserPassword")         //更新user密码
+    public String updateUserPassword(@RequestBody Users users){
+      users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
         HashMap<String, Object> resMap = new HashMap<>();
         usersMapper.updateById(users);
         resMap.put("state", "success");

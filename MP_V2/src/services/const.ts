@@ -15,6 +15,7 @@ interface user {
   scrolltip?: string;
   todoclassify?: string;
   tags?: string;
+  blackTime: string;
 
   createTime?: string;
   updateTime?: string;
@@ -45,16 +46,6 @@ interface memo {
   title: string;
   cover: string;
   content: string;
-
-  createTime?: string;
-  updateTime?: string;
-  version?: number;
-  deleted?: number;
-}
-interface black {
-  blackid: number;
-  userid: number;
-  overTime: string;
 
   createTime?: string;
   updateTime?: string;

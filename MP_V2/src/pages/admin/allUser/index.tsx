@@ -1,11 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Card, message, Modal, Tag } from 'antd';
 import ProTable, { ActionType, ProColumns } from '@ant-design/pro-table';
 import { PageContainer } from '@ant-design/pro-layout';
-import { getAllUsers } from '@/services/user';
+import { getAllUsers, updateUser } from '@/services/user';
 import ButtonGroup from 'antd/lib/button/button-group';
+import ModalShow from './modalshow';
 
 const Music: React.FC = () => {
+  const [modalType, setModalType] = useState<number | boolean>(false); //弹窗展示类型
+  const [info, setInfo] = useState<user>({} as user); //传递给弹窗的数据默认值
+
   const actionRef = useRef<ActionType>();
   const { confirm } = Modal;
 
@@ -26,6 +30,13 @@ const Music: React.FC = () => {
     if (actionRef.current) {
       actionRef.current.reload();
     }
+  };
+  const handleSubmit = () => {
+    reloadTable();
+    setModalType(false);
+  };
+  const handleCancel = () => {
+    setModalType(false);
   };
 
   const columns: ProColumns<user>[] = [
@@ -83,27 +94,40 @@ const Music: React.FC = () => {
       render: (_, item) => {
         return (
           <ButtonGroup>
-            <Button
-              key="delete"
-              type="dashed"
-              size="small"
-              onClick={() => {
-                confirm({
-                  title: '限制登录',
-                  content: `确定要限制登录用户${item.username}吗？`,
-                  onOk: async () => {
-                    // await addblack({
-                    //   userid: item.userid,
-                    //   overTime: '2022-06-19 14:29:56',
-                    // } as black);
-                    message.success('操作成功');
-                    reloadTable();
-                  },
-                });
-              }}
-            >
-              限制登录
-            </Button>
+            {item.blackTime != '2000-01-01 00:00:00' ? (
+              <Button
+                key="delete"
+                type="dashed"
+                size="small"
+                onClick={() => {
+                  confirm({
+                    title: '解除限制登录',
+                    content: `确定要解除限制登录用户${item.username}吗？`,
+                    onOk: async () => {
+                      // 自动设定为这个时间
+                      item.blackTime = '2000-01-01 00:00:00';
+                      await updateUser(item);
+                      message.success('操作成功');
+                      reloadTable();
+                    },
+                  });
+                }}
+              >
+                解除限制登录
+              </Button>
+            ) : (
+              <Button
+                key="add"
+                type="dashed"
+                size="small"
+                onClick={() => {
+                  setInfo(item);
+                  setModalType(1);
+                }}
+              >
+                限制登录
+              </Button>
+            )}
           </ButtonGroup>
         );
       },
@@ -140,6 +164,12 @@ const Music: React.FC = () => {
           search={false}
         />
       </Card>
+      <ModalShow
+        modalType={modalType}
+        onSubmit={handleSubmit}
+        onCancel={handleCancel}
+        info={info}
+      />
     </PageContainer>
   );
 };

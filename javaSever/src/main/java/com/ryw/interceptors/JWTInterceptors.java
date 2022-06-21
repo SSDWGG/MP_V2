@@ -3,8 +3,11 @@ package com.ryw.interceptors;
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ryw.controller.util.JWTUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,18 +16,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JWTInterceptors implements HandlerInterceptor {
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Map<String,Object> map = new HashMap<>();
         // 获取请求头中令牌
         String token = request.getHeader("token");
         try {
-            // 验证令牌
-            JWTUtils.verify(token);
+            // 验证令牌   失效名单机制
 
-//            建立失效名单机制
-            return true;  // 放行请求
+            DecodedJWT verify = JWTUtils.verify(token);
 
+
+
+                return true;  // 放行请求
         } catch (SignatureVerificationException e) {
             e.printStackTrace();
             map.put("msg","无效签名！");
