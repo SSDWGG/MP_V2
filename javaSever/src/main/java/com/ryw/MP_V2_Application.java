@@ -9,9 +9,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class  MP_V2_Application {
 
-
-
-
     public static void main(String[] args) {
         SpringApplication.run(MP_V2_Application.class, args);
     }

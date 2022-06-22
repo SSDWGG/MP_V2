@@ -5,6 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { getAllUsers, updateUser } from '@/services/user';
 import ButtonGroup from 'antd/lib/button/button-group';
 import ModalShow from './modalshow';
+import { formatTimesTampDate } from '@/common/utils';
 
 const Music: React.FC = () => {
   const [modalType, setModalType] = useState<number | boolean>(false); //弹窗展示类型
@@ -94,7 +95,19 @@ const Music: React.FC = () => {
       render: (_, item) => {
         return (
           <ButtonGroup>
-            {item.blackTime != '2000-01-01 00:00:00' ? (
+            {formatTimesTampDate(item.blackTime) < Date.parse(new Date() as unknown as string) ? (
+              <Button
+                key="add"
+                type="dashed"
+                size="small"
+                onClick={() => {
+                  setInfo(item);
+                  setModalType(1);
+                }}
+              >
+                限制登录
+              </Button>
+            ) : (
               <Button
                 key="delete"
                 type="dashed"
@@ -114,18 +127,6 @@ const Music: React.FC = () => {
                 }}
               >
                 解除限制登录
-              </Button>
-            ) : (
-              <Button
-                key="add"
-                type="dashed"
-                size="small"
-                onClick={() => {
-                  setInfo(item);
-                  setModalType(1);
-                }}
-              >
-                限制登录
               </Button>
             )}
           </ButtonGroup>

@@ -14,10 +14,5 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
-    // '/v2/': {
-    //   target: 'http://119.3.145.125:9050/',
-    //   changeOrigin: true,
-    //   pathRewrite: { '^': '' },
-    // },
   },
 };
