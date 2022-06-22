@@ -37,7 +37,6 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
           if (modalType === 1) {
             const p = { ...props.info };
             p.blackTime = value.overTime;
-            console.log(p);
             await updateUser(p);
             message.success('操作成功');
           }

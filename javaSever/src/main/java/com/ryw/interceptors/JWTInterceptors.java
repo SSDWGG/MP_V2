@@ -27,9 +27,6 @@ public class JWTInterceptors implements HandlerInterceptor {
             // 验证令牌   失效名单机制
 
             DecodedJWT verify = JWTUtils.verify(token);
-
-
-
                 return true;  // 放行请求
         } catch (SignatureVerificationException e) {
             e.printStackTrace();

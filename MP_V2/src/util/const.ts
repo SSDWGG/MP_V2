@@ -14,7 +14,6 @@ export const TodoFlagType = {
  */
 export const checkIllegalityStr = (str: string): Boolean => {
   var reg: RegExp = /^[\u4E00-\u9FA5A-Za-z0-9_+，,]+$/im;
-  console.log(reg.test(str));
 
   if (reg.test(str)) {
     //可在这里 弹提示语 (增强用户体验)
