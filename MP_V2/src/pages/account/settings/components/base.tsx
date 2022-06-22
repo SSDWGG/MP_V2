@@ -44,6 +44,8 @@ const BaseView: React.FC = () => {
         p.geographic = `${province?.name}-${p.city}`;
       }
       p.userid = initialState?.currentUser?.userid;
+      p.admin = initialState?.currentUser?.admin;
+
       delete p.province;
       delete p.city;
       await updateUser(p);
@@ -144,10 +146,6 @@ const BaseView: React.FC = () => {
                 placeholder: '请输入您的性别',
               }}
               rules={[
-                // {
-                //   required: true,
-                //   message: '请输入您的性别',
-                // },
                 {
                   pattern: /^\S.*$/,
                   message: '首字符不能为空格',
@@ -155,6 +153,25 @@ const BaseView: React.FC = () => {
               ]}
               allowClear
             />
+            <ProFormText
+              name="watermark"
+              label="水印"
+              width="md"
+              validateFirst //阻塞校验
+              fieldProps={{
+                maxLength: 12,
+                showCount: true,
+                placeholder: '请输入水印内容',
+              }}
+              rules={[
+                {
+                  pattern: /^\S.*$/,
+                  message: '首字符不能为空格',
+                },
+              ]}
+              allowClear
+            />
+
             {/* 地区前端固定写中国 */}
             <ProFormSelect
               width="sm"
@@ -251,27 +268,19 @@ const BaseView: React.FC = () => {
             <Upload
               showUploadList={false}
               accept=".jpg,.jpeg,.png"
-              action="http://localhost:9050/v2/user/avatarUpload"
+              action="http://119.3.145.125:9050/v2/user/avatarUpload"
               headers={{
                 authorization: 'authorization-text',
                 token: localStorage.getItem(getTokenKey('ryw')) as string,
               }}
-              // customRequest={({ file }) => {
-              //   console.log(file);
-
-              // avatarUpload(file as UploadFile);
-              // if (isSuccess(res?.code)) {
-              //   setLoading(false);
-              //   !!afterSave && afterSave();
-              //   !!afterUploadSuccessMessage
-              //     ? afterUploadSuccessMessage(res)
-              // :
-              // message.success('上传头像正在开发调试中，感谢支持');
-              // } else {
-              //   setLoading(false);
-              //   message.error('上传失败');
-              // }
-              // }}
+              onChange={async (info) => {
+                if (info.file.status === 'done') {
+                  await refresh();
+                  message.success(`图片上传成功`);
+                } else if (info.file.status === 'error') {
+                  message.error(`图片上传失败`);
+                }
+              }}
               beforeUpload={(file) => {
                 let shouldUpload = false;
                 const isAccept = /\.(jpg|png|jpeg?g)$/.test(file.name.toLowerCase());

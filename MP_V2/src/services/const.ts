@@ -7,6 +7,7 @@ interface user {
   title?: string;
   phone?: string;
   gender?: string;
+  watermark?: string;
   signature?: string;
   geographic?: string;
   admin?: number;
@@ -14,6 +15,7 @@ interface user {
   scrolltip?: string;
   todoclassify?: string;
   tags?: string;
+  blackTime: string;
 
   createTime?: string;
   updateTime?: string;
@@ -32,6 +34,18 @@ interface todo {
   schedule: number;
   remark: string;
   classify?: string;
+
+  createTime?: string;
+  updateTime?: string;
+  version?: number;
+  deleted?: number;
+}
+interface memo {
+  memoid: number;
+  userid: number;
+  title: string;
+  cover: string;
+  content: string;
 
   createTime?: string;
   updateTime?: string;

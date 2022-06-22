@@ -32,12 +32,12 @@ export async function getInitialState(): Promise<{
 
   const fetchUserInfo = async () => {
     const msg = await queryCurrentUser();
-    if (!!msg.userid) {
-      return msg;
+    if (!!msg.data.userid) {
+      return msg.data;
     } else {
       // token无效的去登录页
       history.replace(loginPath);
-      message.error('账号已禁用，请联系管理员');
+      message.error('账号不存在');
       localStorage.removeItem(getTokenKey('ryw'));
       return undefined;
     }
@@ -45,7 +45,6 @@ export async function getInitialState(): Promise<{
   // 有token走非登陆页的验证token  （刷新，或者直接访问非开放页面的情况）
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
-
     if (!currentUser) {
       // 验证token的借口，验证成功返回用户信息，验证失败不返回值
       message.error('账号已禁用，请联系管理员');
@@ -74,19 +73,25 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
-      content: `${initialState?.currentUser?.username} waterMark`,
+      content: `${initialState?.currentUser?.watermark || ''}`,
     },
     footerRender: () => <Footer />,
     title: initialState?.currentUser?.username,
+    logo: initialState?.currentUser?.avatar || undefined,
 
-    onPageChange: () => {
-      // 直接登录
-      const { location } = history;
-      // 如果没有登录（且非登录注册页面），重定向到 login
-      if (!initialState?.currentUser && location.pathname !== '/user/register') {
-        history.replace(loginPath);
-      }
-    },
+    // onPageChange: () => {
+    //   // 直接登录
+    //   const { location } = history;
+    //   // 如果没有登录（且非登录注册页面），重定向到 login
+    //   if (
+    //     !initialState?.currentUser &&
+    //     location.pathname !== '/user/register' &&
+    //     location.pathname !== loginPath
+    //   ) {
+    //     message.warning('登录凭证已失效，请重新登陆');
+    //     history.replace(loginPath);
+    //   }
+    // },
     links: [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
@@ -99,7 +104,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
-  console.log(error);
   const { response, request, data } = error;
   // @ts-ignore
   if (!request || request.options.skipErrorHandler) throw error;
@@ -129,36 +133,44 @@ const errorHandler = (error: ResponseError) => {
 // 加Token的拦截器
 const requestTokenInterceptor = (url: string, options: RequestOptionsInit) => {
   const { headers } = options;
-  // 取浏览器中存储的token
-  // 服务器环境下url改变  http://119.3.145.125:9050
-
   const token = localStorage.getItem(getTokenKey('ryw'));
-  // console.log(token);
-  // console.log(token || '');
-
-  return {
-    url: `${url}`,
-    options: {
-      ...options,
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${token || ''}`,
-        isolate: 'none',
-        token: `${token || ''}`,
+  // token不存在，重定向到 login
+  if (!token && location.pathname !== '/user/register' && location.pathname !== loginPath) {
+    message.warning('无登录凭证，请重新登陆');
+    history.replace(loginPath);
+    return {};
+  } else {
+    return {
+      url: `${url}`,
+      options: {
+        ...options,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${token || ''}`,
+          isolate: 'none',
+          token: `${token || ''}`,
+        },
       },
-    },
-  };
+    };
+  }
 };
 
-const guestRequestInterceptor = (url: string, options: RequestOptionsInit) => {
-  return {
-    url: `${url}`,
-    options: {
-      ...options,
-    },
-  };
+// 请求响应器查询token是否失效
+const responseTokenInterceptors = (response: Response, options: RequestOptionsInit) => {
+  if (
+    response.status == 403 &&
+    location.pathname !== '/user/register' &&
+    location.pathname !== loginPath
+  ) {
+    message.warning('账号暂无权限');
+    history.replace(loginPath);
+  }
+
+  return response;
+  // 查询token是否失效，或者token不存在就在此处拦截
 };
 export const request: RequestConfig = {
-  requestInterceptors: [requestTokenInterceptor, guestRequestInterceptor],
+  requestInterceptors: [requestTokenInterceptor],
+  responseInterceptors: [responseTokenInterceptors],
   errorHandler,
 };

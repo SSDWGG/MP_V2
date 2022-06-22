@@ -9,4 +9,7 @@ declare namespace UserType {
     email: string;
     phone: number;
   }
+  interface ResCurrentUser extends ResBase {
+    data: user;
+  }
 }

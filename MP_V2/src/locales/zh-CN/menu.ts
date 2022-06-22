@@ -1,9 +1,13 @@
 export default {
+  'menu.admin': '管理员',
+  'menu.admin.allUser': '账号管理',
+
   'menu.todolist': '日程表',
   'menu.memorandum': '备忘录',
 
   'menu.chat': '聊天',
-  'menu.chat.chatroom': '聊天室',
+  'menu.chat.room': '聊天室',
+  'menu.chat.adminRoom': '管理员交流区',
   'menu.music': '音乐播放器',
   'menu.music.musiclist': '音乐库',
 

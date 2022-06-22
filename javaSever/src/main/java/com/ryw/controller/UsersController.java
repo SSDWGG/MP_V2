@@ -39,6 +39,8 @@ public class UsersController {
         long numbers = page.getTotal();// 总条数
         resMap.put("total",numbers);
         resMap.put("data",usersList);
+        resMap.put("current",current);
+        resMap.put("pageSize",pageSize);
         return JSON.toJSONString(resMap);
     }
 
@@ -57,6 +59,9 @@ public class UsersController {
             users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
             users.setAvatar("/rabbit.jpg");
             users.setTitle("初来乍到的新人");
+            users.setAdmin(0);
+            users.setBlackTime("2000-01-01");
+            users.setWatermark(users.getUsername());
             users.setSignature("在醒着的时间里，追求你认为最有意义的~");
             users.setScrolltip("成功的道路并不拥挤，因为坚持的人并不多。");
              usersMapper.insert(users);
@@ -88,17 +93,21 @@ public class UsersController {
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）
     @RequestMapping("/v2/user/CurrentUser")
-    public Users CurrentUser( HttpServletRequest request)
+    public Object CurrentUser(HttpServletRequest request)
     {
         try {
             DecodedJWT verify = JWTUtils.verify(request.getHeader("token"));
 //          此处可以进行数据筛选返回（筛选掉密码等敏感信息）
-            return  usersMapper.selectById(verify.getClaim("userid").asString());
+            Users users = usersMapper.selectById(verify.getClaim("userid").asString());
+            HashMap<String, Object> resMap = new HashMap<>();
+            resMap.put("data", users);
+            resMap.put("code", "200");
+            resMap.put("message", "success");
+            return JSON.toJSONString(resMap);
         } catch (Exception e){
             log.info("token异常");
             return null;
         }
-
     }
 
     //验证token，验证通过，返回user的所有信息（做信息过滤）
@@ -115,9 +124,16 @@ public class UsersController {
 
     @RequestMapping("/v2/user/updateUser")         //更新user信息（不包括密码（需要加密））
     public String updateUser(@RequestBody Users users){
-        if(users.getPassword()!=null){
-            users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
-        }
+       HashMap<String, Object> resMap = new HashMap<>();
+        usersMapper.updateById(users);
+        resMap.put("state", "success");
+        return JSON.toJSONString(resMap);
+    }
+
+
+    @RequestMapping("/v2/user/updateUserPassword")         //更新user密码
+    public String updateUserPassword(@RequestBody Users users){
+      users.setPassword(MyPasswordEncoder.encode(users.getPassword()));
         HashMap<String, Object> resMap = new HashMap<>();
         usersMapper.updateById(users);
         resMap.put("state", "success");
@@ -125,10 +141,9 @@ public class UsersController {
     }
 
     @RequestMapping("/v2/user/avatarUpload")            //头像图片上传
-    public String uploadtximg(@RequestParam("file") MultipartFile file,
+    public String avatarUpload(@RequestParam("file") MultipartFile file,
                               HttpServletRequest request){
-System.out.print(file);
-        Long userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asLong();
+        String userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asString();
         File path = new File("/home/www/MP_V2/dist/avatar"); //项目存放的服务器地址
         if(!path.exists()){
             path.mkdir();
@@ -138,7 +153,7 @@ System.out.print(file);
             file.transferTo(tofile);
 //           存入users表中"/avatar/"+userid+"avatar.jpg"
             QueryWrapper<Users> wrapper = new QueryWrapper<>();
-            wrapper.eq("userid",userid);
+            wrapper.eq("userid",Long.parseLong(userid));
             Users users = usersMapper.selectOne(wrapper);
             users.setAvatar("/avatar/"+userid+"avatar.jpg");
             int result= usersMapper.updateById(users);

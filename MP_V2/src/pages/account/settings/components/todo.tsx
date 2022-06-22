@@ -5,6 +5,7 @@ import { Divider, Input, InputRef, message, Tag } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useModel } from 'umi';
 import { TweenOneGroup } from 'rc-tween-one';
+import { checkIllegalityStr } from '@/util/const';
 
 const TodoSetting: React.FC = () => {
   const { initialState, refresh } = useModel('@@initialState');
@@ -48,10 +49,12 @@ const TodoSetting: React.FC = () => {
 
   const handleInputConfirm = () => {
     if (inputValue && todoclassify.indexOf(inputValue) === -1) {
-      todoclassify.length >= 5
+      todoclassify.length >= 10
         ? message.warning('标签数量达到上限')
         : inputValue.length > 12
         ? message.warning('标签内容长度需小于12字符')
+        : checkIllegalityStr(inputValue)
+        ? message.warning('标签内容请使用中英文和数字')
         : settodoclassify([...todoclassify, inputValue]);
     }
     setInputVisible(false);
@@ -84,11 +87,13 @@ const TodoSetting: React.FC = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
       p.userid = initialState?.currentUser?.userid;
+      p.admin = initialState?.currentUser?.admin;
       delete p.province;
       delete p.city;
 
       // 这里使用-来分割   可以在输入的时候限定不能使用这个特殊字符
       p.todoclassify = todoclassify.join('-');
+
       await updateUser(p);
       await refresh();
       message.success('更新基本信息成功');

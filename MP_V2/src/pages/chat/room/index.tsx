@@ -8,7 +8,7 @@ const ChatRoom: React.FC = () => {
         breadcrumb: {},
       }}
     >
-      ChatRoom 开发中...敬请期待
+      用户ChatRoom 开发中...敬请期待
     </PageContainer>
   );
 };

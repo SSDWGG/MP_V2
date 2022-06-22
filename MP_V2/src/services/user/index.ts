@@ -14,7 +14,7 @@ export async function login(params: UserType.ParamsLogin) {
 
 // 拿到当前的用户的信息
 export async function queryCurrentUser() {
-  return request<user>(`/v2/user/CurrentUser`, {
+  return request<UserType.ResCurrentUser>(`/v2/user/CurrentUser`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -55,6 +55,16 @@ export async function updateUser(params: user) {
   });
 }
 
+// 更新userpassword
+export async function updateUserPassword(params: user) {
+  return request<{}>(`/v2/user/updateUserPassword`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+  });
+}
 export async function avatarUpload(file: UploadFile) {
   return request<{}>(`/v2/user/avatarUpload`, {
     method: 'PUT',
@@ -62,5 +72,16 @@ export async function avatarUpload(file: UploadFile) {
       'Content-Type': 'application/json',
     },
     params: file,
+  });
+}
+
+// 查询全部用户 page分页情况下
+export async function getAllUsers(params: ParamsPageBase) {
+  return request<ResList<user>>(`/v2/user/getAllUser`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
   });
 }

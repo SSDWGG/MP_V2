@@ -11,11 +11,28 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 12/06/2022 17:37:48
+ Date: 22/06/2022 11:12:07
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for memo
+-- ----------------------------
+DROP TABLE IF EXISTS `memo`;
+CREATE TABLE `memo` (
+  `memoid` bigint NOT NULL COMMENT '主键',
+  `userid` bigint NOT NULL COMMENT '用户id',
+  `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标题',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '内容',
+  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户创建时间',
+  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户修改时间',
+  `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
+  `deleted` int DEFAULT '0' COMMENT '逻辑删除',
+  PRIMARY KEY (`memoid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for todo
@@ -38,7 +55,7 @@ CREATE TABLE `todo` (
   `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
   `deleted` int DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`todoid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1535841678161932291 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1539128665344888835 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Table structure for users
@@ -54,16 +71,18 @@ CREATE TABLE `users` (
   `phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '电话',
   `gender` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '性别',
   `signature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '格言',
+  `watermark` varchar(255) DEFAULT NULL COMMENT '水印',
   `scrolltip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '滚动格言',
   `geographic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '省市（使用-隔开）',
   `tags` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '个人标签',
   `todoclassify` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'todo分类',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '地址',
-  `admin` int DEFAULT '0' COMMENT '管理员标识',
+  `admin` int DEFAULT NULL COMMENT '管理员标识',
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户修改时间',
   `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
   `deleted` int DEFAULT '0' COMMENT '逻辑删除',
+  `black_time` datetime DEFAULT NULL COMMENT '封禁解除时间',
   PRIMARY KEY (`userid`) USING BTREE,
   UNIQUE KEY `username` (`username`) COMMENT '唯一索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
