@@ -2,13 +2,16 @@ import React, { useRef, useState } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { useParams, history, useModel } from 'umi';
 import ProForm, { ProFormInstance, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
-import { Button, Card, Col, message, Row } from 'antd';
+import { Button, Card, Col, message, Row, Upload } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { addMemo, deleteMemo, getMemoByMemoid, updateMemo } from '@/services/memo';
+import { getTokenKey } from '@/common/utils';
+import { UploadOutlined } from '@ant-design/icons';
+import './index.less';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
-  const { memoid } = useParams<{ memoid?: string }>();
+  const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
 
@@ -76,11 +79,48 @@ const TextDetail: React.FC = () => {
               }}
               formRef={formRef}
             >
-              <img
-                src={memoCover || initialState?.currentUser?.avatar}
-                style={{ maxHeight: '70px', maxWidth: '70px' }}
-                alt="avatar"
-              />
+              <div className="memoimg">
+                <Upload
+                  showUploadList={false}
+                  accept=".jpg,.jpeg,.png"
+                  action="http://119.3.145.125:9050/v2/memo/memoCoverUpload"
+                  headers={{
+                    authorization: 'authorization-text',
+                    token: localStorage.getItem(getTokenKey('ryw')) as string,
+                    memoid: memoid,
+                  }}
+                  onChange={async (info) => {
+                    if (info.file.status === 'done') {
+                      // await refresh();
+                      message.success(`图片上传成功`);
+                    } else if (info.file.status === 'error') {
+                      message.error(`图片上传失败`);
+                    }
+                  }}
+                  beforeUpload={(file) => {
+                    let shouldUpload = false;
+                    const isAccept = /\.(jpg|png|jpeg?g)$/.test(file.name.toLowerCase());
+                    const isLt1M = !!file.size ? file.size / 1024 / 1024 < 10 : true;
+                    if (!isAccept) {
+                      message.error('图片上传格式不正确，请使用.jpg,.jpeg,.png 结尾的图片文件');
+                    } else if (!isLt1M) {
+                      message.error('图片需小于10MB!');
+                    } else {
+                      shouldUpload = true;
+                    }
+                    return shouldUpload;
+                  }}
+                >
+                  <img
+                    src={memoCover || initialState?.currentUser?.avatar}
+                    style={{ maxHeight: '70px', maxWidth: '70px' }}
+                    alt="avatar"
+                  />
+                  <div className="mask">
+                    <UploadOutlined style={{ fontSize: '30px' }} />
+                  </div>
+                </Upload>
+              </div>
 
               <ProFormText
                 name="title"
@@ -101,7 +141,7 @@ const TextDetail: React.FC = () => {
                 name="content"
                 label="内容"
                 fieldProps={{
-                  autoSize: { minRows: 6, maxRows: 12 },
+                  autoSize: { minRows: 6, maxRows: 20 },
                   maxLength: 251,
                   showCount: true,
                 }}

@@ -17,7 +17,7 @@
 
 3.服务端启动 ：正常java启动 接口端口默认开启为9050
 
-4.前端启动 ： 进入 antpro 文件夹 使用 npm install 安装依赖 使用 npm start 启动 打开http://localhost:8000页面即可
+4.前端启动 ： 进入 antpro 文件夹 使用 npm install 安装依赖 使用 npm start 启动 打开localhost:8000页面
 
 5.登录注册：注册一个用户，然后使用账号密码登录
 

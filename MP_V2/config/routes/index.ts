@@ -83,6 +83,28 @@
       },
     ],
   },
+  // 有趣组件收集区
+  {
+    name: 'funComponents',
+    icon: 'CheckCircleOutlined',
+    path: '/funComponents',
+    routes: [
+      {
+        path: '/funComponents',
+        redirect: '/funComponents/main',
+      },
+      {
+        name: 'main',
+        icon: 'smile',
+        path: '/funComponents/main',
+        component: './funComponents',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
   // 聊天
   // {
   //   name: 'chat',
