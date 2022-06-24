@@ -99,6 +99,12 @@
         path: '/funComponents/main',
         component: './funComponents',
       },
+      {
+        name: 'fc1',
+        icon: 'smile',
+        path: '/funComponents/fc1',
+        component: './funComponents/mousefollow',
+      },
       // 匹配不到路径自动跳转404
       {
         component: '404',

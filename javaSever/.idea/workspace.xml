@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/public/avatar/1avatar.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/fc1/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/fc1/index.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/MP_V2_Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/MP_V2_Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +257,7 @@
       <workItem from="1655778353901" duration="11918000" />
       <workItem from="1655866258000" duration="75000" />
       <workItem from="1655867056358" duration="1970000" />
-      <workItem from="1655983789533" duration="3606000" />
+      <workItem from="1655983789533" duration="3608000" />
     </task>
     <servers />
   </component>

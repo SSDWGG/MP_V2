@@ -14,6 +14,7 @@ const TextDetail: React.FC = () => {
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
+  const [updateFlag, setUpdateFlag] = useState(0);
 
   const onFinish = async () => {
     formRef.current
@@ -71,6 +72,7 @@ const TextDetail: React.FC = () => {
               submitter={{
                 render: () => formButton,
               }}
+              params= {{updateFlag}}
               request={async () => {
                 // 用来做请求和改变时候的判断
                 const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
@@ -91,7 +93,11 @@ const TextDetail: React.FC = () => {
                   }}
                   onChange={async (info) => {
                     if (info.file.status === 'done') {
-                      // await refresh();
+                      const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
+                      setMemoCover((memo as memo).cover || '');
+                      // 为啥这里用params来刷新request，没有被触发
+                      // setUpdateFlag(pre => pre++)
+                      
                       message.success(`图片上传成功`);
                     } else if (info.file.status === 'error') {
                       message.error(`图片上传失败`);
@@ -121,7 +127,6 @@ const TextDetail: React.FC = () => {
                   </div>
                 </Upload>
               </div>
-
               <ProFormText
                 name="title"
                 label="标题"
