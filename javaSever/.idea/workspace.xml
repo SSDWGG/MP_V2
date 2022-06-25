@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/common/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/common/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/MP_V2_Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/MP_V2_Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/JWTUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,6 +258,8 @@
       <workItem from="1655778353901" duration="11918000" />
       <workItem from="1655866258000" duration="75000" />
       <workItem from="1655867056358" duration="1970000" />
+      <workItem from="1655983789533" duration="3608000" />
+      <workItem from="1656126152854" duration="110000" />
     </task>
     <servers />
   </component>

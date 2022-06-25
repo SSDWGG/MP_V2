@@ -127,6 +127,8 @@ export function getLocation(url: string) {
 }
 
 export function isProd(): boolean {
+  // console.log(process.env.NODE_ENV);
+  
   return process.env.NODE_ENV === 'production';
 }
 export function handleImageUrl(values: any, key: string) {
@@ -144,6 +146,13 @@ export const formatter = {
     return _maxLength - count;
   },
 };
+export function getPublicPath(path: string) {
+
+  // 如果放在服务器nginx根目录下就不需要调整
+  return `${isProd() ? '/' : '/'}${path}`;
+}
+
+
 // 毫秒转HH:mm:ss
 export function millisecondFormatDate(ms: number, isMs = false) {
   // nan使用typeof判断是数字

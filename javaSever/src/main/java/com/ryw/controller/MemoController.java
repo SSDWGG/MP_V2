@@ -29,6 +29,10 @@ public class MemoController {
 
     @Autowired
     MemoMapper memoMapper;
+    @Autowired
+    UsersMapper usersMapper;
+
+
     @CrossOrigin
     @RequestMapping("/v2/memo/getUserAllMemos")
     public String getUserAllMemos(HttpServletRequest request ){
@@ -80,4 +84,36 @@ public class MemoController {
         return JSON.toJSONString(resMap);
     }
 
+
+//修改备注图片
+    @RequestMapping("/v2/memo/memoCoverUpload")            //备注图片上传
+    public String avatarUpload(@RequestParam("file") MultipartFile file,
+                               HttpServletRequest request){
+        String memoid = request.getHeader("memoid");
+        String userid = JWTUtils.verify(request.getHeader("token")).getClaim("userid").asString();
+        File path = new File("/home/www/MP_V2/dist/memo"); //图片项目存放的服务器地址
+        if(!path.exists()){
+            path.mkdir();
+        }
+        File tofile = new File(path,memoid+"memo.jpg"); //用id命名
+        try {
+            file.transferTo(tofile);
+//           存入users表中"/memo/"+memoid+"memo.jpg"
+            QueryWrapper<Memo> wrapper = new QueryWrapper<>();
+            wrapper.eq("memoid",Long.parseLong(memoid));
+            Memo memo = memoMapper.selectOne(wrapper);
+            memo.setCover("/memo/"+memoid+"memo.jpg");
+            int result= memoMapper.updateById(memo);
+            if(result!=0){
+                return "success";
+            }
+            return "false";
+        }catch (IOException e){
+            e.printStackTrace();
+            return "false";
+        }
+    }
+
 }
+
+

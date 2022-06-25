@@ -1,11 +1,24 @@
 @import '~antd/es/style/themes/default.less';
 
-.error_icon {
-  color: @highlight-color;
+.memoimg {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  .mask {
+    position: absolute;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: rgba(99, 83, 83, 0.3);
+    // pointer-events: none;
+  }
 }
-.title {
-  margin-bottom: 16px;
-  color: @heading-color;
-  font-weight: 500;
-  font-size: 16px;
+.memoimg:hover .mask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer
+  
 }

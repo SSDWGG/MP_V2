@@ -162,7 +162,7 @@ const responseTokenInterceptors = (response: Response, options: RequestOptionsIn
     location.pathname !== '/user/register' &&
     location.pathname !== loginPath
   ) {
-    message.warning('账号暂无权限');
+    message.warning('账号登录凭证失效或无效，请重新登录');
     history.replace(loginPath);
   }
 
