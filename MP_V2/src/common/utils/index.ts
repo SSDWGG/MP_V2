@@ -127,6 +127,8 @@ export function getLocation(url: string) {
 }
 
 export function isProd(): boolean {
+  // console.log(process.env.NODE_ENV);
+  
   return process.env.NODE_ENV === 'production';
 }
 export function handleImageUrl(values: any, key: string) {
@@ -145,7 +147,9 @@ export const formatter = {
   },
 };
 export function getPublicPath(path: string) {
-  return `${isProd() ? '/home/www/MP_V2/dist/' : '/'}${path}`;
+
+  // 如果放在服务器nginx根目录下就不需要调整
+  return `${isProd() ? '/' : '/'}${path}`;
 }
 
 

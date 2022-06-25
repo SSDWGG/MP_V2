@@ -99,30 +99,30 @@
         path: '/funComponents/main',
         component: './funComponents',
       },
-      {
-        name: 'mousemove',
-        icon: 'smile',
-        path: '/funComponents/mousemove',
-        // https://pro.ant.design/zh-CN/docs/advanced-menu
-        /**
-         * @name false 时不展示顶栏
-         */
-        headerRender: false,
-        /**
-         * @name false 时不展示页脚
-         */
-        footerRender: false,
-        /**
-         * @name false 时不展示菜单
-         */
-        menuRender: false,
-        /**
-         * @name false 时不展示菜单顶栏
-         */
-        menuHeaderRender: false,
+      // {
+      //   name: 'mousemove',
+      //   icon: 'smile',
+      //   path: '/funComponents/mousemove',
+      //   // https://pro.ant.design/zh-CN/docs/advanced-menu
+      //   /**
+      //    * @name false 时不展示顶栏
+      //    */
+      //   headerRender: false,
+      //   /**
+      //    * @name false 时不展示页脚
+      //    */
+      //   footerRender: false,
+      //   /**
+      //    * @name false 时不展示菜单
+      //    */
+      //   menuRender: false,
+      //   /**
+      //    * @name false 时不展示菜单顶栏
+      //    */
+      //   menuHeaderRender: false,
         
-        component: './funComponents/mouseMove',
-      },
+      //   component: './funComponents/mouseMove',
+      // },
       // 匹配不到路径自动跳转404
       {
         component: '404',

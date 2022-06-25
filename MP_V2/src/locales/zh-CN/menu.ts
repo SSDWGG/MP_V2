@@ -24,7 +24,7 @@ export default {
 
 
   'menu.funComponents': '趣味组件区',
-  'menu.funComponents.main': '库简介',
+  'menu.funComponents.main': '收藏库',
 
 
 
