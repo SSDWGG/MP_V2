@@ -144,6 +144,11 @@ export const formatter = {
     return _maxLength - count;
   },
 };
+export function getPublicPath(path: string) {
+  return `${isProd() ? '/home/www/MP_V2/dist/' : '/'}${path}`;
+}
+
+
 // 毫秒转HH:mm:ss
 export function millisecondFormatDate(ms: number, isMs = false) {
   // nan使用typeof判断是数字
