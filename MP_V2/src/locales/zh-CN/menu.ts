@@ -3,8 +3,10 @@ export default {
   'menu.admin.allUser': '账号管理',
 
   'menu.todolist': '日程表',
+  
   'menu.memorandum': '备忘录',
-  'menu.memorandum.editTextDetail': '备忘录',
+  'menu.memorandum.editTextDetail': '编辑备忘录',
+  'menu.memorandum.addTextDetail': '添加备忘录',
 
   'menu.chat': '聊天',
   'menu.chat.room': '聊天室',
