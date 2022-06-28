@@ -29,13 +29,13 @@
 
 ### 1.项目截图
 
-![登录](V2_imgList/login.png)
 ![注册](V2_imgList/register.png)
 ![日程表todolist](V2_imgList/todoList.png)
 ![个人设置base](V2_imgList/accountSettingBase.png)
 ![备忘录](V2_imgList/beiwanglu.png)
 ![个人设置security](V2_imgList/accountSettingSecurity.png)
 ![个人设置todo](V2_imgList/accountSettingTodo.png)
+![趣味组件库](V2_imgList/FC.png)
 <br/>
 
 ### 2.项目功能列举
@@ -95,3 +95,37 @@
 
 - [x] 趣味组件库功能：提供了大量的作者收录的有趣的html，css动效，codeopen，个人开发者，组件库等公开的组件，提供zip压缩包下载，并使用gif展示每个组件的预览和点击放大预览。库持续更新...
 ![趣味组件库](V2_imgList/FC.png)
+
+<br/>
+
+### 4.部署
+部署的话正常情况应该没什么问题，nginx代理用上，还是很好配置的。因为我用了统一的api头，所以直接上代理就行了。
+
+贴下我配置好了
+```
+server {
+        listen       2231 default_server;   #端口
+         server_name  _;
+        root /home/www/MP_V2/dist;         #文件存储位置
+
+         location /v2/{
+        proxy_pass http://119.3.145.125:9050;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        }
+        location /{
+               #资源访问失败后定向到index.html
+            try_files $uri $uri/ /index.html;
+        }
+        error_page 404 /404.html;
+            location = /40x.html {
+       }
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+
+        }
+```
+
+需要讲一下图片文件的上传和下载，因为我是直接传到服务器的，所以，如果你们想部署的需要改变上传服务器ip地址（前端upload组件和后端对应接口一起改下ip和存储地址），或者上云存储。
+联系请致信E-mail：1982549567@qq.com

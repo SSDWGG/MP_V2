@@ -30,8 +30,24 @@ const Main: React.FC = () => {
             下载 站标rabbit图片
           </Button>
         </p>
+        <Card>
+          <h3>
+            <strong>FAQ</strong>
+          </h3>
+          <h3>
+            <strong>Q：为什么该页面加载这么卡顿，动图播放不流畅？</strong>{' '}
+          </h3>
+          <h3>
+            <strong>
+              A：受限于服务器带宽和性能（1g），目前图片没有使用在cdn等外链加速，
+              所以传输速度确实是非常慢，后期可能会进行服务器升级和cdn优化等。
+              每一张动图由于压缩导致丢失了一定的画质和帧率，可以耐心等待一会儿，加载完成后可以点击图片放大浏览。
+              如果感觉该组件还不错，可以在加载完毕后点击下载源码，在本地查看和调试页面。
+            </strong>
+          </h3>
+        </Card>
 
-        <h3>
+        <h3 style={{margin:"13px"}}>
           如果觉得对您有些许帮助，期待您给本项目点个star-------{'>'}
           <strong>
             <a href="https://github.com/SSDWGG/MP_V2">star</a>
