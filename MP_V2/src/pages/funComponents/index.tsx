@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, List } from 'antd';
 import { getPublicPath } from '@/common/utils';
 import './index.less';
 import { FCNams } from './const';
 
 const Main: React.FC = () => {
+  const [activeFC, setActiveFC] = useState('看鼠标');
+
   return (
     <>
       <Card>
@@ -17,56 +19,54 @@ const Main: React.FC = () => {
         </div>
         <p>本页展示并提供一些收录的好玩的前端组件，好玩的动效，好玩的静态页面样式等</p>
         <p>文件下载完成后，解压文件，直接打开html文件即可预览和调试</p>
-        <p>一大波有趣的ui/组件/html/样式即将袭来...（库持续更新中）</p>
+        <p>
+          一大波有趣的ui/组件/html/样式即将袭来...（库持续更新中）
+          <Button
+            key="downImg"
+            onClick={(e) => e.stopPropagation()}
+            download="rabbit.jpg"
+            href={getPublicPath('rabbit.jpg')}
+          >
+            下载 站标rabbit图片
+          </Button>
+        </p>
 
-        <Button
-          key="downImg"
-          onClick={(e) => e.stopPropagation()}
-          download="rabbit.jpg"
-          href={getPublicPath('rabbit.jpg')}
-        >
-          下载 站标rabbit图片
-        </Button>
-        {/* <Button
-          key="downExcel"
-          onClick={(e) => e.stopPropagation()}
-          download="Excel模板.xlsx"
-          href={getPublicPath('ExcelDoc.xlsx')}
-        >
-          下载excel模板（之后会做一些支持excel的操作功能）
-        </Button> */}
-        <List<string>
-          grid={{
-            gutter: 20,
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 2,
-            xl: 3,
-            xxl: 3,
-          }}
-          dataSource={FCNams}
-          renderItem={(item) => (
-            <List.Item>
-              <div className="listitem">
-                <div className="dlButton">
-                  <Button
-                    key={item}
-                    type="dashed"
-                    onClick={(e) => e.stopPropagation()}
-                    download={`${item}.zip`}
-                    href={getPublicPath(`FC/${item}.zip`)}
-                  >
-                    下载 《{`${item}`}》
-                  </Button>
-                </div>
-                <a href={getPublicPath(`FC/gif/${item}.gif`)} className="agifImg">
-                  <img src={`/FC/gif/${item}.gif`} className="gifImg" alt={item} />
-                </a>
-              </div>
-            </List.Item>
-          )}
-        ></List>
+        <h3>
+          如果觉得对您有些许帮助，期待您给本项目点个star-------{'>'}
+          <strong>
+            <a href="https://github.com/SSDWGG/MP_V2">star</a>
+          </strong>
+        </h3>
+
+        {FCNams.map((item) => {
+          return (
+            <Button
+              key={item}
+              type="dashed"
+              onClick={() => {
+                setActiveFC(item)
+              }}
+            >
+               《{`${item}`}》
+            </Button>
+          );
+        })}
+        <div className="listitem">
+          <div className="dlButton">
+            <Button
+              key={activeFC}
+              type="primary"
+              onClick={(e) => e.stopPropagation()}
+              download={`${activeFC}.zip`}
+              href={getPublicPath(`FC/${activeFC}.zip`)}
+            >
+              下载 《{`${activeFC}`}》
+            </Button>
+          </div>
+          <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
+            <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
+          </a>
+        </div>
       </Card>
     </>
   );

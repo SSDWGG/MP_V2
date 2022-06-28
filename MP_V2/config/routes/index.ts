@@ -99,30 +99,39 @@
         path: '/funComponents/main',
         component: './funComponents',
       },
-      // {
-      //   name: 'mousemove',
-      //   icon: 'smile',
-      //   path: '/funComponents/mousemove',
-      //   // https://pro.ant.design/zh-CN/docs/advanced-menu
-      //   /**
-      //    * @name false 时不展示顶栏
-      //    */
-      //   headerRender: false,
-      //   /**
-      //    * @name false 时不展示页脚
-      //    */
-      //   footerRender: false,
-      //   /**
-      //    * @name false 时不展示菜单
-      //    */
-      //   menuRender: false,
-      //   /**
-      //    * @name false 时不展示菜单顶栏
-      //    */
-      //   menuHeaderRender: false,
-        
-      //   component: './funComponents/mouseMove',
-      // },
+      // list因为带宽原因会很卡
+      {
+        name: 'listFC',
+        icon: 'smile',
+        access: 'canAdmin',
+        path: '/funComponents/listFC',
+        component: './funComponents/listFC',
+      },
+      {
+        name: 'test',
+        icon: 'smile',
+        path: '/funComponents/test',
+        // https://pro.ant.design/zh-CN/docs/advanced-menu
+        /**
+         * @name false 时不展示顶栏
+         */
+        headerRender: false,
+        /**
+         * @name false 时不展示页脚
+         */
+        footerRender: false,
+        /**
+         * @name false 时不展示菜单
+         */
+        menuRender: false,
+        /**
+         * @name false 时不展示菜单顶栏
+         */
+        menuHeaderRender: false,
+
+        access: 'canAdmin',
+        component: './funComponents/test',
+      },
       // 匹配不到路径自动跳转404
       {
         component: '404',
@@ -159,7 +168,7 @@
   //     },
   //   ],
   // },
-  // // 音乐
+  // 音乐
   // {
   //   name: 'music',
   //   icon: 'CheckCircleOutlined',
