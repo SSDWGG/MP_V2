@@ -9,15 +9,11 @@
 export default {
   dev: {
     // 和nginx一样有优先排序问题需要注意
-    // '/v2/': {
-    //   target: 'http://localhost:9050/',
-    //   changeOrigin: true,
-    //   pathRewrite: { '^': '' },
-    // },
     '/v2/': {
-      target: 'http://119.3.145.125:9050/',
+      target: 'http://localhost:9050/',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
+   
   },
 };
