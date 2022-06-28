@@ -1,36 +1,59 @@
 @import '~antd/es/style/themes/default.less';
 
-.mzsm {
-  position: relative;
-  margin-bottom: 25px;
-  padding: 20px;
-   border-color: #c0c6cc;
-  background-color: #f8f8fa;
-}
+.Main {
+  :global {
 
-p {
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-}
-.listitem{
-  margin: 20px;
-}
-.dlButton{
-  width: 100%;
- display: flex;
- align-items: center;
- justify-content: center;
-}
-.agifImg{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.gifImg{
-width: 700px;
-margin: auto;
+    .mzsm {
+      position: relative;
+      margin-bottom: 25px;
+      padding: 20px;
+      border-color: #c0c6cc;
+      background-color: #f8f8fa;
+    }
+
+    p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+    .chooseDiv{
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+
+      .FCDiv{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 40px;
+    }
+    }
+    
+
+    .listitem {
+      margin: 20px;
+    }
+
+    .dlButton {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .agifImg {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gifImg {
+      width: 40%;
+      margin: auto;
+    }
+  }
 }

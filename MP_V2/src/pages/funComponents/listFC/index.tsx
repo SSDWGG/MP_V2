@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Card, List } from 'antd';
 import { getPublicPath } from '@/common/utils';
-import './index.less';
+import styles from './index.less';
 import { FCNams } from '../const';
 
 const Main: React.FC = () => {
   return (
     <>
-      <Card>
+      <Card  className={styles.ListFC}>
         <div className="mzsm">
           <p>
             <strong>免责声明：</strong>

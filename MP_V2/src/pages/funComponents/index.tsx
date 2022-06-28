@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Card, List } from 'antd';
+import { Button, Card } from 'antd';
 import { getPublicPath } from '@/common/utils';
-import './index.less';
+import styles from './index.less';
 import { FCNams } from './const';
 
 const Main: React.FC = () => {
@@ -9,7 +9,7 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <Card>
+      <Card className={styles.Main}>
         <div className="mzsm">
           <p>
             <strong>免责声明：</strong>
@@ -38,19 +38,24 @@ const Main: React.FC = () => {
           </strong>
         </h3>
 
-        {FCNams.map((item) => {
-          return (
-            <Button
-              key={item}
-              type="dashed"
-              onClick={() => {
-                setActiveFC(item)
-              }}
-            >
-               《{`${item}`}》
-            </Button>
-          );
-        })}
+        <div className='chooseDiv'>
+          {FCNams.map((item) => {
+            return (
+              <div className="FCDiv">
+                <Button
+                  key={item}
+                  type="dashed"
+                  onClick={() => {
+                    setActiveFC(item);
+                  }}
+                >
+                  《{`${item}`}》
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+
         <div className="listitem">
           <div className="dlButton">
             <Button
