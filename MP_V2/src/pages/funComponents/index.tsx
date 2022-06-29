@@ -3,6 +3,7 @@ import { Button, Card } from 'antd';
 import { getPublicPath } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from './const';
+import { Info } from '@/util/info';
 
 const Main: React.FC = () => {
   const [activeFC, setActiveFC] = useState('看鼠标');
@@ -50,7 +51,7 @@ const Main: React.FC = () => {
         <h3 style={{margin:"13px"}}>
           如果觉得对您有些许帮助，期待您给本项目点个star-------{'>'}
           <strong>
-            <a href="https://github.com/SSDWGG/MP_V2">star</a>
+            <a href={`${Info.github}/MP_V2`}>star</a>
           </strong>
         </h3>
 

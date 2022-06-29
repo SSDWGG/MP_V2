@@ -1,6 +1,7 @@
 import { useIntl } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
+import { Info } from '@/util/info';
 
 export default () => {
   const intl = useIntl();
@@ -18,21 +19,20 @@ export default () => {
         {
           key: 'Ren',
           title: 'Ren',
-          href: 'https://github.com/SSDWGG',
+          href: Info.github,
 
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/SSDWGG',
+          href: Info.github,
           blankTarget: true,
         },
         {
           key: 'WGG',
           title: 'WGG',
-          href: 'https://github.com/SSDWGG',
-
+          href: Info.github,
           blankTarget: true,
         },
       ]}

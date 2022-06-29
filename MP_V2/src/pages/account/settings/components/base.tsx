@@ -14,6 +14,7 @@ import provinceData from '@/util/geographic/province.json';
 import styles from './BaseView.less';
 import { checkhave, updateUser } from '@/services/user';
 import { getTokenKey } from '@/common/utils';
+import { Info } from '@/util/info';
 
 const BaseView: React.FC = () => {
   //  获取用户信息
@@ -268,7 +269,7 @@ const BaseView: React.FC = () => {
             <Upload
               showUploadList={false}
               accept=".jpg,.jpeg,.png"
-              action="http://119.3.145.125:9050/v2/user/avatarUpload"
+              action={`${Info.ip}/v2/user/avatarUpload`}
               headers={{
                 authorization: 'authorization-text',
                 token: localStorage.getItem(getTokenKey('ryw')) as string,

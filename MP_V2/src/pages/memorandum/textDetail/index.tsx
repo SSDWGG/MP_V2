@@ -8,6 +8,7 @@ import { addMemo, deleteMemo, getMemoByMemoid, updateMemo } from '@/services/mem
 import { getTokenKey } from '@/common/utils';
 import { UploadOutlined } from '@ant-design/icons';
 import './index.less';
+import { Info } from '@/util/info';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
@@ -85,8 +86,8 @@ const TextDetail: React.FC = () => {
                 <Upload
                   showUploadList={false}
                   accept=".jpg,.jpeg,.png"
-                  action="http://119.3.145.125:9050/v2/memo/memoCoverUpload"
-                  headers={{
+                  action={`${Info.ip}/v2/memo/memoCoverUpload`}
+                    headers={{
                     authorization: 'authorization-text',
                     token: localStorage.getItem(getTokenKey('ryw')) as string,
                     memoid: memoid,

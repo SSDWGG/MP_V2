@@ -1,7 +1,8 @@
+import { Info } from '@/util/info';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Space, Tooltip } from 'antd';
 import React from 'react';
-import { Link, useModel } from 'umi';
+import {  useModel } from 'umi';
 import HeaderSearch from '../HeaderSearch';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
@@ -30,21 +31,21 @@ const GlobalHeaderRight: React.FC = () => {
         placeholder="Hit me up if you need"
         options={[
           {
-            label: <Link to="https://github.com/SSDWGG">github</Link>,
+            label: <a href={Info.github}>github</a>,
             value: 'https://github.com/SSDWGG',
           },
           {
-            label: <a href="https://github.com/SSDWGG">vx</a>,
+            label: <a href={Info.github}>vx</a>,
             value: '13616549486',
           },
           {
-            label: <a href="https://github.com/SSDWGG">email</a>,
+            label: <a href={Info.github}>email</a>,
             value: '1982549567@qq.com',
           },
         ]}
         onSearch={() => {
           // 点击搜索跳转外页
-          window.location.href = 'https://github.com/SSDWGG';
+          window.location.href = Info.github;
         }}
       />
 
