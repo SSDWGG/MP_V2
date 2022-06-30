@@ -51,7 +51,7 @@ const TodoTableSort: React.FC<{
   };
 
   const DragHandle = SortableHandle(() => (
-    <Tooltip placement="top" title="拖拽前请取消当前的其他排序的列">
+    <Tooltip placement="top" title="拖拽前请取消当前的其他排序的列，否则拖拽无法生效">
       <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
     </Tooltip>
   ));
@@ -146,7 +146,9 @@ const TodoTableSort: React.FC<{
         const bTime = new Date(b.beginTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
+      
       // defaultSortOrder: 'descend',
+      // defaultSortOrder: 'ascend',
     },
     {
       title: '期待结束时间',

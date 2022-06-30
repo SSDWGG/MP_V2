@@ -5,29 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_attoparser_attoparser_2_0_5_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_thymeleaf_2_5_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_5_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_5_3_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_websocket_5_3_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_extras_thymeleaf_extras_java8time_3_0_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_0_12_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring5_3_0_12_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_unbescape_unbescape_1_1_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/TestServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WSController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/VerificationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MP_V2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MP_V2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/JWTUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/JWTUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/config/InterceptorConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -278,6 +261,7 @@
       <workItem from="1655983789533" duration="3608000" />
       <workItem from="1656126152854" duration="110000" />
       <workItem from="1656481010227" duration="3406000" />
+      <workItem from="1656488089253" duration="5159000" />
     </task>
     <servers />
   </component>

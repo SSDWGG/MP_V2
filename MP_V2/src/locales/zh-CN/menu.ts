@@ -17,6 +17,8 @@ export default {
 
   'menu.login': '登录',
   'menu.register': '注册',
+  'menu.forget': '忘记密码',
+
 
   'menu.account': '个人页',
   'menu.account.center': '个人卡片',

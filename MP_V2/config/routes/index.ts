@@ -3,7 +3,7 @@
     path: '/',
     redirect: '/todolist',
   },
-  // 登录注册
+  // 登录注册忘记密码
   {
     path: '/user',
     layout: false,
@@ -20,9 +20,15 @@
       },
       {
         name: 'register',
-        icon: 'smile',
+        layout: false,
         path: '/user/register',
         component: './user/register',
+      },
+      {
+        name: 'forget',
+        layout: false,
+        path: '/user/forget',
+        component: './user/forget',
       },
       // 匹配不到路径自动跳转404
       {
