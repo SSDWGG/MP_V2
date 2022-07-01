@@ -1,6 +1,6 @@
 import { formatTimesTampDate, getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
-import { Button, Form, Input, message, Tooltip } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';

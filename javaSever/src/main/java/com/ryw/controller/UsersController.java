@@ -117,6 +117,7 @@ public class UsersController {
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         HashMap<String,Object> queryMap = new HashMap<>();
         queryMap.put("username",users.getUsername());
+        queryMap.put("email",users.getEmail());
         wrapper.allEq(queryMap, false);
         List<Users> usersList = usersMapper.selectList(wrapper);
         return usersList;

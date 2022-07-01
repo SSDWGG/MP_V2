@@ -5,10 +5,10 @@ import styles from './index.less';
 import { FCNams } from '../const';
 import { Info } from '@/util/info';
 
-const Main: React.FC = () => {
+const ListFC: React.FC = () => {
   return (
     <>
-      <Card  className={styles.ListFC}>
+      <Card className={styles.ListFC}>
         <div className="mzsm">
           <p>
             <strong>免责声明：</strong>
@@ -63,6 +63,7 @@ const Main: React.FC = () => {
         </Card>
 
         <List<string>
+          rowKey={0}
           grid={{
             gutter: 20,
             xs: 1,
@@ -98,4 +99,4 @@ const Main: React.FC = () => {
     </>
   );
 };
-export default Main;
+export default ListFC;

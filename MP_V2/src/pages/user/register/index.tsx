@@ -16,14 +16,14 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
-  // 用户名重复性校验  用户注册，用户名不得重复
+  // 用户名重复性校验  用户注册，用户名不得重复（新建的时候判断 >=1   修改的时候判断是否和当前账号相等）
   const checkAlreadyHave = async (rule: any, value: any) => {
     const params = {
       [rule.field]: value,
     };
     const res = await checkhave(params);
     if (res.length >= 1) {
-      return Promise.reject(`已被占用，请尝试其他用户名`);
+      return Promise.reject(`已被占用，请尝试更换其他`);
     }
     return Promise.resolve();
   };
@@ -131,7 +131,6 @@ const Register: FC = () => {
               label="邮箱"
               validateFirst
               help="请输入有效的邮箱号，修改密码含验证邮箱流程"
-
               rules={[
                 {
                   required: true,
@@ -141,9 +140,9 @@ const Register: FC = () => {
                   type: 'email',
                   message: '请输入正确的邮箱格式',
                 },
-                // {
-                //   validator: checkAlreadyHave,
-                // },
+                {
+                  validator: checkAlreadyHave,
+                },
               ]}
               fieldProps={{
                 maxLength: 32,

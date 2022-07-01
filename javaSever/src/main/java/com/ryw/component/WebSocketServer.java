@@ -32,8 +32,7 @@ public class WebSocketServer {
     private String userId = "";
 
     /**
-     * 连接建立成
-     * 功调用的方法
+     * 连接建立成功调用的方法
      */
     @OnOpen
     public void onOpen(Session session,@PathParam("userId") String userId) {
@@ -54,8 +53,7 @@ public class WebSocketServer {
     }
 
     /**
-     * 连接关闭
-     * 调用的方法
+     * 连接关闭调用的方法
      */
     @OnClose
     public void onClose() {
@@ -111,8 +109,7 @@ public class WebSocketServer {
     }
 
     /**
-     * 实现服务
-     * 器主动推送
+     * 实现服务器主动推送
      */
     public void sendMessage(String message) {
         try {

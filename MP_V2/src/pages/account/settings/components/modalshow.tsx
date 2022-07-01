@@ -3,10 +3,9 @@ import { Modal, message } from 'antd';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import type { ProFormInstance } from '@ant-design/pro-form';
 import { MobileReg, PasswordReg } from '@/util/const';
-import { updateUser, updateUserPassword } from '@/services/user';
+import { checkhave, updateUser, updateUserPassword } from '@/services/user';
 import { getTokenKey } from '@/common/utils';
-import { history } from 'umi';
-
+import { history, useModel } from 'umi';
 
 interface CreateFormProps {
   onCancel: () => void;
@@ -21,6 +20,9 @@ const enumText = {
   3: '更换绑定邮箱',
 };
 const ModalShow: React.FC<CreateFormProps> = (props) => {
+
+  const { initialState } = useModel('@@initialState');
+
   const { onSubmit, onCancel, modalType, info } = props;
 
   const formRef = useRef<ProFormInstance>();
@@ -37,12 +39,10 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
         p.userid = info.userid;
         p.admin = info.admin;
         if (modalType == 1) {
-
           await updateUserPassword(p);
           localStorage.removeItem(getTokenKey('ryw'));
-    history.replace('/user/login');
-        }
-        else await updateUser(p);
+          history.replace('/user/login');
+        } else await updateUser(p);
         message.success({
           content: '修改成功',
         });
@@ -68,6 +68,20 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
       return promise.reject('两次密码不一致');
     }
     return promise.resolve();
+  };
+
+  // 邮箱重复性校验 
+  const checkAlreadyHave = async (rule: any, value: any) => {
+    const params = {
+      [rule.field]: value,
+    };
+    const res = await checkhave(params);
+    console.log(res);
+    
+    if (res.length == 1 && res[0].email !== initialState?.currentUser?.email) {
+      return Promise.reject(`已被占用，请尝试其他邮箱`);
+    }
+    return Promise.resolve();
   };
 
   const renderContent = () => {
@@ -154,9 +168,9 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
                 type: 'email',
                 message: '请输入正确的邮箱格式',
               },
-              // {
-              //   validator: checkAlreadyHave,
-              // },
+              {
+                validator: checkAlreadyHave,
+              },
             ]}
             fieldProps={{
               maxLength: 32,

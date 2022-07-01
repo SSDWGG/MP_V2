@@ -5,16 +5,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class VerificationController {
@@ -27,23 +41,25 @@ public class VerificationController {
     private JavaMailSender javaMailSender;
 
 
+
+
     //  保存验证码的集合
     List<Map<String, Object>> list = new ArrayList<>();
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @CrossOrigin
-    @RequestMapping("/v2/code/sendEmail")
+
+    //    发送普通邮件
+    @RequestMapping("/v2/code/sendNormalEmail")
     @ResponseBody
-//    不通过注解的方式也可以拿到参数
     public String sendEmail(String email) {
-        System.out.print(email);
-        SimpleMailMessage message = new SimpleMailMessage();
         String code = VerifyCode(6);
-        message.setFrom(sender);
-        message.setTo(email);
-        message.setSubject("test title");
-        message.setText("【finallproject网站】验证码为："+code+"，有效时间为5分钟(若不是本人操作，可忽略该条邮件)");// 内容
+        SimpleMailMessage message = new SimpleMailMessage();
         try {
+            message.setFrom(sender);
+            message.setTo(email);
+            message.setSubject("MP_V2 的验证码邮件");
+            message.setText("【MP_V2】您的验证码为："+code+"，有效时间为30分钟(若不是本人操作，请忽略该条邮件)");// 内容
             javaMailSender.send(message);
             logger.info(email+"文本邮件发送成功！");
             saveCode(code,email);
@@ -142,5 +158,78 @@ public class VerificationController {
         }
     }
 
+
+    /**
+     * 读取邮件模板
+     * 替换模板中的信息
+     *
+     * @param title 内容
+     * @return
+     */
+    public String buildContent(String title) {
+        //加载邮件html模板
+        Resource resource = new ClassPathResource("mailtemplate.ftl");
+        InputStream inputStream = null;
+        BufferedReader fileReader = null;
+        StringBuffer buffer = new StringBuffer();
+        String line = "";
+        try {
+            inputStream = resource.getInputStream();
+            fileReader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = fileReader.readLine()) != null) {
+                buffer.append(line);
+            }
+        } catch (Exception e) {
+//            log.info("发送邮件读取模板失败{}", e);
+            System.out.println("发送邮件读取模板失败{}");
+        } finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //替换html模板中的参数
+        return MessageFormat.format(buffer.toString(), title);
+    }
+
+    /**
+     * 向用户邮箱发送短信
+     *
+     * @param email 收件人邮箱
+     */
+    @RequestMapping("/v2/code/sendEmail")
+    @ResponseBody
+    public String sendEmailMessage(String email) {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        try {
+            String code = VerifyCode(6);
+            //邮箱发送内容组成
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setSubject("来自【MP_V2】系统 的验证码邮件");
+            helper.setText(buildContent(code + ""), true);
+            helper.setTo(email);
+            helper.setFrom(sender);
+            javaMailSender.send(message);
+            logger.info(email+"文本邮件发送成功！");
+            saveCode(code,email);
+            return "success";
+        }catch (MailSendException e){
+            logger.error(email+"目标邮箱不存在");
+            return "false";
+        } catch (Exception e) {
+            logger.error(email+"文本邮件发送异常", e);
+            return "failure";
+        }
+    }
 
 }

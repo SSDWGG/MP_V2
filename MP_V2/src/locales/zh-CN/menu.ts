@@ -30,6 +30,8 @@ export default {
   'menu.funComponents': '趣味组件区',
   'menu.funComponents.main': '收藏库',
   'menu.funComponents.listFC': '库列表',
+  'menu.funComponents.test': '测试空页',
+  
 
 
 
