@@ -125,9 +125,9 @@ const Login: React.FC = () => {
           </Form.Item>
         </Form>
         <div className="login__extra-link">
-          <Tooltip title="请联系管理员重置" placement="bottom" color="bule">
+          {/* <Tooltip title="请联系管理员重置" placement="bottom" color="bule"> */}
           <Link to="/user/forget">忘记密码？</Link>
-          </Tooltip>
+          {/* </Tooltip> */}
           <Link to="/user/register">申请账号</Link>
         </div>
       </div>

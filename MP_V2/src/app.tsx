@@ -135,7 +135,12 @@ const requestTokenInterceptor = (url: string, options: RequestOptionsInit) => {
   const { headers } = options;
   const token = localStorage.getItem(getTokenKey('ryw'));
   // token不存在，重定向到 login
-  if (!token && location.pathname !== '/user/register' && location.pathname !== loginPath) {
+  if (
+    !token &&
+    location.pathname !== '/user/register' &&
+    location.pathname !== '/user/forget' &&
+    location.pathname !== loginPath
+  ) {
     message.warning('无登录凭证，请重新登陆');
     history.replace(loginPath);
     return {};
@@ -160,6 +165,7 @@ const responseTokenInterceptors = (response: Response, options: RequestOptionsIn
   if (
     response.status == 403 &&
     location.pathname !== '/user/register' &&
+    location.pathname !== '/user/forget' &&
     location.pathname !== loginPath
   ) {
     message.warning('账号登录凭证失效或无效，请重新登录');

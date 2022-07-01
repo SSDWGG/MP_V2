@@ -45,14 +45,14 @@ public class VerificationController {
         message.setText("【finallproject网站】验证码为："+code+"，有效时间为5分钟(若不是本人操作，可忽略该条邮件)");// 内容
         try {
             javaMailSender.send(message);
-            logger.info("文本邮件发送成功！");
+            logger.info(email+"文本邮件发送成功！");
             saveCode(code,email);
             return "success";
         }catch (MailSendException e){
-            logger.error("目标邮箱不存在");
+            logger.error(email+"目标邮箱不存在");
             return "false";
         } catch (Exception e) {
-            logger.error("文本邮件发送异常！", e);
+            logger.error(email+"文本邮件发送异常", e);
             return "failure";
         }
     }//发送验证码
@@ -100,6 +100,7 @@ public class VerificationController {
     @RequestMapping("/v2/code/testCode")
     @ResponseBody
     //验证验证码是否正确
+//    {state；boolean}
     private boolean testCode(String code,String email){
         if (list.size()==0){
             return false;

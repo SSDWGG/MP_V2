@@ -38,7 +38,7 @@ const Projects: FC<{ memosData: memo[] }> = (props) => {
               }
             />
             <div className={styles.cardItemContent}>
-              <span>{moment(item.updateTime).fromNow()}</span>
+              <span>更新于：{moment(item.updateTime).fromNow()}</span>
               <div className={styles.avatarList}>
                 <AvatarList size="small">
                   <AvatarList.Item

@@ -3,7 +3,10 @@ import { Modal, message } from 'antd';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import type { ProFormInstance } from '@ant-design/pro-form';
 import { MobileReg, PasswordReg } from '@/util/const';
-import { updateUserPassword } from '@/services/user';
+import { updateUser, updateUserPassword } from '@/services/user';
+import { getTokenKey } from '@/common/utils';
+import { history } from 'umi';
+
 
 interface CreateFormProps {
   onCancel: () => void;
@@ -33,8 +36,13 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
         const p = { ...value };
         p.userid = info.userid;
         p.admin = info.admin;
+        if (modalType == 1) {
 
-        await updateUserPassword(p);
+          await updateUserPassword(p);
+          localStorage.removeItem(getTokenKey('ryw'));
+    history.replace('/user/login');
+        }
+        else await updateUser(p);
         message.success({
           content: '修改成功',
         });

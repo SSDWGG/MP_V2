@@ -1,14 +1,22 @@
-import { addUser } from '@/services/user';
+import { getTokenKey } from '@/common/utils';
+import { sendCode, testCode, updatePasswordByEmail } from '@/services/user';
 import { PasswordReg } from '@/util/const';
 import { LockOutlined } from '@ant-design/icons';
-import ProForm, { ProFormCaptcha, ProFormInstance, ProFormText } from '@ant-design/pro-form';
-import { Button, message, Modal, Result } from 'antd';
-import { FC, useRef } from 'react';
-import { history, Link } from 'umi';
+import ProForm, {
+  ProFormCaptcha,
+  ProFormDependency,
+  ProFormInstance,
+  ProFormText,
+} from '@ant-design/pro-form';
+import { Button, message } from 'antd';
+import { FC, useRef, useState } from 'react';
+import { history,Link } from 'umi';
 import styles from './style.less';
 
 const Register: FC = () => {
   const formRef = useRef<ProFormInstance>();
+  const [captchaOk, setCaptchaOk] = useState(true);
+
   // 二次密码校验
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;
@@ -17,36 +25,32 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
-  const validateAndGetFormatValue = () => {
+  // 修改密码
+  const updatePassword = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
-      const p = { ...values };
-      delete p.confirm;
-      await addUser(p);
-      Modal.success({
-        title: null,
-        icon: false,
-        okText: ' 返回登录',
-        onOk: () => {
-          history.push('/user/login');
-        },
-        content: (
-          <Result
-            status="success"
-            title={
-              <div>
-                <div>注册成功</div>
-                {values.username.length > 3 ? (
-                  <span>您的账户名：{values.username.slice(0, 3)}... </span>
-                ) : (
-                  <span>账户名：{values.username} </span>
-                )}
-              </div>
-            }
-            subTitle="激活邮件稍后将会发送到您的邮箱中，请查收。"
-          />
-        ),
-      });
+    const res=  await updatePasswordByEmail(values)
+    !!res.state?message.success("修改成功"):message.error("修改失败")
+    localStorage.removeItem(getTokenKey('ryw'));
+    history.replace('/user/login');
+
+
     });
+  };
+
+  // 验证验证码（可以优化后端限定验证次数），然后取反标识符
+  const checkCode = async (value: string, email: string) => {
+    const params = {
+      code: value,
+      email: email,
+    };
+    const res = await testCode(params);
+    if (res === false) {
+      setCaptchaOk(true)
+
+      return Promise.reject(`邮箱验证失败`);
+    }
+    setCaptchaOk(false)
+    return Promise.resolve();
   };
   return (
     <div className={styles.loginPage}>
@@ -75,6 +79,7 @@ const Register: FC = () => {
               name="email"
               label="邮箱"
               validateFirst
+              
               rules={[
                 {
                   required: true,
@@ -92,46 +97,61 @@ const Register: FC = () => {
                 maxLength: 32,
                 showCount: true,
                 placeholder: '请输入邮箱',
+                disabled: !captchaOk,
+
                 // prefix: <MobileOutlined className={styles.prefixIcon} />,
               }}
               allowClear
             />
 
-            <ProFormCaptcha
-              fieldProps={{
-                // size: 'large',
-                prefix: <LockOutlined className={styles.prefixIcon} />,
+            <ProFormDependency name={['email']}>
+              {({ email }) => {
+                return (
+                  <>
+                    <ProFormCaptcha
+                      fieldProps={{
+                        prefix: <LockOutlined className={styles.prefixIcon} />,
+                      }}
+                      // captchaProps={{
+                      // }}
+                      placeholder={'请输入验证码'}
+                      captchaTextRender={(timing, count) => {
+                        if (timing) {
+                          return `${count} 获取验证码`;
+                        }
+                        return '获取验证码';
+                      }}
+                      phoneName="email"
+                      name="captcha"
+                      rules={[
+                        {
+                          required: true,
+                          message: '请输入验证码！',
+                        },
+                        {
+                          validator: (rule,value) => checkCode(value, email),
+                        },
+                      ]}
+                      onGetCaptcha={async (email) => {
+                        const result = await sendCode(email);                        
+                        if (result === "success") {
+                          message.success("文本邮件发送成功！");
+                        }
+                        if (result === "false") {
+                          message.warning("目标邮箱不存在");
+                          return;
+                        }if (result === "failure") {
+                          message.warning("文本邮件发送异常");
+                          return;
+                        }
+                      }}
+                    />
+                  </>
+                );
               }}
-              // captchaProps={{
-              //   size: 'large',
-              // }}
-              placeholder={'请输入验证码'}
-              captchaTextRender={(timing, count) => {
-                if (timing) {
-                  return `${count} 获取验证码`;
-                }
-                return '获取验证码';
-              }}
-              phoneName="email"
-              name="captcha"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入验证码！',
-                },
-              ]}
-              onGetCaptcha={async (mobile) => {
-                console.log(mobile);
-                const result = false;
-                if (result === false) {
-                  return;
-                }
-                message.success('获取验证码成功！验证码为：1234');
-              }}
-            />
+            </ProFormDependency>
 
-
-{/* 这仨用依赖来显示是否可以改和点击   验证码失焦自动校验 */}
+ 
             <ProFormText.Password
               name="password"
               validateFirst
@@ -143,20 +163,24 @@ const Register: FC = () => {
                   message: '请输入8-20位字符，必须包含大小写字母和数宇',
                 },
               ]}
+              placeholder={captchaOk ? '请先通过账号邮箱验证' : '请输入密码'}
               fieldProps={{
                 minLength: 8,
                 maxLength: 20,
                 showCount: true,
-                placeholder: '请输入密码',
+                disabled: captchaOk,
               }}
               allowClear
             />
             <ProFormText.Password
               name="confirm"
               validateFirst
-              label="确认新密码"
+              label="确认密码"
               dependencies={['password']}
-              placeholder="请再次输入密码"
+              placeholder={captchaOk ? '请先通过账号邮箱验证' : '请再次输入密码'}
+              fieldProps={{
+                disabled: captchaOk,
+              }}
               rules={[
                 {
                   required: true,
@@ -172,57 +196,18 @@ const Register: FC = () => {
               size="middle"
               className={styles.submit}
               type="primary"
-              onClick={validateAndGetFormatValue}
+              disabled={captchaOk}
+              onClick={updatePassword}
             >
               <span>确认修改</span>
             </Button>
-            <Link className={styles.login} to="/user/login">
-              <span>返回登录</span>
-            </Link>
           </>
+          <Link className={styles.login} to="/user/login">
+            <span>返回登录</span>
+          </Link>
         </ProForm>
       </div>
     </div>
   );
 };
 export default Register;
-
-{
-  /* <>
-
-<ProFormCaptcha
-  fieldProps={{
-    size: 'large',
-    prefix: <LockOutlined className={styles.prefixIcon} />,
-  }}
-  captchaProps={{
-    size: 'large',
-  }}
-  placeholder={'请输入验证码'}
-  captchaTextRender={(timing, count) => {
-    if (timing) {
-      return `${count} 获取验证码`;
-    }
-    return '获取验证码'
-  }}
-  phoneName="mobile"
-
-  name="captcha"
-  rules={[
-    {
-      required: true,
-      message: "请输入验证码！",
-    },
-  ]}
-  onGetCaptcha={async (mobile) => {
-    console.log(mobile);
-    
-    const result = false
-    if (result === false) {
-      return;
-    }
-    message.success('获取验证码成功！验证码为：1234');
-  }}
-/>
-</> */
-}
