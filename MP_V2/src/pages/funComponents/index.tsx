@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Spin } from 'antd';
 import { getPublicPath } from '@/common/utils';
 import styles from './index.less';
@@ -8,9 +8,51 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 const Main: React.FC = () => {
   const [activeFC, setActiveFC] = useState('看鼠标');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
+  const buttonList = FCNams.map((item) => {
+    return (
+      <div className="FCDiv" key={item}>
+        <Button
+          key={item}
+          type="dashed"
+          onClick={() => {
+            setLoading(true);
+            setActiveFC(item);
+          }}
+        >
+          《{`${item}`}》
+        </Button>
+      </div>
+    );
+  });
+  const FCItem = (
+    <div className="listitem">
+      <div className="dlButton">
+        <Button
+          key={activeFC}
+          type="primary"
+          onClick={(e) => e.stopPropagation()}
+          download={`${activeFC}.zip`}
+          href={getPublicPath(`FC/${activeFC}.zip`)}
+        >
+          下载 《{`${activeFC}`}》
+        </Button>
+      </div>
+      <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
+        {loading ? (
+          <Spin indicator={antIcon} />
+        ) : (
+          <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
+        )}
+      </a>
+    </div>
+  );
+
+  useEffect(() => {
+    setLoading(false);
+  }, [FCItem]);
   return (
     <>
       <Card className={styles.Main}>
@@ -58,47 +100,8 @@ const Main: React.FC = () => {
           </strong>
         </h3>
 
-        <div className="chooseDiv">
-          {FCNams.map((item) => {
-            return (
-              <div className="FCDiv" key={item}>
-                <Button
-                  key={item}
-                  type="dashed"
-                  onClick={() => {
-                    setLoading(true);
-                    console.log('开始加载', loading);
-                    setActiveFC(item);
-                    setLoading(false);
-                    console.log('结束加载', loading);
-                  }}
-                >
-                  《{`${item}`}》
-                </Button>
-              </div>
-            );
-          })}
-        </div>
-        {loading ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <div className="listitem">
-            <div className="dlButton">
-              <Button
-                key={activeFC}
-                type="primary"
-                onClick={(e) => e.stopPropagation()}
-                download={`${activeFC}.zip`}
-                href={getPublicPath(`FC/${activeFC}.zip`)}
-              >
-                下载 《{`${activeFC}`}》
-              </Button>
-            </div>
-            <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
-              <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
-            </a>
-          </div>
-        )}
+        <div className="chooseDiv">{buttonList}</div>
+        {FCItem}
       </Card>
     </>
   );

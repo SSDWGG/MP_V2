@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mailtemplate.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/modalshow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/account/settings/components/modalshow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/user/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/user/register/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/VerificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/VerificationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/component/WebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/TestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/TestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WSController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WSController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +263,7 @@
       <workItem from="1655983789533" duration="3608000" />
       <workItem from="1656126152854" duration="110000" />
       <workItem from="1656481010227" duration="3406000" />
-      <workItem from="1656488089253" duration="17872000" />
+      <workItem from="1656488089253" duration="18747000" />
     </task>
     <servers />
   </component>

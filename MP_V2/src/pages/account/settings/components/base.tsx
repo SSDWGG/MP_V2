@@ -269,7 +269,7 @@ const BaseView: React.FC = () => {
             <Upload
               showUploadList={false}
               accept=".jpg,.jpeg,.png"
-              action={`${Info.ip}/v2/user/avatarUpload`}
+              action={`${Info.ip}v2/user/avatarUpload`}
               headers={{
                 authorization: 'authorization-text',
                 token: localStorage.getItem(getTokenKey('ryw')) as string,

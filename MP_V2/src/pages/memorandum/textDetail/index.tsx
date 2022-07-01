@@ -86,7 +86,7 @@ const TextDetail: React.FC = () => {
                 <Upload
                   showUploadList={false}
                   accept=".jpg,.jpeg,.png"
-                  action={`${Info.ip}/v2/memo/memoCoverUpload`}
+                  action={`${Info.ip}v2/memo/memoCoverUpload`}
                     headers={{
                     authorization: 'authorization-text',
                     token: localStorage.getItem(getTokenKey('ryw')) as string,
