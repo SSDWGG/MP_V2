@@ -32,6 +32,8 @@ export default defineConfig({
   routes,
   theme: {
     'primary-color': defaultSettings.primaryColor,
+    // 'root-entry-name': 'variable',
+
   },
   esbuild: {},
   title: false,

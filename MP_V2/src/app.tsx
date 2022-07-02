@@ -1,4 +1,4 @@
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { SettingDrawer, Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { message, notification } from 'antd';
 import { history, RequestConfig, RunTimeLayoutConfig } from 'umi';
@@ -68,7 +68,7 @@ export async function getInitialState(): Promise<{
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
@@ -78,6 +78,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     footerRender: () => <Footer />,
     title: initialState?.currentUser?.username,
     logo: initialState?.currentUser?.avatar || undefined,
+
 
     // onPageChange: () => {
     //   // 直接登录
@@ -96,6 +97,29 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
+    childrenRender: (children, props) => {
+      // if (initialState?.loading) return <PageLoading />;
+      return (
+        <>
+          {children}
+          {/* 使用路由检查筛选 */}
+          {!props.location?.pathname?.includes('/user') && (
+            <SettingDrawer
+              disableUrlParams
+              enableDarkTheme
+              settings={initialState?.settings}
+              onSettingChange={(settings) => {
+                setInitialState((preInitialState) => (
+                   {
+                  ...preInitialState,
+                  settings,
+                }));
+              }}
+            />
+          )}
+        </>
+      );
+    },
     ...initialState?.settings,
   };
 };
