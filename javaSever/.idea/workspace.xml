@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/TestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/TestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WSController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WSController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/MP_V2-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +260,7 @@
       <workItem from="1655983789533" duration="3608000" />
       <workItem from="1656126152854" duration="110000" />
       <workItem from="1656481010227" duration="3406000" />
-      <workItem from="1656488089253" duration="18747000" />
+      <workItem from="1656488089253" duration="20938000" />
     </task>
     <servers />
   </component>

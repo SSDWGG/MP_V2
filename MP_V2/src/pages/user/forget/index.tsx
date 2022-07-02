@@ -1,5 +1,5 @@
 import { getTokenKey } from '@/common/utils';
-import { sendCode, testCode, updatePasswordByEmail } from '@/services/user';
+import { checkhave, sendCode, testCode, updatePasswordByEmail } from '@/services/user';
 import { PasswordReg } from '@/util/const';
 import { LockOutlined } from '@ant-design/icons';
 import ProForm, {
@@ -10,12 +10,13 @@ import ProForm, {
 } from '@ant-design/pro-form';
 import { Button, message } from 'antd';
 import { FC, useRef, useState } from 'react';
-import { history,Link } from 'umi';
+import { history, Link } from 'umi';
 import styles from './style.less';
 
 const Register: FC = () => {
   const formRef = useRef<ProFormInstance>();
   const [captchaOk, setCaptchaOk] = useState(true);
+  const [emialHave, seteEmialHave] = useState(true);
 
   // 二次密码校验
   const checkConfirm = (_: any, value: string) => {
@@ -25,15 +26,14 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
+
   // 修改密码
   const updatePassword = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
-    const res=  await updatePasswordByEmail(values)
-    !!res.state?message.success("修改成功"):message.error("修改失败")
-    localStorage.removeItem(getTokenKey('ryw'));
-    history.replace('/user/login');
-
-
+      const res = await updatePasswordByEmail(values);
+      !!res.state ? message.success('修改成功') : message.error('修改失败');
+      localStorage.removeItem(getTokenKey('ryw'));
+      history.replace('/user/login');
     });
   };
 
@@ -45,13 +45,28 @@ const Register: FC = () => {
     };
     const res = await testCode(params);
     if (res === false) {
-      setCaptchaOk(true)
+      setCaptchaOk(true);
 
       return Promise.reject(`邮箱验证失败`);
     }
-    setCaptchaOk(false)
+    setCaptchaOk(false);
     return Promise.resolve();
   };
+
+  // 发送验证码前提验证邮箱号必须存在，验证成功开启验证码发送权限
+  const checkAlreadyHave = async (rule: any, value: any) => {
+    const params = {
+      [rule.field]: value,
+    };
+    const res = await checkhave(params);
+    if (res.length == 0) {
+      seteEmialHave(true)
+      return Promise.reject(`邮箱未注册，请检查`);
+    }
+    seteEmialHave(false)
+    return Promise.resolve();
+  };
+
   return (
     <div className={styles.loginPage}>
       <div className="login__left-text">
@@ -79,7 +94,6 @@ const Register: FC = () => {
               name="email"
               label="邮箱"
               validateFirst
-              
               rules={[
                 {
                   required: true,
@@ -89,9 +103,9 @@ const Register: FC = () => {
                   type: 'email',
                   message: '请输入正确的邮箱格式',
                 },
-                // {
-                //   validator: checkAlreadyHave,
-                // },
+                {
+                  validator: checkAlreadyHave,
+                },
               ]}
               fieldProps={{
                 maxLength: 32,
@@ -111,9 +125,11 @@ const Register: FC = () => {
                     <ProFormCaptcha
                       fieldProps={{
                         prefix: <LockOutlined className={styles.prefixIcon} />,
+                        disabled: emialHave,
                       }}
-                      // captchaProps={{
-                      // }}
+                      captchaProps={{
+                        disabled: emialHave,
+                      }}
                       placeholder={'请输入验证码'}
                       captchaTextRender={(timing, count) => {
                         if (timing) {
@@ -129,19 +145,20 @@ const Register: FC = () => {
                           message: '请输入验证码！',
                         },
                         {
-                          validator: (rule,value) => checkCode(value, email),
+                          validator: (rule, value) => checkCode(value, email),
                         },
                       ]}
                       onGetCaptcha={async (email) => {
-                        const result = await sendCode(email);                        
-                        if (result === "success") {
-                          message.success("文本邮件发送成功！");
+                        const result = await sendCode(email);
+                        if (result === 'success') {
+                          message.success('文本邮件发送成功！');
                         }
-                        if (result === "false") {
-                          message.warning("目标邮箱不存在");
+                        if (result === 'false') {
+                          message.warning('目标邮箱不存在');
                           return;
-                        }if (result === "failure") {
-                          message.warning("文本邮件发送异常");
+                        }
+                        if (result === 'failure') {
+                          message.warning('文本邮件发送异常');
                           return;
                         }
                       }}
@@ -151,7 +168,6 @@ const Register: FC = () => {
               }}
             </ProFormDependency>
 
- 
             <ProFormText.Password
               name="password"
               validateFirst

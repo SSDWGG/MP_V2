@@ -1,7 +1,7 @@
 import { addUser, checkhave } from '@/services/user';
 import { MobileReg, PasswordReg } from '@/util/const';
 import ProForm, { ProFormInstance, ProFormText } from '@ant-design/pro-form';
-import { Button, Modal, Result } from 'antd';
+import { Button, message, Modal, Result } from 'antd';
 import { FC, useRef } from 'react';
 import { history, Link } from 'umi';
 import styles from './style.less';
@@ -16,6 +16,7 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
+
   // 用户名重复性校验  用户注册，用户名不得重复（新建的时候判断 >=1   修改的时候判断是否和当前账号相等）
   const checkAlreadyHave = async (rule: any, value: any) => {
     const params = {
@@ -23,10 +24,12 @@ const Register: FC = () => {
     };
     const res = await checkhave(params);
     if (res.length >= 1) {
+      message.warning("已被占用，请尝试更换其他")
       return Promise.reject(`已被占用，请尝试更换其他`);
     }
     return Promise.resolve();
   };
+
   const validateAndGetFormatValue = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
