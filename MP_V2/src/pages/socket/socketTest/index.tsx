@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-const AdminRoom: React.FC = () => {
+const ChatRoom: React.FC = () => {
   return (
     <PageContainer
       header={{
@@ -8,8 +8,8 @@ const AdminRoom: React.FC = () => {
         breadcrumb: {},
       }}
     >
-      AdminRoom 开发中...该房间仅限admin使用
+      socketTest 开发中...敬请期待
     </PageContainer>
   );
 };
-export default AdminRoom;
+export default ChatRoom;
