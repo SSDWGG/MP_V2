@@ -1,6 +1,6 @@
 import { formatTimesTampDate, getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
-import { Button, Form, Input, message, Tooltip } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
@@ -125,9 +125,9 @@ const Login: React.FC = () => {
           </Form.Item>
         </Form>
         <div className="login__extra-link">
-          <Tooltip title="请联系管理员" placement="bottom" color="bule">
-            <a>忘记密码？</a>
-          </Tooltip>
+          {/* <Tooltip title="请联系管理员重置" placement="bottom" color="bule"> */}
+          <Link to="/user/forget">忘记密码？</Link>
+          {/* </Tooltip> */}
           <Link to="/user/register">申请账号</Link>
         </div>
       </div>

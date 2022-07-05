@@ -3,7 +3,7 @@
     path: '/',
     redirect: '/todolist',
   },
-  // 登录注册
+  // 登录注册忘记密码
   {
     path: '/user',
     layout: false,
@@ -20,9 +20,15 @@
       },
       {
         name: 'register',
-        icon: 'smile',
+        layout: false,
         path: '/user/register',
         component: './user/register',
+      },
+      {
+        name: 'forget',
+        layout: false,
+        path: '/user/forget',
+        component: './user/forget',
       },
       // 匹配不到路径自动跳转404
       {
@@ -30,6 +36,7 @@
       },
     ],
   },
+  // 管理员专用
   {
     path: '/admin',
     name: 'admin',
@@ -51,14 +58,14 @@
   {
     path: '/todolist',
     name: 'todolist',
-    icon: 'smile',
+    icon: 'ClockCircleOutlined',
     component: './todolist',
   },
   // 备忘录
   {
     path: '/memorandum',
     name: 'memorandum',
-    icon: 'CheckCircleOutlined',
+    icon: 'UnorderedListOutlined',
     routes: [
       {
         path: '/memorandum',
@@ -86,7 +93,7 @@
   // 有趣组件收集区
   {
     name: 'funComponents',
-    icon: 'CheckCircleOutlined',
+    icon: 'TrophyOutlined',
     path: '/funComponents',
     routes: [
       {
@@ -139,35 +146,33 @@
     ],
   },
   // 聊天
-  // {
-  //   name: 'chat',
-  //   icon: 'CheckCircleOutlined',
-  //   path: '/chat',
-  //   routes: [
-  //     {
-  //       path: '/chat',
-  //       redirect: '/chat/room',
-  //     },
-  //     {
-  //       name: 'room',
-  //       icon: 'smile',
-  //       path: '/chat/room',
-  //       component: './chat/room',
-  //     },
-  //     {
-  //       name: 'adminRoom',
-  //       icon: 'smile',
-  //       path: '/chat/adminRoom',
-  //       access: 'canAdmin',
-  //       component: './chat/adminRoom',
-  //     },
-
-  //     // 匹配不到路径自动跳转404
-  //     {
-  //       component: '404',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'socket',
+    icon: 'SendOutlined',
+    path: '/socket',
+    routes: [
+      {
+        path: '/socket',
+        redirect: '/socket/socketTest',
+      },
+      {
+        name: 'socketTest',
+        icon: 'smile',
+        path: '/socket/socketTest',
+        component: './socket/socketTest',
+      },
+      {
+        name: 'room',
+        icon: 'smile',
+        path: '/socket/room',
+        component: './socket/room',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
   // 音乐
   // {
   //   name: 'music',

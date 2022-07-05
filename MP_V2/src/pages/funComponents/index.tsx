@@ -1,12 +1,58 @@
-import React, { useState } from 'react';
-import { Button, Card } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Spin } from 'antd';
 import { getPublicPath } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from './const';
+import { Info } from '@/util/info';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Main: React.FC = () => {
   const [activeFC, setActiveFC] = useState('看鼠标');
+  const [loading, setLoading] = useState(true);
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
+  const buttonList = FCNams.map((item) => {
+    return (
+      <div className="FCDiv" key={item}>
+        <Button
+          key={item}
+          type="dashed"
+          onClick={() => {
+            setLoading(true);
+            setActiveFC(item);
+          }}
+        >
+          《{`${item}`}》
+        </Button>
+      </div>
+    );
+  });
+  const FCItem = (
+    <div className="listitem">
+      <div className="dlButton">
+        <Button
+          key={activeFC}
+          type="primary"
+          onClick={(e) => e.stopPropagation()}
+          download={`${activeFC}.zip`}
+          href={getPublicPath(`FC/${activeFC}.zip`)}
+        >
+          下载 《{`${activeFC}`}》
+        </Button>
+      </div>
+      <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
+        {loading ? (
+          <Spin indicator={antIcon} />
+        ) : (
+          <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
+        )}
+      </a>
+    </div>
+  );
+
+  useEffect(() => {
+    setLoading(false);
+  }, [FCItem]);
   return (
     <>
       <Card className={styles.Main}>
@@ -47,47 +93,15 @@ const Main: React.FC = () => {
           </h3>
         </Card>
 
-        <h3 style={{margin:"13px"}}>
+        <h3 style={{ margin: '13px' }}>
           如果觉得对您有些许帮助，期待您给本项目点个star-------{'>'}
           <strong>
-            <a href="https://github.com/SSDWGG/MP_V2">star</a>
+            <a href={`${Info.github}/MP_V2`}>star</a>
           </strong>
         </h3>
 
-        <div className='chooseDiv'>
-          {FCNams.map((item) => {
-            return (
-              <div className="FCDiv">
-                <Button
-                  key={item}
-                  type="dashed"
-                  onClick={() => {
-                    setActiveFC(item);
-                  }}
-                >
-                  《{`${item}`}》
-                </Button>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="listitem">
-          <div className="dlButton">
-            <Button
-              key={activeFC}
-              type="primary"
-              onClick={(e) => e.stopPropagation()}
-              download={`${activeFC}.zip`}
-              href={getPublicPath(`FC/${activeFC}.zip`)}
-            >
-              下载 《{`${activeFC}`}》
-            </Button>
-          </div>
-          <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
-            <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
-          </a>
-        </div>
+        <div className="chooseDiv">{buttonList}</div>
+        {FCItem}
       </Card>
     </>
   );

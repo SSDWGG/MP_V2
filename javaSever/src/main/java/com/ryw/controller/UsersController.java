@@ -117,6 +117,7 @@ public class UsersController {
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         HashMap<String,Object> queryMap = new HashMap<>();
         queryMap.put("username",users.getUsername());
+        queryMap.put("email",users.getEmail());
         wrapper.allEq(queryMap, false);
         List<Users> usersList = usersMapper.selectList(wrapper);
         return usersList;
@@ -165,5 +166,17 @@ public class UsersController {
             e.printStackTrace();
             return "false";
         }
+    }
+
+    @RequestMapping("/v2/user/updatePasswordByEmail")         //email验证更新user密码
+    public String updatePasswordByEmail( @RequestParam("email") String email, @RequestParam("password") String password){
+        QueryWrapper<Users> wrapper = new QueryWrapper<>();
+        HashMap<String,Object> queryMap = new HashMap<>();
+        queryMap.put("email",email);
+        wrapper.allEq(queryMap, false);
+        Users users = usersMapper.selectOne(wrapper);
+
+        users.setPassword(password);
+        return updateUserPassword(users);
     }
 }

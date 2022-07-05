@@ -116,7 +116,8 @@ const TodoTablePage: React.FC<{
         const bTime = new Date(b.beginTime).getTime();
         return aTime > bTime ? 1 : -1;
       },
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
+      defaultSortOrder: 'ascend',
     },
     {
       title: '期待结束时间',

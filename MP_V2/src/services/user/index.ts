@@ -85,3 +85,37 @@ export async function getAllUsers(params: ParamsPageBase) {
     params,
   });
 }
+
+// 校验验证码
+export async function testCode(params: { code: string; email: string }) {
+  return request<boolean>(`/v2/code/testCode`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+}
+
+
+// 发送验证码
+export async function sendCode(email: string) {
+  return request<string>(`/v2/code/sendEmail`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:{email}
+  });
+}
+
+// email验证更新userpassword
+export async function updatePasswordByEmail(params: {email:string,password:string}) {
+  return request<{state:string}>(`/v2/user/updatePasswordByEmail`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params,
+  });
+}

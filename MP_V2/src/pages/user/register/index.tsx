@@ -1,7 +1,7 @@
 import { addUser, checkhave } from '@/services/user';
 import { MobileReg, PasswordReg } from '@/util/const';
 import ProForm, { ProFormInstance, ProFormText } from '@ant-design/pro-form';
-import { Button, Modal, Result } from 'antd';
+import { Button, message, Modal, Result } from 'antd';
 import { FC, useRef } from 'react';
 import { history, Link } from 'umi';
 import styles from './style.less';
@@ -16,17 +16,20 @@ const Register: FC = () => {
     }
     return promise.resolve();
   };
-  // 用户名重复性校验  用户注册，用户名不得重复
+
+  // 用户名重复性校验  用户注册，用户名不得重复（新建的时候判断 >=1   修改的时候判断是否和当前账号相等）
   const checkAlreadyHave = async (rule: any, value: any) => {
     const params = {
       [rule.field]: value,
     };
     const res = await checkhave(params);
     if (res.length >= 1) {
-      return Promise.reject(`已被占用，请尝试其他用户名`);
+      message.warning("已被占用，请尝试更换其他")
+      return Promise.reject(`已被占用，请尝试更换其他`);
     }
     return Promise.resolve();
   };
+
   const validateAndGetFormatValue = () => {
     formRef.current?.validateFieldsReturnFormatValue?.().then(async (values) => {
       const p = { ...values };
@@ -49,10 +52,10 @@ const Register: FC = () => {
                   <span>您的账户名：{values.username.slice(0, 3)}... </span>
                 ) : (
                   <span>账户名：{values.username} </span>
-                )}{' '}
+                )}
               </div>
             }
-            subTitle="激活邮件已发送到您的邮箱中，请及时查收。（测试中）"
+            subTitle="激活邮件稍后将会发送到您的邮箱中，请查收。"
           />
         ),
       });
@@ -130,6 +133,7 @@ const Register: FC = () => {
               name="email"
               label="邮箱"
               validateFirst
+              help="请输入有效的邮箱号，修改密码含验证邮箱流程"
               rules={[
                 {
                   required: true,
@@ -139,9 +143,9 @@ const Register: FC = () => {
                   type: 'email',
                   message: '请输入正确的邮箱格式',
                 },
-                // {
-                //   validator: checkAlreadyHave,
-                // },
+                {
+                  validator: checkAlreadyHave,
+                },
               ]}
               fieldProps={{
                 maxLength: 32,

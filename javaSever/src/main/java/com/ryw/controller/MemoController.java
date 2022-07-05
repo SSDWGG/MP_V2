@@ -64,6 +64,7 @@ public class MemoController {
          memoMapper.insert(memo);
         HashMap<String, Object> resMap = new HashMap<>();
         resMap.put("state", "success");
+
         return JSON.toJSONString(resMap);
         }
 //    删

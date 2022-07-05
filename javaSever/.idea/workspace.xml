@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/proxy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/common/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/common/utils/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/util/JWTUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -88,14 +84,16 @@
       <recent name="com.ryw.hander" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ryw.component" />
+      <recent name="com.ryw.vo" />
+      <recent name="com.ryw.config" />
       <recent name="com.ryw.controller" />
       <recent name="com.ryw.mapper" />
-      <recent name="com.ryw.entity" />
-      <recent name="com.ryw.vo" />
-      <recent name="com.ryw.component" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -260,6 +258,8 @@
       <workItem from="1655867056358" duration="1970000" />
       <workItem from="1655983789533" duration="3608000" />
       <workItem from="1656126152854" duration="110000" />
+      <workItem from="1656481010227" duration="3406000" />
+      <workItem from="1656488089253" duration="25185000" />
     </task>
     <servers />
   </component>

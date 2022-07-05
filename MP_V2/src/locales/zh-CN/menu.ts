@@ -8,15 +8,17 @@ export default {
   'menu.memorandum.editTextDetail': '编辑备忘录',
   'menu.memorandum.addTextDetail': '添加备忘录',
 
-  'menu.chat': '聊天',
-  'menu.chat.room': '聊天室',
-  'menu.chat.adminRoom': '管理员交流区',
+  'menu.socket': 'socket',
+  'menu.socket.room': '聊天室',
+  'menu.socket.socketTest': '测试socket',
 
   'menu.music': '音乐播放器',
   'menu.music.musiclist': '音乐库',
 
   'menu.login': '登录',
   'menu.register': '注册',
+  'menu.forget': '忘记密码',
+
 
   'menu.account': '个人页',
   'menu.account.center': '个人卡片',
@@ -28,6 +30,8 @@ export default {
   'menu.funComponents': '趣味组件区',
   'menu.funComponents.main': '收藏库',
   'menu.funComponents.listFC': '库列表',
+  'menu.funComponents.test': '测试空页',
+  
 
 
 
