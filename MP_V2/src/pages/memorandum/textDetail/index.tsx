@@ -148,7 +148,7 @@ const TextDetail: React.FC = () => {
                 label="内容"
                 fieldProps={{
                   autoSize: { minRows: 6, maxRows: 20 },
-                  maxLength: 251,
+                  maxLength: 20000,
                   showCount: true,
                 }}
                 rules={[
