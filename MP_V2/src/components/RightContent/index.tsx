@@ -28,7 +28,7 @@ const GlobalHeaderRight: React.FC = () => {
       {/* 搜索之后可以做成个人项目链接跳转 */}
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="Hit me up if you need"
+        placeholder="Contact me  me up if you need"
         options={[
           {
             label: <a href={Info.github}>github</a>,

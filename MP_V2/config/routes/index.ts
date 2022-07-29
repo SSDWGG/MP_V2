@@ -1,7 +1,14 @@
 ﻿export default [
   {
     path: '/',
-    redirect: '/todolist',
+    redirect: '/toCreate',
+  },
+  // show page
+  {
+    path: '/toCreate',
+    name: 'toCreate',
+    icon: 'AlertOutlined',
+    component: './toCreate',
   },
   // 登录注册忘记密码
   {
@@ -36,24 +43,7 @@
       },
     ],
   },
-  // 管理员专用
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/admin/allUser',
-        name: 'allUser',
-        icon: 'smile',
-        component: './admin/allUser',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
+
   // 日程表
   {
     path: '/todolist',
@@ -159,6 +149,7 @@
         name: 'socketTest',
         icon: 'smile',
         path: '/socket/socketTest',
+        access: 'canAdmin',
         component: './socket/socketTest',
       },
       {
@@ -170,6 +161,24 @@
       // 匹配不到路径自动跳转404
       {
         component: '404',
+      },
+    ],
+  },
+  // 管理员专用
+  {
+    path: '/admin',
+    name: 'admin',
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/admin/allUser',
+        name: 'allUser',
+        icon: 'smile',
+        component: './admin/allUser',
+      },
+      {
+        component: './404',
       },
     ],
   },
