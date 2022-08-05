@@ -120,8 +120,7 @@ public class WebSocketServer {
     }
 
     /**
-     *发送自定
-     *义消息
+     *发送自定义消息
      **/
     public static void sendInfo(String message, String userId) {
         log.info("发送消息到:"+userId+"，报文:"+message);

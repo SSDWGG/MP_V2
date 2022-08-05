@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { Avatar, Skeleton } from 'antd';
 
 import styles from './style.less';
+import { HomeOutlined, UserOutlined, WifiOutlined } from '@ant-design/icons';
 
 const PageHeaderContent: FC<{ currentUser: Partial<user> }> = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
@@ -17,6 +18,10 @@ const PageHeaderContent: FC<{ currentUser: Partial<user> }> = ({ currentUser }) 
   if (nowdate.getHours() >= 20 && nowdate.getHours() < 23) helloContent = `晚间好 ☕  `;
   if (nowdate.getHours() >= 23 || nowdate.getHours() < 5) helloContent = `夜已深啦 ❤️️ 尽早休息  `;
 
+       const  ip=  localStorage.getItem('MP_V2_IP');
+       const city = localStorage.getItem('MP_V2_CITY');
+
+
   return (
     <div className={styles.pageHeaderContent}>
       <div className={styles.avatar}>
@@ -27,7 +32,17 @@ const PageHeaderContent: FC<{ currentUser: Partial<user> }> = ({ currentUser }) 
           {helloContent}
           {currentUser.username}
         </div>
-        <div>身份：{currentUser.title}</div>
+        <div>
+          <UserOutlined />
+          {currentUser.title}
+        </div>
+        <div>
+          <HomeOutlined />
+          {city}
+        </div>
+        <div>
+          <WifiOutlined /> {ip}
+        </div>
       </div>
     </div>
   );
