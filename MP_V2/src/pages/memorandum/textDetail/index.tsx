@@ -73,7 +73,7 @@ const TextDetail: React.FC = () => {
               submitter={{
                 render: () => formButton,
               }}
-              params= {{updateFlag}}
+              params={{ updateFlag }}
               request={async () => {
                 // 用来做请求和改变时候的判断
                 const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
@@ -87,18 +87,20 @@ const TextDetail: React.FC = () => {
                   showUploadList={false}
                   accept=".jpg,.jpeg,.png"
                   action={`${Info.ip}v2/memo/memoCoverUpload`}
-                    headers={{
+                  headers={{
                     authorization: 'authorization-text',
                     token: localStorage.getItem(getTokenKey('ryw')) as string,
                     memoid: memoid,
                   }}
                   onChange={async (info) => {
                     if (info.file.status === 'done') {
-                      const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
+                      const memo = !!memoid
+                        ? await getMemoByMemoid(memoid as unknown as number)
+                        : {};
                       setMemoCover((memo as memo).cover || '');
                       // 为啥这里用params来刷新request，没有被触发
                       // setUpdateFlag(pre => pre++)
-                      
+
                       message.success(`图片上传成功`);
                     } else if (info.file.status === 'error') {
                       message.error(`图片上传失败`);
@@ -147,7 +149,7 @@ const TextDetail: React.FC = () => {
                 name="content"
                 label="内容"
                 fieldProps={{
-                  autoSize: { minRows: 6, maxRows: 20 },
+                  autoSize: { minRows: 6, maxRows: 200 },
                   maxLength: 20000,
                   showCount: true,
                 }}
