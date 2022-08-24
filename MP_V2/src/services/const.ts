@@ -46,6 +46,8 @@ interface memo {
   title: string;
   cover: string;
   content: string;
+  collapse:number;
+  h5content:string
 
   createTime?: string;
   updateTime?: string;

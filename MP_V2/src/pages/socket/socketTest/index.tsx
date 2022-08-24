@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { useModel } from 'umi';
 import './index.less';
+import { Info } from '@/util/info';
 
 const ChatRoom: React.FC = () => {
+  const { initialState } = useModel('@@initialState');
+  const [messageValue, setMessageValue] = useState<string>('');
+
   const [allValue, setAllValue] = useState<{
     toUserId: string;
     contentText: string;
@@ -11,12 +16,14 @@ const ChatRoom: React.FC = () => {
   let socket: any;
 
   function openSocket() {
-    const socketUrl = 'ws://localhost:9050/api/pushMessage/' + allValue.userId;
+    const socketUrl = `ws://${Info.wsIp}/api/pushMessage/${initialState?.currentUser?.userid}`;
     console.log(socketUrl);
+    // 关闭之前的ws
     if (socket != null) {
       socket.close();
       socket = null;
     }
+    // ['用户的token']
     socket = new WebSocket(socketUrl);
     //打开事件
     socket.onopen = function () {
@@ -38,29 +45,19 @@ const ChatRoom: React.FC = () => {
   }
 
   function sendMessage() {
-    socket.send(
-      '{"toUserId":"' + allValue.toUserId + '","contentText":"' + allValue.contentText + '"}',
-    );
-    console.log(
-      '{"toUserId":"' + allValue.toUserId + '","contentText":"' + allValue.contentText + '"}',
-    );
+    socket.send(`{
+      toUserId:${initialState?.currentUser?.userid}1111,
+      contentText: 'qwe'
+    }`);
+    // console.log(
+    //   '{"toUserId":"' + allValue.toUserId + '","contentText":"' + allValue.contentText + '"}',
+    // );
   }
 
   return (
     <>
-      <p>【socket开启者的ID信息】：</p>
-      <div>
-        <input
-          id="userId"
-          name="userId"
-          type="text"
-          defaultValue="10"
-          value={allValue.userId}
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
-        />
-      </div>
+      <p>【socket开启者的ID信息】：{initialState?.currentUser?.userid}</p>
+
       <p>【客户端向服务器发送的内容】：</p>
       <div>
         <input

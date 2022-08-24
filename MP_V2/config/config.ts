@@ -6,6 +6,7 @@ import routes from './routes/index';
 const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
+
   hash: true,
   antd: {},
   dva: {
@@ -33,6 +34,7 @@ export default defineConfig({
   theme: {
     'primary-color': defaultSettings.primaryColor,
     // 'root-entry-name': 'variable',
+    
 
   },
   esbuild: {},

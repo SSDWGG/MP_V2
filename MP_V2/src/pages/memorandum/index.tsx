@@ -45,7 +45,7 @@ const Memorandum: React.FC = () => {
           添加备忘录
         </Button>
         {/* 先使用text来存储，之后的版本再做富文本的模式 */}
-        <Projects memosData={memosData} />
+        <Projects memosData={memosData} refresh = {getMemoDate}/>
       </Card>
     </PageContainer>
   );

@@ -43,7 +43,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         return;
       }
       //  退出登录，页面定向到登录页面
-      history.push(`/account/${key}`);
+      history.push(`/user/login`);
+      // history.push(`/account/${key}`);
     },
     [setInitialState],
   );

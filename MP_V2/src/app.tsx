@@ -97,29 +97,29 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
-    childrenRender: (children, props) => {
-      // if (initialState?.loading) return <PageLoading />;
-      return (
-        <>
-          {children}
-          {/* 使用路由检查筛选 */}
-          {!props.location?.pathname?.includes('/user') && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => (
-                   {
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
-            />
-          )}
-        </>
-      );
-    },
+    // childrenRender: (children, props) => {
+    //   // if (initialState?.loading) return <PageLoading />;
+    //   return (
+    //     <>
+    //       {children}
+    //       {/* 使用路由检查筛选 */}
+    //       {!props.location?.pathname?.includes('/user') && (
+    //         <SettingDrawer
+    //           disableUrlParams
+    //           enableDarkTheme
+    //           settings={initialState?.settings}
+    //           onSettingChange={(settings) => {
+    //             setInitialState((preInitialState) => (
+    //                {
+    //               ...preInitialState,
+    //               settings,
+    //             }));
+    //           }}
+    //         />
+    //       )}
+    //     </>
+    //   );
+    // },
     ...initialState?.settings,
   };
 };

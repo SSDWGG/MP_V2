@@ -4,10 +4,12 @@ import { FC } from 'react';
 import AvatarList from './components/AvatarList';
 import styles from './style.less';
 import { history, useModel } from 'umi';
+import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
+import { updateMemo } from '@/services/memo';
 
 const { Paragraph } = Typography;
 
-const Projects: FC<{ memosData: memo[] }> = (props) => {
+const Projects: FC<{ memosData: memo[]; refresh: () => Promise<memo[]> }> = (props) => {
   const { initialState } = useModel('@@initialState');
   return (
     <List<memo>
@@ -25,31 +27,96 @@ const Projects: FC<{ memosData: memo[] }> = (props) => {
       renderItem={(item) => (
         <List.Item
           onClick={() => {
-            history.push(`/memorandum/editTextDetail/${item.memoid}`);
+            // history.push(`/memorandum/editTextDetail/${item.memoid}`);
+
+            history.push(`/memorandum/editTextDetailEditor/${item.memoid}`);
           }}
+          className={styles.listMemoItem}
         >
-          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
-            <Card.Meta
-              title={<a>{item.title}</a>}
-              description={
-                <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
-                  {item.content}
-                </Paragraph>
-              }
-            />
-            <div className={styles.cardItemContent}>
-              <span>更新于：{moment(item.updateTime).fromNow()}</span>
-              <div className={styles.avatarList}>
-                <AvatarList size="small">
-                  <AvatarList.Item
-                    key={initialState?.currentUser?.userid}
-                    src={initialState?.currentUser?.avatar as string}
-                    tips={initialState?.currentUser?.username}
-                  />
-                </AvatarList>
+          {item.collapse ? (
+            <>
+              <div
+                className={'ce'}
+                onClick={async (e) => {
+                  // 阻止冒泡到父容器的click上
+                  e.stopPropagation();
+                  //  发送请求
+                  const collapse = item.collapse ? 0 : 1;
+                  const memoid = item.memoid;
+                  await updateMemo({ memoid, collapse } as memo);
+                  // 刷新页面
+                  props.refresh();
+                }}
+              >
+                {
+                  <>
+                    {'展开'}
+                    <ArrowsAltOutlined />
+                  </>
+                }
               </div>
-            </div>
-          </Card>
+              <Card hoverable>
+                <Card.Meta title={<a>{item.title}</a>} />
+                <div className={styles.cardItemContent}>
+                  <span>更新于：{moment(item.updateTime).fromNow()}</span>
+                  <div className={styles.avatarList}>
+                    <AvatarList size="small">
+                      <AvatarList.Item
+                        key={initialState?.currentUser?.userid}
+                        src={initialState?.currentUser?.avatar as string}
+                        tips={initialState?.currentUser?.username}
+                      />
+                    </AvatarList>
+                  </div>
+                </div>
+              </Card>
+            </>
+          ) : (
+            <>
+              <div
+                className={'ce'}
+                onClick={async (e) => {
+                  // 阻止冒泡到父容器的click上
+                  e.stopPropagation();
+                  //  发送请求
+                  const collapse = item.collapse ? 0 : 1;
+                  const memoid = item.memoid;
+                  await updateMemo({ memoid, collapse } as memo);
+                  // 刷新页面
+                  props.refresh();
+                }}
+              >
+                {
+                  <>
+                    {'收起'}
+                    <ShrinkOutlined />
+                  </>
+                }
+              </div>
+              <Card hoverable cover={<img alt={item.title} src={item.cover} />}>
+                <Card.Meta
+                  title={<a>{item.title}</a>}
+                  description={
+                    <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
+                      {item.content}
+                    </Paragraph>
+                  }
+                />
+                <div className={styles.cardItemContent}>
+                  <span>更新于：{moment(item.updateTime).fromNow()}</span>
+                  <div className={styles.avatarList}>
+                    <AvatarList size="small">
+                      <AvatarList.Item
+                        key={initialState?.currentUser?.userid}
+                        src={initialState?.currentUser?.avatar as string}
+                        tips={initialState?.currentUser?.username}
+                      />
+                    </AvatarList>
+                  </div>
+                </div>
+              </Card>
+            </>
+          )}
         </List.Item>
       )}
     />

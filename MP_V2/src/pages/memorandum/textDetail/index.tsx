@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {  useRef, useState } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { useParams, history, useModel } from 'umi';
 import ProForm, { ProFormInstance, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
@@ -15,7 +15,16 @@ const TextDetail: React.FC = () => {
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
-  const [updateFlag, setUpdateFlag] = useState(0);
+
+  
+  const getRequestMemoData = async () => {
+    // 用来做请求和改变时候的判断
+    const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
+    console.log(memo);
+
+    setMemoCover((memo as memo).cover || '');
+    return { ...memo };
+  }
 
   const onFinish = async () => {
     formRef.current
@@ -30,8 +39,7 @@ const TextDetail: React.FC = () => {
         console.log('error', err);
       });
   };
-
-  const formButton = (
+  const formButtonNode = (
     <ButtonGroup>
       <Button
         type="default"
@@ -71,15 +79,10 @@ const TextDetail: React.FC = () => {
           <Card bordered={false} style={{ marginBottom: 24 }}>
             <ProForm
               submitter={{
-                render: () => formButton,
+                render: () => formButtonNode,
               }}
-              params= {{updateFlag}}
-              request={async () => {
-                // 用来做请求和改变时候的判断
-                const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
-                setMemoCover((memo as memo).cover || '');
-                return { ...memo };
-              }}
+              // params={{ updateFlag }}
+              request={getRequestMemoData }
               formRef={formRef}
             >
               <div className="memoimg">
@@ -87,18 +90,20 @@ const TextDetail: React.FC = () => {
                   showUploadList={false}
                   accept=".jpg,.jpeg,.png"
                   action={`${Info.ip}v2/memo/memoCoverUpload`}
-                    headers={{
+                  headers={{
                     authorization: 'authorization-text',
                     token: localStorage.getItem(getTokenKey('ryw')) as string,
                     memoid: memoid,
                   }}
                   onChange={async (info) => {
                     if (info.file.status === 'done') {
-                      const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
+                      const memo = !!memoid
+                        ? await getMemoByMemoid(memoid as unknown as number)
+                        : {};
                       setMemoCover((memo as memo).cover || '');
                       // 为啥这里用params来刷新request，没有被触发
                       // setUpdateFlag(pre => pre++)
-                      
+
                       message.success(`图片上传成功`);
                     } else if (info.file.status === 'error') {
                       message.error(`图片上传失败`);
@@ -147,7 +152,7 @@ const TextDetail: React.FC = () => {
                 name="content"
                 label="内容"
                 fieldProps={{
-                  autoSize: { minRows: 6, maxRows: 20 },
+                  autoSize: { minRows: 6, maxRows: 200 },
                   maxLength: 20000,
                   showCount: true,
                 }}

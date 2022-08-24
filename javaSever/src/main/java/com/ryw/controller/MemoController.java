@@ -53,6 +53,7 @@ public class MemoController {
             QueryWrapper<Memo> wrapper = new QueryWrapper<>();
             wrapper.eq("memoid",memoid);
              Memo memo = memoMapper.selectOne(wrapper);
+             System.out.println(memo);
         return JSON.toJSONString(memo);
     }
 

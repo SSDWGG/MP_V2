@@ -1,27 +1,20 @@
-import React from 'react';
-import { Button } from 'antd';
 import './index.less';
-import { history } from 'umi';
 
-const Void: React.FC = () => {
+function MyEditor() {
+
+
   return (
-    <div id = "fcTest">
-      <div className="mzsm">
-        <p>
-          <strong>测试：</strong>
-        </p>
-        <p>本页面为空路由的空白测试页面</p>
+      <div className='testMain'>
+          <div className='a'>a</div>
+          <div >2</div>
+          <div >3</div>
+          <div >4</div>
+          <div >5</div>
+          <div >6</div>
+          <div >7</div>
+             
       </div>
+  )
+}
 
-      <Button
-        type="dashed"
-        onClick={() => {
-          history.push('/');
-        }}
-      >
-        跳转 /
-      </Button>
-    </div>
-  );
-};
-export default Void;
+export default MyEditor
