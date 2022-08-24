@@ -1,7 +1,7 @@
-import React, {  useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { useParams, history, useModel } from 'umi';
-import ProForm, { ProFormInstance, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
+import ProForm, { ProFormInstance, ProFormText } from '@ant-design/pro-form';
 import { Button, Card, Col, message, Row, Upload } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
 import { addMemo, deleteMemo, getMemoByMemoid, updateMemo } from '@/services/memo';
@@ -9,6 +9,9 @@ import { getTokenKey } from '@/common/utils';
 import { UploadOutlined } from '@ant-design/icons';
 import './index.less';
 import { Info } from '@/util/info';
+import '@wangeditor/editor/dist/css/style.css'; // 引入 css
+import { Editor, Toolbar } from '@wangeditor/editor-for-react';
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
@@ -16,22 +19,97 @@ const TextDetail: React.FC = () => {
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
 
-  
+  // editor 实例
+  const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法
+  // 编辑器内容
+  const [html, setHtml] = useState('');
+  const [htmlLength, setHtmlLength] = useState(0);
+  // 工具栏配置
+  const toolbarConfig: Partial<IToolbarConfig> = {}; // TS 语法
+  // 编辑器配置
+  const editorConfig: Partial<IEditorConfig> = {
+    // TS 语法
+    placeholder: '请输入内容...',
+  };
+  // 及时销毁 editor ，重要！
+  useEffect(() => {
+    return () => {
+      if (editor == null) return;
+      editor.destroy();
+      setEditor(null);
+    };
+  }, [editor]);
+  const onChangeEditor = (editor: any) => {
+    setHtml(editor.getHtml());
+    const regex = /(<([^>]+)>)/gi;
+    const content = editor.getHtml();
+    const htmlLength = content.replace(regex, '').length;
+    setHtmlLength(htmlLength);
+  };
+  // 富文本转普通文本（无空格）
+  const editorH5ToNormal = (h5Content: string) => {
+    let regex = /(<([^>]+)>)/gi;
+    // return h5Content.replace(regex, '').replaceAll('&nbsp;', '');
+    return h5Content.replace(regex, '');
+  };
+  // pc富文本转小程序富文本
+  const editorH5ToMini = (h5Content: string) => {
+    /**
+     * 转译标签收集
+     * p -> view
+     *  <p></p>
+     * div -> view
+     *  <div></div>
+     * span -> text
+     *  <span></span>
+     * px -> %
+     * '<p', '</p>', '<div', '<div/>', '<span', '<span/>'
+     */
+    let minDom = {
+      '<p': '<view',
+      '</p>': '</view>',
+      '<div': '<view',
+      '</div>': '</view>',
+      '<span': '<text',
+      '</span>': '</text>',
+      '<img ': '<image mode="widthFix" ',
+      '<strong>': '<text class="strong">',
+      '</strong>': '</text>',
+      '18px': '40rpx',
+      '16px': '34rpx',
+      '14px': '30rpx',
+      '12px': '28rpx',
+      scaleToFill: 'widthFix',
+      '&nbsp;': '<text> </text>',
+      '><source': '',
+      'type="video/mp4"/></video>': 'type="video/mp4"></video>',
+    };
+    let miniContent = h5Content;
+    Object.keys(minDom).forEach((item) => {
+      miniContent = miniContent.replaceAll(item, minDom[item]);
+    });
+    return miniContent;
+  };
+
   const getRequestMemoData = async () => {
     // 用来做请求和改变时候的判断
     const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
     console.log(memo);
+    setHtml((memo as any).h5content);
 
     setMemoCover((memo as memo).cover || '');
     return { ...memo };
-  }
+  };
 
   const onFinish = async () => {
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (values) => {
         const cover = initialState?.currentUser?.avatar;
-        !!memoid ? await updateMemo({ memoid, ...values }) : await addMemo({ cover, ...values });
+        const h5content = html;
+        !!memoid
+          ? await updateMemo({ memoid, h5content, ...values })
+          : await addMemo({ cover, h5content, ...values });
         history.push(`/memorandum`);
         message.success(`${!!memoid ? '修改' : '添加'}成功`);
       })
@@ -79,10 +157,9 @@ const TextDetail: React.FC = () => {
           <Card bordered={false} style={{ marginBottom: 24 }}>
             <ProForm
               submitter={{
-                render: () => formButtonNode,
+                render: () => null,
               }}
-              // params={{ updateFlag }}
-              request={getRequestMemoData }
+              request={getRequestMemoData}
               formRef={formRef}
             >
               <div className="memoimg">
@@ -148,23 +225,34 @@ const TextDetail: React.FC = () => {
                 ]}
                 allowClear
               />
-              <ProFormTextArea
-                name="content"
-                label="内容"
-                fieldProps={{
-                  autoSize: { minRows: 6, maxRows: 200 },
-                  maxLength: 20000,
-                  showCount: true,
-                }}
-                rules={[
-                  {
-                    required: true,
-                    message: '内容不能为空',
-                  },
-                ]}
-                allowClear
-              />
             </ProForm>
+            <div className="page-editor">
+              <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
+                <Toolbar
+                  editor={editor}
+                  defaultConfig={toolbarConfig}
+                  mode="default"
+                  style={{ borderBottom: '1px solid #ccc' }}
+                />
+                <Editor
+                  defaultConfig={editorConfig}
+                  value={html}
+                  onCreated={setEditor}
+                  onChange={(e) => onChangeEditor(e)}
+                  mode="default"
+                  style={{ height: '400px', overflowY: 'hidden' }}
+                />
+              </div>
+              {htmlLength > 5000 ? (
+                <div className="htmlLength c-r">{`${htmlLength}/5000`}</div>
+              ) : (
+                <div className="htmlLength">{`${htmlLength}/5000`}</div>
+              )}
+              {/* <div style={{ marginTop: '15px' }}>1{html}</div>
+              <div style={{ marginTop: '15px' }}>2{editorH5ToNormal(html)}</div>
+              <div style={{ marginTop: '15px' }}>3{editorH5ToMini(html)}</div> */}
+            </div>
+            {formButtonNode}
           </Card>
         </Col>
       </Row>

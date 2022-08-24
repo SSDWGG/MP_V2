@@ -26,8 +26,8 @@ public class Memo {
     private String cover;
     private String title;
     private String content;
-
-
+    private String h5content;
+    private Integer collapse;
 
 
     @TableLogic //逻辑删除注解    (内部进行更新)
@@ -41,6 +41,22 @@ public class Memo {
 
 
     //构造类和setget方法 和tostring方法
+
+    public Integer getCollapse() {
+        return collapse;
+    }
+
+    public void setCollapse(Integer collapse) {
+        this.collapse = collapse;
+    }
+
+    public String getH5content() {
+        return h5content;
+    }
+
+    public void setH5content(String h5content) {
+        this.h5content = h5content;
+    }
 
     public Long getMemoid() {
         return memoid;

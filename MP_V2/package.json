@@ -55,6 +55,8 @@
     "@ant-design/pro-layout": "^6.15.3",
     "@ant-design/pro-table": "^2.30.8",
     "@umijs/route-utils": "^1.0.36",
+    "@wangeditor/editor": "^5.1.14",
+    "@wangeditor/editor-for-react": "^1.0.4",
     "ahooks": "^2.0.0",
     "antd": "^4.14.0",
     "bizcharts": "^3.5.3-beta.0",

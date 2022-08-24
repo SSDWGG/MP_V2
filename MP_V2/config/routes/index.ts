@@ -74,6 +74,13 @@
         hideInMenu: true,
         component: './memorandum/textDetail',
       },
+      // 富文本模式备忘录
+      {
+        path: `/memorandum/editTextDetailEditor/:memoid`,
+        name: 'editTextDetail',
+        hideInMenu: true,
+        component: './memorandum/textDetailEditor',
+      },
       // 匹配不到路径自动跳转404
       {
         component: '404',

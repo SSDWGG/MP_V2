@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes" />
+    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/MemoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/entity/Memo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/entity/Memo.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -266,6 +271,7 @@
       <workItem from="1658630620222" duration="1835000" />
       <workItem from="1658728328973" duration="1772000" />
       <workItem from="1659060483124" duration="3246000" />
+      <workItem from="1660960107721" duration="7208000" />
     </task>
     <servers />
   </component>
