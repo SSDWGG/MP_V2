@@ -46,7 +46,7 @@ const TextDetail: React.FC = () => {
     const htmlLength = content.replace(regex, '').length;
     setHtmlLength(htmlLength);
   };
-  // 富文本转普通文本（无空格）
+  // 富文本转普通文本
   const editorH5ToNormal = (h5Content: string) => {
     let regex = /(<([^>]+)>)/gi;
     // return h5Content.replace(regex, '').replaceAll('&nbsp;', '');
@@ -107,9 +107,10 @@ const TextDetail: React.FC = () => {
       .then(async (values) => {
         const cover = initialState?.currentUser?.avatar;
         const h5content = html;
+        const content = editorH5ToNormal(html);
         !!memoid
-          ? await updateMemo({ memoid, h5content, ...values })
-          : await addMemo({ cover, h5content, ...values });
+          ? await updateMemo({ memoid, h5content,content, ...values })
+          : await addMemo({ cover, h5content, content, ...values });
         history.push(`/memorandum`);
         message.success(`${!!memoid ? '修改' : '添加'}成功`);
       })

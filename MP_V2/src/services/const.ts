@@ -16,6 +16,7 @@ interface user {
   todoclassify?: string;
   tags?: string;
   blackTime: string;
+  lastip?:number|null
 
   createTime?: string;
   updateTime?: string;

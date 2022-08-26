@@ -79,7 +79,7 @@ const TextDetail: React.FC = () => {
           <Card bordered={false} style={{ marginBottom: 24 }}>
             <ProForm
               submitter={{
-                render: () => formButtonNode,
+                render: () => null,
               }}
               // params={{ updateFlag }}
               request={getRequestMemoData }
@@ -139,6 +139,7 @@ const TextDetail: React.FC = () => {
                 fieldProps={{
                   maxLength: 64,
                   showCount: true,
+                  disabled: true,
                 }}
                 rules={[
                   {
@@ -155,6 +156,8 @@ const TextDetail: React.FC = () => {
                   autoSize: { minRows: 6, maxRows: 200 },
                   maxLength: 20000,
                   showCount: true,
+                  disabled: true,
+
                 }}
                 rules={[
                   {

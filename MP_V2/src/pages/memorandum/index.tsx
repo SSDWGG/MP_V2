@@ -37,7 +37,7 @@ const Memorandum: React.FC = () => {
         <Button
           type="dashed"
           onClick={() => {
-            history.push(`/memorandum/addTextDetail`);
+            history.push(`/memorandum/addTextDetailEditor`);
           }}
           style={{ width: '100%', marginBottom: 15 }}
         >

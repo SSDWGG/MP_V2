@@ -12,6 +12,8 @@ import TodoTablePage from './basic-list/TodoTablePage';
 import TodoTableSort from './basic-list/TodoTableSort';
 import styles from './index.less';
 import titleStyle from './basic-list/style.less';
+import { updateUser } from '@/services/user';
+
 
 import { averageTime, filterTimeTodo, getDoingNumByOkFlag } from './utils/todoUtils';
 
@@ -19,18 +21,26 @@ const todolist: React.FC = () => {
   const [allTodoList, setAllTodoList] = useState<todo[]>([] as todo[]); //全部todo数据
   const { initialState } = useModel('@@initialState');
   const [tableType, setTableType] = useState<number>(todoTableType.page); //table展示类型（1 分页table，2 拖拽、排序table）
-  // 这里说明一下，直接请求全表数据是不符合安全原则的，
-  // 这里我请求了全表数据用来做一个数据的统计作用（因为我比较大侧重于前端开发的原因在这个项目中我这么做了）
-  // 数据的筛选统计应当放在后台进行，只返回给前端结果数据而不是全表
+  // 这里说明一下，直接请求全表数据是不安全且慢，数据的筛选统计应当放在后台进行，只返回给前端结果数据而不是全表
 
   // 获取、刷新 数据源
   const getAllTodoData = async () => {
     const res = await getTodosList(initialState?.currentUser?.userid as number);
     setAllTodoList(res);
   };
+  const setUserIp = async ()=>{    
+  await  updateUser({
+      userid: initialState?.currentUser?.userid as number,
+      admin: initialState?.currentUser?.admin,
+      lastip:localStorage.getItem('MP_V2_IP')
+    } as user);
+      
+  }
 
   useEffect(() => {
     getAllTodoData();
+    
+    localStorage.getItem('MP_V2_IP')!== initialState?.currentUser?.lastip&&  setUserIp();
   }, []);
 
   return (

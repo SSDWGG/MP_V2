@@ -35,8 +35,8 @@ public class Users {
     private String tags;
     private String todoclassify;
     private  int admin;
-
     private String blackTime;
+    private  String lastip;
 
 
 
@@ -54,6 +54,14 @@ public class Users {
 
     //构造类和setget方法 和tostring方法
 
+
+    public String getLastip() {
+        return lastip;
+    }
+
+    public void setLastip(String lastip) {
+        this.lastip = lastip;
+    }
 
     public String getBlackTime() {
         return blackTime;
