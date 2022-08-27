@@ -1,4 +1,4 @@
-package com.ryw.component;
+package com.ryw.controller.WS;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -10,6 +10,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 @Slf4j
-@ServerEndpoint("/api/pushMessage/{userId}")
+@ServerEndpoint("/v2/ws/toAllUser/{userId}")
 public class WebSocketServer {
 
     /**静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。*/
@@ -82,13 +83,19 @@ public class WebSocketServer {
                 JSONObject jsonObject = JSON.parseObject(message);
                 //追加发送人(防止串改)
                 jsonObject.put("fromUserId",this.userId);
-                String toUserId=jsonObject.getString("toUserId");
-                //传送给对应toUserId用户的websocket  单播事件
-                if(StringUtils.isNotBlank(toUserId)&&webSocketMap.containsKey(toUserId)){
-                    webSocketMap.get(toUserId).sendMessage(message);
+                String userId=jsonObject.getString("userId");
+                //使用一个字段来判断 单播事件  广播事件 其他
+                if(StringUtils.isNotBlank(userId)&&webSocketMap.containsKey(userId)){
+//                    广播
+                    for(Map.Entry<String, WebSocketServer> entry: webSocketMap.entrySet()) {
+                        webSocketMap.get(entry.getKey()).sendMessage(message);
+
+//                        System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                    }
+//                        webSocketMap.get(userId).sendMessage(message);
                 }else{
                     //否则不在这个服务器上，发送到mysql或者redis
-                    log.error("请求的userId:"+toUserId+"不在该服务器上");
+                    log.error("请求的userId:"+userId+"不在该服务器上");
                 }
             }catch (Exception e){
                 e.printStackTrace();

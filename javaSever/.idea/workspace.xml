@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/horizontalWaterfalls/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/funComponents/horizontalWaterfalls/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/style.less" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/projects/style.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/music/list/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/music/list/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/socket/socketTest/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/socket/socketTest/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/util/info.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/VerificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/VerificationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/TestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/TestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/component/WebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/TestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/TestServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WStest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/component/WebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/WebSocketServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/TestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/WebSocketServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/WSController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS/WebSocketController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ryw/vo/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/component/WebSocketServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/TestServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/WebSocketController.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +280,7 @@
       <workItem from="1658728328973" duration="1772000" />
       <workItem from="1659060483124" duration="3246000" />
       <workItem from="1660960107721" duration="7208000" />
-      <workItem from="1661390019292" duration="12334000" />
+      <workItem from="1661390019292" duration="15248000" />
     </task>
     <servers />
   </component>

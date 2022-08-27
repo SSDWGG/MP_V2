@@ -1,6 +1,6 @@
 import { formatTimesTampDate, getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
-import { DeploymentUnitOutlined, LikeTwoTone } from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
 import { Button, Form, Input, message, notification } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
             message: GetHelloContent(),
             description: `欢迎登录, ${userInfo.username}~`,
             duration:10,
-            icon:<DeploymentUnitOutlined />,
+            icon:<SmileOutlined style={{ color: '#108ee9' }} />,
             className: 'notification-class',
             
           });
