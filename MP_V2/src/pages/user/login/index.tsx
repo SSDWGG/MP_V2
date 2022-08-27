@@ -1,10 +1,13 @@
 import { formatTimesTampDate, getTokenKey } from '@/common/utils';
 import { login } from '@/services/user';
-import { Button, Form, Input, message } from 'antd';
+import { DeploymentUnitOutlined, LikeTwoTone } from '@ant-design/icons';
+import { Button, Form, Input, message, notification } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
 import style from './index.less';
+import { GetHelloContent } from '@/util/const';
+
 
 interface FormValues {
   username: string;
@@ -36,8 +39,22 @@ const Login: React.FC = () => {
           currentUser: userInfo,
         }));
         goto('/todolist');
+        setTimeout(() => {
+          notification.success({
+            message: GetHelloContent(),
+            description: `欢迎登录, ${userInfo.username}~`,
+            duration:10,
+            icon:<DeploymentUnitOutlined />,
+            className: 'notification-class',
+            
+          });
+        }, 2000);
       } else {
-        message.error(`账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`);
+        notification.error({
+          message: '暂无登录权限',
+          description: `账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`,          
+        });
+        // message.error(`账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`);
       }
     }
   };

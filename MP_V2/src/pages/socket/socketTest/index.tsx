@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useModel } from 'umi';
 import './index.less';
 import { Info } from '@/util/info';
+import { message } from 'antd';
 
 const ChatRoom: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-  const [messageValue, setMessageValue] = useState<string>('');
+  const [messageValue, setMessageValue] = useState<string>('哈哈哈');
 
-  const [allValue, setAllValue] = useState<{
-    toUserId: string;
-    contentText: string;
-    userId: string;
-  }>({} as any);
+  // // 登录用户
+  // user: '',
+  // // 消息记录列表
+  // msgList: [],
+  // // 发送的消息
+  // message: {
+  //   time:null,//时间
+  //   to: '',//发给谁
+  //   from: '',
+  //   msg: ''
+  // },
+  // // 在线用户列表
+  // userList: []
 
   let socket: any;
+  const openSocket = () => {
 
-  function openSocket() {
+   if(typeof (WebSocket) == "undefined" ){
+    message.error('您的浏览器不支持WebSocket')
+    return
+   } 
+
     const socketUrl = `ws://${Info.wsIp}/api/pushMessage/${initialState?.currentUser?.userid}`;
-    console.log(socketUrl);
     // 关闭之前的ws
     if (socket != null) {
       socket.close();
@@ -31,7 +44,9 @@ const ChatRoom: React.FC = () => {
     };
     //获得消息事件
     socket.onmessage = function (msg: any) {
-      console.log(msg.data);
+      let data = JSON.parse(msg.data)
+      console.log('此处是收到的信息', data);
+      message.success(`${data.contentText}`);
       //发现消息进入,开始处理前端触发逻辑
     };
     //关闭事件
@@ -42,50 +57,26 @@ const ChatRoom: React.FC = () => {
     socket.onerror = function () {
       console.log('websocket发生了错误');
     };
-  }
+  };
+  useEffect(() => {
+    openSocket();
+    return !!socket && socket.onclose;
+  }, []);
 
-  function sendMessage() {
-    socket.send(`{
-      toUserId:${initialState?.currentUser?.userid}1111,
-      contentText: 'qwe'
-    }`);
-    // console.log(
-    //   '{"toUserId":"' + allValue.toUserId + '","contentText":"' + allValue.contentText + '"}',
-    // );
-  }
+  const sendMessage = () => {
+    let message = {
+      toUserId: initialState?.currentUser?.userid,
+      contentText: messageValue,
+    };
+    !!socket ? socket.send(JSON.stringify(message)) : openSocket();
+  };
 
   return (
     <>
       <p>【socket开启者的ID信息】：{initialState?.currentUser?.userid}</p>
 
       <p>【客户端向服务器发送的内容】：</p>
-      <div>
-        <input
-          id="toUserId"
-          name="toUserId"
-          type="text"
-          value={allValue.toUserId}
-          onChange={(e) => {
-            console.log(e);
-          }}
-          defaultValue={20}
-        />
-        <input
-          id="contentText"
-          name="contentText"
-          type="text"
-          value={allValue.contentText}
-          onChange={(e) => {
-            console.log(e);
-          }}
-          defaultValue="hello websocket"
-        />
-      </div>
-      <p>【操作】：</p>
-      <div>
-        <a onClick={() => openSocket()}>开启socket</a>
-      </div>
-      <p>【操作】：</p>
+      <h1>{messageValue}</h1>
       <div>
         <a onClick={() => sendMessage()}>发送消息</a>
       </div>

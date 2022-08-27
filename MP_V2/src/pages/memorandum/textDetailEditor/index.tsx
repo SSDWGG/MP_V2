@@ -11,7 +11,7 @@ import './index.less';
 import { Info } from '@/util/info';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
+import { IDomEditor, IEditorConfig, IToolbarConfig,DomEditor} from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
@@ -25,12 +25,23 @@ const TextDetail: React.FC = () => {
   const [html, setHtml] = useState('');
   const [htmlLength, setHtmlLength] = useState(0);
   // 工具栏配置
-  const toolbarConfig: Partial<IToolbarConfig> = {}; // TS 语法
+  const toolbarConfig: Partial<IToolbarConfig> = {
+    excludeKeys: [
+      /* 隐藏哪些菜单 */
+      'insertLink',
+      "group-image",
+      "group-video",
+    ],
+  }; // TS 语法
+// console.log(DomEditor.getToolbar(editor));
+
+
   // 编辑器配置
   const editorConfig: Partial<IEditorConfig> = {
     // TS 语法
     placeholder: '请输入内容...',
   };
+
   // 及时销毁 editor ，重要！
   useEffect(() => {
     return () => {
@@ -109,7 +120,7 @@ const TextDetail: React.FC = () => {
         const h5content = html;
         const content = editorH5ToNormal(html);
         !!memoid
-          ? await updateMemo({ memoid, h5content,content, ...values })
+          ? await updateMemo({ memoid, h5content, content, ...values })
           : await addMemo({ cover, h5content, content, ...values });
         history.push(`/memorandum`);
         message.success(`${!!memoid ? '修改' : '添加'}成功`);
@@ -151,6 +162,7 @@ const TextDetail: React.FC = () => {
       )}
     </ButtonGroup>
   );
+  
   return (
     <GridContent>
       <Row gutter={24} justify="center">

@@ -1,65 +1,7 @@
 @import '~antd/es/style/themes/default.less';
 @import './utils/utils.less';
 
-.coverCardList {
-  .card {
-    :global {
-      .ant-card-meta-title {
-        margin-bottom: 4px;
 
-        & > a {
-          display: inline-block;
-          max-width: 100%;
-          color: @heading-color;
-        }
-      }
-
-      .ant-card-meta-description {
-        height: 44px;
-        overflow: hidden;
-        line-height: 22px;
-      }
-    }
-
-    &:hover {
-      :global {
-        .ant-card-meta-title > a {
-          color: @primary-color;
-        }
-      }
-    }
-  }
-
-  .cardItemContent {
-    display: flex;
-    height: 20px;
-    margin-top: 16px;
-    margin-bottom: -4px;
-    line-height: 20px;
-
-    & > span {
-      flex: 1;
-      color: @text-color-secondary;
-      font-size: 12px;
-    }
-
-    .avatarList {
-      flex: 0 1 auto;
-      // align-items: flex-end;
-      // justify-content: end;
-    }
-  }
-
-  .cardList {
-    margin-top: 24px;
-  }
-
-  :global {
-    .ant-list .ant-list-item-content-single {
-      max-width: 100%;
-    }
-  }
-}
 
 .listMemoItem {
   :global {
@@ -84,7 +26,7 @@
 }
 
 /* 将内容块重排为4列 */
-// .listMemoItem:nth-of-type(4n+1) { order: 1; }
-// .listMemoItem:nth-of-type(4n+2) { order: 2; }
-// .listMemoItem:nth-of-type(4n+3) { order: 3; }
-// .listMemoItem:nth-of-type(4n)   { order: 4; }
+.listMemoItem:nth-of-type(4n+1) { order: 1; }
+.listMemoItem:nth-of-type(4n+2) { order: 2; }
+.listMemoItem:nth-of-type(4n+3) { order: 3; }
+.listMemoItem:nth-of-type(4n)   { order: 4; }

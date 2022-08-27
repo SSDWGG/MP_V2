@@ -14,11 +14,11 @@ public class TestServiceImpl {
 
     //打印时间
 //    @Scheduled(fixedRate=60000) //x毫秒执行一次
-//    public  void  printTime(){
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-//        String date = dateFormat.format(new Date());
-////        WebSocketServer.sendInfo(date,"10");
-//        System.out.println(date);
-//    }
+    public  void  printTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String date = dateFormat.format(new Date());
+        WebSocketServer.sendInfo(date,date);
+        System.out.println(date);
+    }
 
 }

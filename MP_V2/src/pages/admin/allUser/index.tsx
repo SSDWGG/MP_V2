@@ -74,6 +74,12 @@ const Music: React.FC = () => {
       ellipsis: true,
     },
     {
+      title: '登录ip',
+      dataIndex: 'lastip',
+      width: 70,
+      ellipsis: true,
+    },
+    {
       title: '电话',
       dataIndex: 'phone',
       width: 70,

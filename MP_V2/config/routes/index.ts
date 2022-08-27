@@ -107,7 +107,6 @@
       {
         name: 'listFC',
         icon: 'smile',
-        access: 'canAdmin',
         path: '/funComponents/listFC',
         component: './funComponents/listFC',
       },
@@ -164,13 +163,13 @@
         name: 'socketTest',
         icon: 'smile',
         path: '/socket/socketTest',
-        access: 'canAdmin',
         component: './socket/socketTest',
       },
       {
         name: 'room',
         icon: 'smile',
         path: '/socket/room',
+        access: 'canAdmin',
         component: './socket/room',
       },
       // 匹配不到路径自动跳转404
@@ -198,27 +197,27 @@
     ],
   },
   // 音乐
-  // {
-  //   name: 'music',
-  //   icon: 'CheckCircleOutlined',
-  //   path: '/music',
-  //   routes: [
-  //     {
-  //       path: '/music',
-  //       redirect: '/music/list',
-  //     },
-  //     {
-  //       name: 'musiclist',
-  //       icon: 'smile',
-  //       path: '/music/list',
-  //       component: './music/list',
-  //     },
-  //     // 匹配不到路径自动跳转404
-  //     {
-  //       component: '404',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'music',
+    icon: 'CheckCircleOutlined',
+    path: '/music',
+    routes: [
+      {
+        path: '/music',
+        redirect: '/music/list',
+      },
+      {
+        name: 'musiclist',
+        icon: 'smile',
+        path: '/music/list',
+        component: './music/list',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
   // 个人主页
   {
     name: 'account',

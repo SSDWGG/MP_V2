@@ -57,15 +57,16 @@ const Projects: FC<{ memosData: memo[]; refresh: () => Promise<memo[]> }> = (pro
               </div>
               <Card hoverable>
                 <Card.Meta title={<a>{item.title}</a>} />
-                <div className={styles.cardItemContent}>
+                <div>
                   <span>更新于：{moment(item.updateTime).fromNow()}</span>
-                  <div className={styles.avatarList}>
+                  <div>
                     <AvatarList size="small">
                       <AvatarList.Item
                         key={initialState?.currentUser?.userid}
                         src={initialState?.currentUser?.avatar as string}
                         tips={initialState?.currentUser?.username}
                       />
+                      <AvatarList.Item key={'ryw'} src={'/avatar/initavatar.jpg'} tips={'ssdwgg'} />
                     </AvatarList>
                   </div>
                 </div>
@@ -96,21 +97,18 @@ const Projects: FC<{ memosData: memo[]; refresh: () => Promise<memo[]> }> = (pro
               <Card hoverable cover={<img alt={item.title} src={item.cover} />}>
                 <Card.Meta
                   title={<a>{item.title}</a>}
-                  description={
-                    <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
-                      {item.content}
-                    </Paragraph>
-                  }
+                  description={<Paragraph ellipsis={{ rows: 2 }}>{item.content}</Paragraph>}
                 />
-                <div className={styles.cardItemContent}>
+                <div>
                   <span>更新于：{moment(item.updateTime).fromNow()}</span>
-                  <div className={styles.avatarList}>
+                  <div>
                     <AvatarList size="small">
                       <AvatarList.Item
                         key={initialState?.currentUser?.userid}
                         src={initialState?.currentUser?.avatar as string}
                         tips={initialState?.currentUser?.username}
                       />
+                      <AvatarList.Item key={'ryw'} src={'/avatar/initavatar.jpg'} tips={'ssdwgg'} />
                     </AvatarList>
                   </div>
                 </div>

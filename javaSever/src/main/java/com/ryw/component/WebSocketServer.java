@@ -49,7 +49,7 @@ public class WebSocketServer {
             addOnlineCount();
         }
         log.info("用户连接:"+userId+",当前在线人数为:" + getOnlineCount());
-        sendMessage("连接成功");
+//        sendMessage("连接成功");
     }
 
     /**
@@ -66,8 +66,7 @@ public class WebSocketServer {
     }
 
     /**
-     * 收到客户端消
-     * 息后调用的方法
+     * 收到客户端消息后调用的方法
      * @param message
      * 客户端发送过来的消息
      **/
@@ -79,11 +78,12 @@ public class WebSocketServer {
         if(StringUtils.isNotBlank(message)){
             try {
                 //解析发送的报文
+
                 JSONObject jsonObject = JSON.parseObject(message);
                 //追加发送人(防止串改)
                 jsonObject.put("fromUserId",this.userId);
                 String toUserId=jsonObject.getString("toUserId");
-                //传送给对应toUserId用户的websocket
+                //传送给对应toUserId用户的websocket  单播事件
                 if(StringUtils.isNotBlank(toUserId)&&webSocketMap.containsKey(toUserId)){
                     webSocketMap.get(toUserId).sendMessage(message);
                 }else{
