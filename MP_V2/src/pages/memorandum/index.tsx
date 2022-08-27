@@ -12,8 +12,23 @@ const Memorandum: React.FC = () => {
   const [memosData, setMemoData] = useState<memo[]>([]);
 
   const getMemoDate = async () => {
-    const resMemo = await getUserAllMemos();
-    !!resMemo ? setMemoData(resMemo) : setMemoData([]);
+    let resMemo = await getUserAllMemos();
+
+
+    if( !!resMemo){  // 收起字段的备忘录排序在末尾
+      const before:memo[] = []
+      const after:memo[] = []
+      resMemo.forEach(item=>{
+      item.collapse ? after.push(item):before.push(item)
+      })
+    setMemoData([...before,...after])
+      }else{
+      setMemoData([])
+    }
+  
+
+
+    // 判断memo>1的情况
     return resMemo;
   };
 
@@ -37,7 +52,7 @@ const Memorandum: React.FC = () => {
         <Button
           type="dashed"
           onClick={() => {
-            history.push(`/memorandum/addTextDetail`);
+            history.push(`/memorandum/addTextDetailEditor`);
           }}
           style={{ width: '100%', marginBottom: 15 }}
         >

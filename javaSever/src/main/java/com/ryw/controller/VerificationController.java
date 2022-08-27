@@ -210,6 +210,7 @@ public class VerificationController {
     @RequestMapping("/v2/code/sendEmail")
     @ResponseBody
     public String sendEmailMessage(String email) {
+
         MimeMessage message = javaMailSender.createMimeMessage();
         try {
             String code = VerifyCode(6);

@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useModel } from 'umi';
 import './index.less';
-import { Info } from '@/util/info';
+import { SocketInfo } from '@/util/info';
+import { Card, Input, message, notification } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 
-const ChatRoom: React.FC = () => {
+const WStestRoom: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-  const [messageValue, setMessageValue] = useState<string>('');
-
-  const [allValue, setAllValue] = useState<{
-    toUserId: string;
-    contentText: string;
-    userId: string;
-  }>({} as any);
+  const [messageValue, setMessageValue] = useState<string>('你好呀~');
 
   let socket: any;
+  const openSocket = () => {
+    if (typeof WebSocket == 'undefined') {
+      message.error('您的浏览器不支持WebSocket');
+      return;
+    }
 
-  function openSocket() {
-    const socketUrl = `ws://${Info.wsIp}/api/pushMessage/${initialState?.currentUser?.userid}`;
-    console.log(socketUrl);
+    const socketUrl = SocketInfo.socketAllUserUrl + initialState?.currentUser?.userid;
     // 关闭之前的ws
     if (socket != null) {
       socket.close();
       socket = null;
     }
-    // ['用户的token']
     socket = new WebSocket(socketUrl);
     //打开事件
     socket.onopen = function () {
@@ -31,7 +30,13 @@ const ChatRoom: React.FC = () => {
     };
     //获得消息事件
     socket.onmessage = function (msg: any) {
-      console.log(msg.data);
+      let data = JSON.parse(msg.data);
+      notification.open({
+        message: `编号${data.userId.substring(data.userId.length - 4)}向您发来一条新消息~`,
+        description: `${data.content}`,
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        duration: 0,
+      });
       //发现消息进入,开始处理前端触发逻辑
     };
     //关闭事件
@@ -42,54 +47,44 @@ const ChatRoom: React.FC = () => {
     socket.onerror = function () {
       console.log('websocket发生了错误');
     };
-  }
+  };
+  useEffect(() => {
+    openSocket();
+    return !!socket && socket.onclose;
+  }, []);
 
-  function sendMessage() {
-    socket.send(`{
-      toUserId:${initialState?.currentUser?.userid}1111,
-      contentText: 'qwe'
-    }`);
-    // console.log(
-    //   '{"toUserId":"' + allValue.toUserId + '","contentText":"' + allValue.contentText + '"}',
-    // );
-  }
+  const sendMessage = () => {
+    let messageData = {
+      userId: initialState?.currentUser?.userid,
+      content: messageValue,
+    };
+    if (!!socket) {
+      socket.send(JSON.stringify(messageData));
+    } else {
+      message.warning(`通信连接断开，目前正在重新为您建立通信连接，请尝试再次发送信息`);
+      openSocket();
+    }
+  };
 
   return (
-    <>
-      <p>【socket开启者的ID信息】：{initialState?.currentUser?.userid}</p>
+    <Card className="wstestroom">
+      <p>在此您可以向全体正在使用网站通信连接的小伙伴打招呼~</p>
 
-      <p>【客户端向服务器发送的内容】：</p>
-      <div>
-        <input
-          id="toUserId"
-          name="toUserId"
-          type="text"
-          value={allValue.toUserId}
-          onChange={(e) => {
-            console.log(e);
-          }}
-          defaultValue={20}
-        />
-        <input
-          id="contentText"
-          name="contentText"
-          type="text"
-          value={allValue.contentText}
-          onChange={(e) => {
-            console.log(e);
-          }}
-          defaultValue="hello websocket"
-        />
-      </div>
-      <p>【操作】：</p>
-      <div>
-        <a onClick={() => openSocket()}>开启socket</a>
-      </div>
-      <p>【操作】：</p>
+      <p>在下方输入您要传达的内容</p>
+      <TextArea
+        maxLength={50}
+        showCount
+        autoSize={{ minRows: 2, maxRows: 5 }}
+        placeholder="请输入您要传递的内内容"
+        value={messageValue}
+        onChange={(e) => {
+          setMessageValue(e.target.value);
+        }}
+      />
       <div>
         <a onClick={() => sendMessage()}>发送消息</a>
       </div>
-    </>
+    </Card>
   );
 };
-export default ChatRoom;
+export default WStestRoom;

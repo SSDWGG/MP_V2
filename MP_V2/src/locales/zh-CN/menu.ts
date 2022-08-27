@@ -7,8 +7,9 @@ export default {
   'menu.todolist': '日程表',
 
   'menu.memorandum': '备忘录',
+  'menu.memorandum.editTextDetailEditor': '编辑富文本备忘录',
   'menu.memorandum.editTextDetail': '编辑备忘录',
-  'menu.memorandum.addTextDetail': '添加备忘录',
+  'menu.memorandum.addTextDetailEditor': '添加备忘录',
 
   'menu.socket': 'socket',
   'menu.socket.room': '聊天室',
@@ -30,7 +31,8 @@ export default {
   'menu.funComponents': '趣味组件区',
   'menu.funComponents.main': '收藏库',
   'menu.funComponents.listFC': '库列表',
-  'menu.funComponents.test': '测试空页',
+  'menu.funComponents.whiteTest': '测试空页',
+  'menu.funComponents.horizontalWaterfalls': '水平瀑布流布局',
 
   'menu.exception.403': '403',
   'menu.exception.404': '404',

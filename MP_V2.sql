@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : wgg_yun
  Source Server Type    : MySQL
- Source Server Version : 80028
+ Source Server Version : 80026
  Source Host           : localhost:3306
  Source Schema         : MP_V2
 
  Target Server Type    : MySQL
- Target Server Version : 80028
+ Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 22/06/2022 11:12:07
+ Date: 27/08/2022 11:21:40
 */
 
 SET NAMES utf8mb4;
@@ -26,11 +26,13 @@ CREATE TABLE `memo` (
   `userid` bigint NOT NULL COMMENT '用户id',
   `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标题',
-  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '内容',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '内容',
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '账户修改时间',
   `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
   `deleted` int DEFAULT '0' COMMENT '逻辑删除',
+  `collapse` int NOT NULL DEFAULT '0' COMMENT '是否收起，1收起0展开',
+  `h5content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '富文本内容，和内容字段强关联',
   PRIMARY KEY (`memoid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -55,7 +57,7 @@ CREATE TABLE `todo` (
   `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
   `deleted` int DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`todoid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1539128665344888835 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1562782672894357507 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Table structure for users
@@ -83,6 +85,7 @@ CREATE TABLE `users` (
   `version` int DEFAULT '1' COMMENT '乐观锁，异步锁',
   `deleted` int DEFAULT '0' COMMENT '逻辑删除',
   `black_time` datetime DEFAULT NULL COMMENT '封禁解除时间',
+  `lastip` varchar(255) DEFAULT NULL COMMENT '记录ip',
   PRIMARY KEY (`userid`) USING BTREE,
   UNIQUE KEY `username` (`username`) COMMENT '唯一索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

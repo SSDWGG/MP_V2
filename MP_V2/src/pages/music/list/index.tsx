@@ -20,6 +20,29 @@ const Music: React.FC = () => {
       content={<PageHeaderContent currentUser={initialState?.currentUser as user} />}
     >
       music 开发中...敬请期待
+      <div>
+      {/* <audio controls>
+      <source src="/musiclist/hrzj.mp3" type="audio/mpeg" />
+      您的浏览器不支持 audio 元素。
+    </audio>
+    <audio controls>
+      <source src="/musiclist/周杰伦-告白气球.flac" type="audio/mpeg" />
+      您的浏览器不支持 audio 元素。
+    </audio>
+    <audio controls>
+      <source src="/musiclist/周杰伦-轨迹(Live).flac" type="audio/mpeg" />
+      您的浏览器不支持 audio 元素。
+    </audio> */}
+    <audio controls>
+      <source src="/musiclist/周杰伦-简单爱.flac" type="audio/mpeg" />
+      您的浏览器不支持 audio 元素。
+    </audio>
+    {/* <audio controls>
+      <source src="/musiclist/周杰伦-开不了口.flac" type="audio/mpeg" />
+      您的浏览器不支持 audio 元素。
+    </audio> */}
+      </div>
+     
     </PageContainer>
   );
 };

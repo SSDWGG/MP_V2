@@ -63,10 +63,10 @@
         component: './memorandum',
       },
       {
-        name: 'addTextDetail',
-        path: '/memorandum/addTextDetail',
+        name: 'addTextDetailEditor',
+        path: '/memorandum/addTextDetailEditor',
         hideInMenu: true,
-        component: './memorandum/textDetail',
+        component: './memorandum/textDetailEditor',
       },
       {
         path: `/memorandum/editTextDetail/:memoid`,
@@ -77,7 +77,7 @@
       // 富文本模式备忘录
       {
         path: `/memorandum/editTextDetailEditor/:memoid`,
-        name: 'editTextDetail',
+        name: 'editTextDetailEditor',
         hideInMenu: true,
         component: './memorandum/textDetailEditor',
       },
@@ -107,14 +107,13 @@
       {
         name: 'listFC',
         icon: 'smile',
-        access: 'canAdmin',
         path: '/funComponents/listFC',
         component: './funComponents/listFC',
       },
       {
-        name: 'test',
+        name: 'whiteTest',
         icon: 'smile',
-        path: '/funComponents/test',
+        path: '/funComponents/whiteTest',
         // https://pro.ant.design/zh-CN/docs/advanced-menu
         /**
          * @name false 时不展示顶栏
@@ -134,7 +133,15 @@
         menuHeaderRender: false,
 
         access: 'canAdmin',
-        component: './funComponents/test',
+        component: './funComponents/whiteTest',
+      },
+      {
+        name: 'horizontalWaterfalls',
+        icon: 'smile',
+        path: '/funComponents/horizontalWaterfalls',
+       
+        access: 'canAdmin',
+        component: './funComponents/horizontalWaterfalls',
       },
       // 匹配不到路径自动跳转404
       {
@@ -156,13 +163,13 @@
         name: 'socketTest',
         icon: 'smile',
         path: '/socket/socketTest',
-        access: 'canAdmin',
         component: './socket/socketTest',
       },
       {
         name: 'room',
         icon: 'smile',
         path: '/socket/room',
+        access: 'canAdmin',
         component: './socket/room',
       },
       // 匹配不到路径自动跳转404
@@ -190,27 +197,27 @@
     ],
   },
   // 音乐
-  // {
-  //   name: 'music',
-  //   icon: 'CheckCircleOutlined',
-  //   path: '/music',
-  //   routes: [
-  //     {
-  //       path: '/music',
-  //       redirect: '/music/list',
-  //     },
-  //     {
-  //       name: 'musiclist',
-  //       icon: 'smile',
-  //       path: '/music/list',
-  //       component: './music/list',
-  //     },
-  //     // 匹配不到路径自动跳转404
-  //     {
-  //       component: '404',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'music',
+    icon: 'CheckCircleOutlined',
+    path: '/music',
+    routes: [
+      {
+        path: '/music',
+        redirect: '/music/list',
+      },
+      {
+        name: 'musiclist',
+        icon: 'smile',
+        path: '/music/list',
+        component: './music/list',
+      },
+      // 匹配不到路径自动跳转404
+      {
+        component: '404',
+      },
+    ],
+  },
   // 个人主页
   {
     name: 'account',

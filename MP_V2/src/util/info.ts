@@ -5,3 +5,11 @@ export const Info = {
   // ip:"http://119.3.145.125:9050/",
   wsIp: "localhost:9050",
 };
+
+export const SocketInfo = {
+
+  socketAllUserUrl : `ws://${Info.wsIp}/v2/ws/toAllUser/`
+};
+
+
+

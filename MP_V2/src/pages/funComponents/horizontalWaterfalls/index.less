@@ -1,0 +1,41 @@
+@import '~antd/es/style/themes/default.less';
+
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;
+  // 容器必须有固定高度
+//  且高度大于最高的列高 
+  height: 960px;
+  
+  // 非必须 
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  padding: 20px;
+  width: 60%;
+  margin: 40px auto;
+  counter-reset: items;
+}
+
+.item {
+  width: 24%;
+  //  非必须 
+  position: relative;
+  margin-bottom: 2%;
+  background-color: #a1cbfa;
+  border: 1px solid #4290e2;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* 仅用于打印数字 */
+div.item::before {
+  counter-increment: items;
+  content: counter(items);
+}
+
+/* 将内容块重排为4列 */
+.item:nth-of-type(4n+1) { order: 1; }
+.item:nth-of-type(4n+2) { order: 2; }
+.item:nth-of-type(4n+3) { order: 3; }
+.item:nth-of-type(4n)   { order: 4; }
