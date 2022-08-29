@@ -1,24 +1,14 @@
 @import '~antd/es/style/themes/default.less';
 
 .memoimg {
-  position: relative;
-  width: 70px;
-  height: 70px;
-  .mask {
-    position: absolute;
-    top: 0;
-    display: none;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    background-color: rgba(99, 83, 83, 0.3);
-    // pointer-events: none;
-  }
+  max-width: 170px;
+  max-height: 170px;
 }
-.memoimg:hover .mask {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor:pointer
-  
+.title{
+ position: relative;
+}
+.edit-icon{
+  position: absolute;
+  bottom: 0;
+right: 0;
 }

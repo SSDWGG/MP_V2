@@ -29,7 +29,7 @@ const Projects: FC<{ memosData: memo[]; refresh: () => Promise<memo[]> }> = (pro
           onClick={() => {
             // history.push(`/memorandum/editTextDetail/${item.memoid}`);
 
-            history.push(`/memorandum/editTextDetailEditor/${item.memoid}`);
+            history.push(`/memorandum/editTextDetail/${item.memoid}`);
           }}
           className={styles.listMemoItem}
         >

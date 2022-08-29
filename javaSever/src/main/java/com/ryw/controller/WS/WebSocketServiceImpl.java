@@ -17,7 +17,7 @@ public class WebSocketServiceImpl {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String date = dateFormat.format(new Date());
 //        WebSocketServer.sendInfo(date,date);
-        System.out.println(date);
+//        System.out.println(date);
     }
 
 }

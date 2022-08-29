@@ -11,7 +11,7 @@ import './index.less';
 import { Info } from '@/util/info';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { IDomEditor, IEditorConfig, IToolbarConfig,DomEditor} from '@wangeditor/editor';
+import { IDomEditor, IEditorConfig, IToolbarConfig, DomEditor } from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
@@ -29,12 +29,11 @@ const TextDetail: React.FC = () => {
     excludeKeys: [
       /* 隐藏哪些菜单 */
       'insertLink',
-      "group-image",
-      "group-video",
+      'group-image',
+      'group-video',
     ],
   }; // TS 语法
-// console.log(DomEditor.getToolbar(editor));
-
+  // console.log(DomEditor.getToolbar(editor));
 
   // 编辑器配置
   const editorConfig: Partial<IEditorConfig> = {
@@ -105,7 +104,6 @@ const TextDetail: React.FC = () => {
   const getRequestMemoData = async () => {
     // 用来做请求和改变时候的判断
     const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
-    console.log(memo);
     setHtml((memo as any).h5content);
 
     setMemoCover((memo as memo).cover || '');
@@ -162,7 +160,8 @@ const TextDetail: React.FC = () => {
       )}
     </ButtonGroup>
   );
-  
+ 
+
   return (
     <GridContent>
       <Row gutter={24} justify="center">
@@ -215,7 +214,7 @@ const TextDetail: React.FC = () => {
                 >
                   <img
                     src={memoCover || initialState?.currentUser?.avatar}
-                    style={{ maxHeight: '70px', maxWidth: '70px' }}
+                    style={{ maxHeight: '100px', maxWidth: '100px' }}
                     alt="avatar"
                   />
                   <div className="mask">
@@ -253,7 +252,7 @@ const TextDetail: React.FC = () => {
                   onCreated={setEditor}
                   onChange={(e) => onChangeEditor(e)}
                   mode="default"
-                  style={{ height: '400px', overflowY: 'hidden' }}
+                  style={{ height: '600px', overflowY: 'hidden' }}
                 />
               </div>
               {htmlLength > 5000 ? (
@@ -266,6 +265,7 @@ const TextDetail: React.FC = () => {
               <div style={{ marginTop: '15px' }}>3{editorH5ToMini(html)}</div> */}
             </div>
             {formButtonNode}
+           
           </Card>
         </Col>
       </Row>
