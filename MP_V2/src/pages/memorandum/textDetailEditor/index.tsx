@@ -11,14 +11,14 @@ import './index.less';
 import { Info } from '@/util/info';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { IDomEditor, IEditorConfig, IToolbarConfig, DomEditor } from '@wangeditor/editor';
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
-
+const maxContentLength = 5000
   // editor 实例
   const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法
   // 编辑器内容
@@ -40,7 +40,6 @@ const TextDetail: React.FC = () => {
     // TS 语法
     placeholder: '请输入内容...',
   };
-
   // 及时销毁 editor ，重要！
   useEffect(() => {
     return () => {
@@ -114,9 +113,17 @@ const TextDetail: React.FC = () => {
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (values) => {
+
+        const content = editorH5ToNormal(html);
+        if( content.length>maxContentLength){
+          message.warning('内容长度超出最大限制')
+          return
+        }
+       
+
+
         const cover = initialState?.currentUser?.avatar;
         const h5content = html;
-        const content = editorH5ToNormal(html);
         !!memoid
           ? await updateMemo({ memoid, h5content, content, ...values })
           : await addMemo({ cover, h5content, content, ...values });
@@ -252,13 +259,13 @@ const TextDetail: React.FC = () => {
                   onCreated={setEditor}
                   onChange={(e) => onChangeEditor(e)}
                   mode="default"
-                  style={{ height: '600px', overflowY: 'hidden' }}
+                  style={{ maxHeight: '800px', overflowY: 'scroll' }}
                 />
               </div>
-              {htmlLength > 5000 ? (
-                <div className="htmlLength c-r">{`${htmlLength}/5000`}</div>
+              {htmlLength > maxContentLength ? (
+                <div className="htmlLength c-r">{`${htmlLength}/${maxContentLength}`}</div>
               ) : (
-                <div className="htmlLength">{`${htmlLength}/5000`}</div>
+                <div className="htmlLength">{`${htmlLength}/${maxContentLength}`}</div>
               )}
               {/* <div style={{ marginTop: '15px' }}>1{html}</div>
               <div style={{ marginTop: '15px' }}>2{editorH5ToNormal(html)}</div>

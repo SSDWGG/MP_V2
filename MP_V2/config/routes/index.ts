@@ -80,6 +80,7 @@
         name: 'editTextDetailEditor',
         hideInMenu: true,
         component: './memorandum/textDetailEditor',
+        
       },
       // 匹配不到路径自动跳转404
       {

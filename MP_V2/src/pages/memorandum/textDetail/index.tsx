@@ -6,7 +6,7 @@ import { getMemoByMemoid } from '@/services/memo';
 import './index.less';
 import Title from 'antd/lib/typography/Title';
 import Paragraph from 'antd/lib/typography/Paragraph';
-import { EditOutlined, HighlightTwoTone } from '@ant-design/icons';
+import { HighlightTwoTone } from '@ant-design/icons';
 
 const TextDetail: React.FC = () => {
   const { memoid } = useParams<{ memoid: string }>();
@@ -22,7 +22,7 @@ const TextDetail: React.FC = () => {
     getMemoData();
   }, []);
   useEffect(() => {
-    document.getElementById('h5content').innerHTML = memo.h5content;
+   (document.getElementById('h5content') as any) .innerHTML = memo.h5content;
   });
   return (
     <GridContent>
