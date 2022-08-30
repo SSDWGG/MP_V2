@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/admin/allUser/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetailEditor/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/memorandum/textDetailEditor/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/socket/socketTest/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/socket/socketTest/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/pages/user/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +269,7 @@
       <workItem from="1658728328973" duration="1772000" />
       <workItem from="1659060483124" duration="3246000" />
       <workItem from="1660960107721" duration="7208000" />
-      <workItem from="1661390019292" duration="17117000" />
+      <workItem from="1661390019292" duration="17718000" />
     </task>
     <servers />
   </component>

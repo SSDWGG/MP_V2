@@ -40,11 +40,18 @@ const Main: React.FC = () => {
           下载 《{`${activeFC}`}》
         </Button>
       </div>
-      <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
+      {/* <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
         {loading ? (
           <Spin indicator={antIcon} />
         ) : (
           <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
+        )}
+      </a> */}
+      <a href={`https://mpm-front-test.meipingmi.com.cn/yxd-test/20220830/${activeFC}.gif`} className="agifImg">
+        {loading ? (
+          <Spin indicator={antIcon} />
+        ) : (
+          <img src={`https://mpm-front-test.meipingmi.com.cn/yxd-test/20220830/${activeFC}.gif`} className="gifImg" alt={activeFC} />
         )}
       </a>
     </div>

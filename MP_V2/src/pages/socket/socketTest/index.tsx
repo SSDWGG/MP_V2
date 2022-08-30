@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useModel } from 'umi';
 import './index.less';
 import { Card } from 'antd';
@@ -16,8 +16,7 @@ const WStestRoom: React.FC = () => {
     if (!!initialState?.socket) {
       initialState?.socket.send(JSON.stringify(messageData));
     } else {
-      // message.warning(`通信连接断开，目前正在重新为您建立通信连接，请尝试再次发送信息`);
-    await initialState?.openSocket(initialState.currentUser?.userid as  number)
+    await( initialState?.openSocket as any)(initialState?.currentUser?.userid as  number)
     initialState?.socket.send(JSON.stringify(messageData));
 
     }

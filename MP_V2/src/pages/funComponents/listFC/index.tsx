@@ -49,7 +49,7 @@ const ListFC: React.FC = () => {
           <h3>
             <strong>FAQ</strong>
           </h3>
-          <h3>
+          {/* <h3>
             <strong>Q：为什么该页面加载这么卡顿，动图播放不流畅？</strong>{' '}
           </h3>
           <h3>
@@ -58,6 +58,14 @@ const ListFC: React.FC = () => {
               所以传输速度确实是非常慢，后期可能会进行服务器升级和cdn优化等。
               每一张动图由于压缩导致丢失了一定的画质和帧率，可以耐心等待一会儿，加载完成后可以点击图片放大浏览。
               如果感觉该组件还不错，可以在加载完毕后点击下载源码，在本地查看和调试页面。
+            </strong>
+          </h3> */}
+          <h3>
+            <strong>Q：为什么下载缓慢？</strong>
+          </h3>
+          <h3>
+            <strong>
+              A：受限于服务器带宽和性能（1g），目前只有gif图片在使用在oss加速，后期会进行服务器升级和cdn优化静态资源。
             </strong>
           </h3>
         </Card>
@@ -88,8 +96,9 @@ const ListFC: React.FC = () => {
                     下载 《{`${item}`}》
                   </Button>
                 </div>
-                <a href={getPublicPath(`FC/gif/${item}.gif`)} className="agifImg">
-                  <img src={`/FC/gif/${item}.gif`} className="gifImg" alt={item} />
+                
+                <a href={`https://mpm-front-test.meipingmi.com.cn/yxd-test/20220830/${item}.gif`} className="agifImg">
+                  <img src={`https://mpm-front-test.meipingmi.com.cn/yxd-test/20220830/${item}.gif`} className="gifImg" alt={item} />
                 </a>
               </div>
             </List.Item>
