@@ -30,8 +30,11 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (!!userInfo) {
-      // 账号密码正确，验证是否在黑名单中（这个黑名单的验证操作，最好由后端来做请求拦截验证，而不是前端请求验证，前端的时间获取是不安全的）
-      if (formatTimesTampDate(userInfo.blackTime) < Date.parse(new Date() as unknown as string)) {
+      // 账号密码正确，验证是否在黑名单中（验证操作，最好由后端来做请求拦截验证，而不是前端请求验证，前端的时间获取是不安全的）
+      if (
+        formatTimesTampDate(userInfo.blackTime) < Date.parse(new Date() as unknown as string) ||
+        !formatTimesTampDate(userInfo.blackTime)
+      ) {
         message.success('登录成功！正在为您跳转主页...');
         // refresh(); 切换账号登录，主动刷新intistate内容
         // 接入socket
