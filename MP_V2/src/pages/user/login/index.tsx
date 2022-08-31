@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
 import style from './index.less';
 import { GetHelloContent } from '@/util/const';
-
+import { SocketInfo } from '@/util/info';
 
 interface FormValues {
   username: string;
@@ -30,29 +30,36 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (!!userInfo) {
-      // 账号密码正确，验证是否在黑名单中（这个黑名单的验证操作，最好由后端来做请求拦截验证，而不是前端请求验证，前端的时间获取是不安全的）
-      if (formatTimesTampDate(userInfo.blackTime) < Date.parse(new Date() as unknown as string)) {
+      // 账号密码正确，验证是否在黑名单中（验证操作，最好由后端来做请求拦截验证，而不是前端请求验证，前端的时间获取是不安全的）
+      if (
+        formatTimesTampDate(userInfo.blackTime) < Date.parse(new Date() as unknown as string) ||
+        !formatTimesTampDate(userInfo.blackTime)
+      ) {
         message.success('登录成功！正在为您跳转主页...');
         // refresh(); 切换账号登录，主动刷新intistate内容
+        // 接入socket
+        let socket = await openSocket(userInfo.userid);
         await setInitialState((s) => ({
           ...s,
           currentUser: userInfo,
+          socket,
+          // 因为这里的socket后端使用的是set存储，所以即使是多次连接也没有问题
+          openSocket,
         }));
         goto('/todolist');
         setTimeout(() => {
           notification.success({
             message: GetHelloContent(),
             description: `欢迎登录, ${userInfo.username}~`,
-            duration:10,
-            icon:<SmileOutlined style={{ color: '#108ee9' }} />,
+            duration: 10,
+            icon: <SmileOutlined style={{ color: '#108ee9' }} />,
             className: 'notification-class',
-            
           });
         }, 2000);
       } else {
         notification.error({
           message: '暂无登录权限',
-          description: `账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`,          
+          description: `账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`,
         });
         // message.error(`账号被限制登录,下次允许登录时间${moment(userInfo.blackTime).fromNow()}`);
       }
@@ -73,6 +80,46 @@ const Login: React.FC = () => {
     }
     setSubmitting(false);
   }
+  const openSocket = async (userid: number) => {
+    if (typeof WebSocket == 'undefined') {
+      message.error('您的浏览器不支持WebSocket');
+      return;
+    }
+
+    const socketUrl = SocketInfo.socketAllUserUrl + userid;
+    let socket: any;
+    // 关闭之前的ws
+    if (socket != null) {
+      socket.close();
+      socket = null;
+    }
+    socket = await new WebSocket(socketUrl);
+    //打开事件
+    socket.onopen = function () {
+      console.log('websocket已打开');
+    };
+    //获得消息事件
+    socket.onmessage = function (msg: any) {
+      let data = JSON.parse(msg.data);
+      notification.open({
+        message: `编号${data.userId.substring(data.userId.length - 4)}向您发来一条新消息~`,
+        description: `${data.content}`,
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        duration: 0,
+      });
+      //发现消息进入,开始处理前端触发逻辑
+    };
+    //关闭事件
+    socket.onclose = function () {
+      console.log('websocket已关闭');
+    };
+    //发生了错误事件
+    socket.onerror = function () {
+      console.log('websocket发生了错误');
+    };
+
+    return socket;
+  };
 
   return (
     <div className={style.loginPage}>

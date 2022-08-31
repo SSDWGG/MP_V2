@@ -2,6 +2,8 @@ import { message } from 'antd';
 // import copy from 'copy-to-clipboard';
 import produce from 'immer';
 import { sampleSize } from 'lodash';
+import { Info } from '@/util/info';
+
 
 export * from './interval';
 export * from './is';
@@ -195,3 +197,20 @@ export function swapElement<T>(list: T[], fromIndex: number, toIndex: number) {
   });
   return newList;
 }
+
+/**
+ * 下载oss中的zip文件
+ */
+ export function  handleDownload(itemName :string){
+  let x=new XMLHttpRequest();
+      x.open("GET", `${Info.ossBaseUrl}${itemName}.zip`, true);
+      x.responseType = 'blob';
+      x.onload=function(e){
+          var url = window.URL.createObjectURL(x.response)
+          var a = document.createElement('a');
+          a.href = url
+          a.download = `${itemName}.zip`
+          a.click()
+      }
+      x.send();
+  }

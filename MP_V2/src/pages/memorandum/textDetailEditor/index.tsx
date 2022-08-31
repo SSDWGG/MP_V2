@@ -11,14 +11,14 @@ import './index.less';
 import { Info } from '@/util/info';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { IDomEditor, IEditorConfig, IToolbarConfig,DomEditor} from '@wangeditor/editor';
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
-
+const maxContentLength = 5000
   // editor 实例
   const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法
   // 编辑器内容
@@ -29,19 +29,17 @@ const TextDetail: React.FC = () => {
     excludeKeys: [
       /* 隐藏哪些菜单 */
       'insertLink',
-      "group-image",
-      "group-video",
+      'group-image',
+      'group-video',
     ],
   }; // TS 语法
-// console.log(DomEditor.getToolbar(editor));
-
+  // console.log(DomEditor.getToolbar(editor));
 
   // 编辑器配置
   const editorConfig: Partial<IEditorConfig> = {
     // TS 语法
     placeholder: '请输入内容...',
   };
-
   // 及时销毁 editor ，重要！
   useEffect(() => {
     return () => {
@@ -105,7 +103,6 @@ const TextDetail: React.FC = () => {
   const getRequestMemoData = async () => {
     // 用来做请求和改变时候的判断
     const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
-    console.log(memo);
     setHtml((memo as any).h5content);
 
     setMemoCover((memo as memo).cover || '');
@@ -116,9 +113,17 @@ const TextDetail: React.FC = () => {
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (values) => {
+
+        const content = editorH5ToNormal(html);
+        if( content.length>maxContentLength){
+          message.warning('内容长度超出最大限制')
+          return
+        }
+       
+
+
         const cover = initialState?.currentUser?.avatar;
         const h5content = html;
-        const content = editorH5ToNormal(html);
         !!memoid
           ? await updateMemo({ memoid, h5content, content, ...values })
           : await addMemo({ cover, h5content, content, ...values });
@@ -162,7 +167,8 @@ const TextDetail: React.FC = () => {
       )}
     </ButtonGroup>
   );
-  
+ 
+
   return (
     <GridContent>
       <Row gutter={24} justify="center">
@@ -215,7 +221,7 @@ const TextDetail: React.FC = () => {
                 >
                   <img
                     src={memoCover || initialState?.currentUser?.avatar}
-                    style={{ maxHeight: '70px', maxWidth: '70px' }}
+                    style={{ maxHeight: '100px', maxWidth: '100px' }}
                     alt="avatar"
                   />
                   <div className="mask">
@@ -253,19 +259,20 @@ const TextDetail: React.FC = () => {
                   onCreated={setEditor}
                   onChange={(e) => onChangeEditor(e)}
                   mode="default"
-                  style={{ height: '400px', overflowY: 'hidden' }}
+                  style={{ maxHeight: '800px', overflowY: 'scroll' }}
                 />
               </div>
-              {htmlLength > 5000 ? (
-                <div className="htmlLength c-r">{`${htmlLength}/5000`}</div>
+              {htmlLength > maxContentLength ? (
+                <div className="htmlLength c-r">{`${htmlLength}/${maxContentLength}`}</div>
               ) : (
-                <div className="htmlLength">{`${htmlLength}/5000`}</div>
+                <div className="htmlLength">{`${htmlLength}/${maxContentLength}`}</div>
               )}
               {/* <div style={{ marginTop: '15px' }}>1{html}</div>
               <div style={{ marginTop: '15px' }}>2{editorH5ToNormal(html)}</div>
               <div style={{ marginTop: '15px' }}>3{editorH5ToMini(html)}</div> */}
             </div>
             {formButtonNode}
+           
           </Card>
         </Col>
       </Row>

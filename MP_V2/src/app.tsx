@@ -7,8 +7,52 @@ import { getTokenKey } from './common/utils';
 import Footer from './components/Footer';
 import RightContent from './components/RightContent';
 import { queryCurrentUser } from './services/user';
+import { SocketInfo } from '@/util/info';
+import { SmileOutlined } from '@ant-design/icons';
+
 
 const loginPath = '/user/login';
+const openSocket = async (userid: number) => {
+  if (typeof WebSocket == 'undefined') {
+    message.error('您的浏览器不支持WebSocket');
+    return;
+  }
+
+  const socketUrl = SocketInfo.socketAllUserUrl + userid;
+  let socket: any;
+  // 关闭之前的ws
+  if (socket != null) {
+    socket.close();
+    socket = null;
+  }
+  socket = await new WebSocket(socketUrl);
+  //打开事件
+  socket.onopen = function () {
+    console.log('websocket已打开');
+  };
+  //获得消息事件
+  socket.onmessage = function (msg: any) {
+    let data = JSON.parse(msg.data);
+    notification.open({
+      message: `编号${data.userId.substring(data.userId.length - 4)}向您发来一条新消息~`,
+      description: `${data.content}`,
+      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+      duration: 0,
+    });
+    //发现消息进入,开始处理前端触发逻辑
+  };
+  //关闭事件
+  socket.onclose = function () {
+    console.log('websocket已关闭');
+  };
+  //发生了错误事件
+  socket.onerror = function () {
+    console.log('websocket发生了错误');
+  };
+
+  return socket;
+};
+
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -22,6 +66,8 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: user;
   fetchUserInfo?: () => Promise<user | undefined>;
+  socket?:any;
+  openSocket?: (userid: number) => Promise<any>
 }> {
   const { pathname } = history.location;
   const localToken = localStorage.getItem(getTokenKey('ryw'));
@@ -54,13 +100,24 @@ export async function getInitialState(): Promise<{
         settings: {},
       };
     } else {
+
+// 用户登录或刷新通过校验 连接socket
+
+
+ // 接入socket
+ let socket = await openSocket(currentUser.userid);
+
       return {
         fetchUserInfo,
         currentUser,
         settings: {},
+        socket,
+        // 因为这里的socket后端使用的是set存储，所以即使是多次连接也没有问题
+        openSocket,
       };
     }
   }
+  
   return {
     fetchUserInfo,
     settings: {},

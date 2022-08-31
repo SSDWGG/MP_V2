@@ -107,6 +107,10 @@ const Music: React.FC = () => {
                 type="dashed"
                 size="small"
                 onClick={() => {
+                 if(item.admin ===1){
+                  message.warning('无权限制管理员')
+                  return
+                 }  
                   setInfo(item);
                   setModalType(1);
                 }}

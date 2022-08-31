@@ -76,7 +76,6 @@ const ModalShow: React.FC<CreateFormProps> = (props) => {
       [rule.field]: value,
     };
     const res = await checkhave(params);
-    console.log(res);
     
     if (res.length == 1 && res[0].email !== initialState?.currentUser?.email) {
       return Promise.reject(`已被占用，请尝试其他邮箱`);

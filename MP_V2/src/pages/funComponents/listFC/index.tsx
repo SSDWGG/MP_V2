@@ -1,11 +1,14 @@
 import React from 'react';
 import { Button, Card, List } from 'antd';
-import { getPublicPath } from '@/common/utils';
+import { getPublicPath, handleDownload } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from '../const';
 import { Info } from '@/util/info';
 
 const ListFC: React.FC = () => {
+
+
+
   return (
     <>
       <Card className={styles.ListFC}>
@@ -45,7 +48,7 @@ const ListFC: React.FC = () => {
           </strong>
         </h3>
 
-        <Card>
+        {/* <Card>
           <h3>
             <strong>FAQ</strong>
           </h3>
@@ -60,7 +63,15 @@ const ListFC: React.FC = () => {
               如果感觉该组件还不错，可以在加载完毕后点击下载源码，在本地查看和调试页面。
             </strong>
           </h3>
-        </Card>
+          <h3>
+            <strong>Q：为什么下载缓慢？</strong>
+          </h3>
+          <h3>
+            <strong>
+              A：受限于服务器带宽和性能（1g），目前只有gif图片在使用在oss加速，后期会进行服务器升级和cdn优化静态资源。
+            </strong>
+          </h3>
+        </Card> */}
 
         <List<string>
           rowKey={0}
@@ -81,15 +92,17 @@ const ListFC: React.FC = () => {
                   <Button
                     key={item}
                     type="dashed"
-                    onClick={(e) => e.stopPropagation()}
-                    download={`${item}.zip`}
-                    href={getPublicPath(`FC/${item}.zip`)}
+                    // onClick={(e) => e.stopPropagation()}
+                    onClick={()=>handleDownload(item)}
+                    // download={`${item}.zip`}
+                    // href={getPublicPath(`FC/${item}.zip`)}
                   >
                     下载 《{`${item}`}》
                   </Button>
                 </div>
-                <a href={getPublicPath(`FC/gif/${item}.gif`)} className="agifImg">
-                  <img src={`/FC/gif/${item}.gif`} className="gifImg" alt={item} />
+                
+                <a href={`${Info.ossBaseUrl}${item}.gif`} className="agifImg">
+                  <img src={`${Info.ossBaseUrl}${item}.gif`} className="gifImg" alt={item} />
                 </a>
               </div>
             </List.Item>
