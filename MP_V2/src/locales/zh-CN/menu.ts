@@ -13,7 +13,7 @@ export default {
 
   'menu.socket': 'socket',
   'menu.socket.room': '聊天室',
-  'menu.socket.socketTest': '测试socket',
+  'menu.socket.socketTest': '叮一下',
 
   'menu.music': '音乐播放器',
   'menu.music.musiclist': '音乐库',

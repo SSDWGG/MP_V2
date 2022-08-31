@@ -31,11 +31,13 @@
 
 ![注册](V2_imgList/register.png)
 ![日程表todolist](V2_imgList/todoList.png)
+![富文本备忘录](V2_imgList/beiwangluUpdate.png)
+![趣味组件库](V2_imgList/FC.png)
+![socket通信](V2_imgList/socketHello.png)
 ![个人设置base](V2_imgList/accountSettingBase.png)
-![备忘录](V2_imgList/beiwanglu.png)
 ![个人设置security](V2_imgList/accountSettingSecurity.png)
 ![个人设置todo](V2_imgList/accountSettingTodo.png)
-![趣味组件库](V2_imgList/FC.png)
+
 <br/>
 
 ### 2.项目功能列举
@@ -45,19 +47,19 @@
 - [x] 使用 jwt 完成账号的权限验证
 - [x] 日程表功能（todoList）
 - [x] 用户个性化配置（头像，信息，系统页面配置等）
-- [x] 备忘录功能
+- [x] 富文本备忘录功能
 - [x] 管理员管理功能（权限管理类的）
 - [x] 趣味组件库（作者收录的一些有趣的页面和组件的代码，可下载）
+- [x] socket通信功能
 
 计划将会开发的功能
-- socket聊天室功能
 - 音乐播放器功能
-- 一些其他的定制功能
+- 一些其他功能
 
 
 <br/>
 
-### 3.功能模块介绍
+<!-- ### 3.功能模块介绍
 - [x] 用户注册功能  ，按照表单填写信息即可，用户名这里我用了一个重复性校验。如果用户名已经被使用，会有提示。
 
 - [x] 通过邮箱验证码修改密码功能（html邮件） 默认使用25端口（云服务器厂商需要申请解封该端口）
@@ -91,7 +93,7 @@
 
 - [x] 备忘录功能：
 ![备忘录](V2_imgList/beiwanglu.png)
-![备忘录详细](V2_imgList/beiwangludetail.png)
+![备忘录详细](V2_imgList/beiwangluUpdate.png)
 
 - [x] 管理员管理功能：对于识别为管理员的用户会有一些特殊的权限页面，管理员的标识为users表中的admin字段   admin==1 为管理员
 ![管理员管理账号](V2_imgList/adminAccount.png)
@@ -99,7 +101,7 @@
 - [x] 趣味组件库功能：提供了大量的作者收录的有趣的html，css动效，codeopen，个人开发者，组件库等公开的组件，提供zip压缩包下载，并使用gif展示每个组件的预览和点击放大预览。库持续更新...
 ![趣味组件库](V2_imgList/FC.png)
 
-<br/>
+<br/> -->
 
 ### 4.部署
 部署的话正常情况应该没什么问题，nginx代理用上，还是很好配置的。因为我用了统一的api头，所以直接上代理就行了。
