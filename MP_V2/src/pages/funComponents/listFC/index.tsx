@@ -23,14 +23,14 @@ const ListFC: React.FC = () => {
         <p>文件下载完成后，解压文件，直接打开html文件即可预览和调试</p>
         <p>
           一大波有趣的ui/组件/html/样式即将袭来...（库持续更新中）
-          <Button
+          {/* <Button
             key="downImg"
             onClick={(e) => e.stopPropagation()}
             download="rabbit.jpg"
             href={getPublicPath('rabbit.jpg')}
           >
             下载 站标rabbit图片
-          </Button>
+          </Button> */}
           {/* <Button
           key="downExcel"
           onClick={(e) => e.stopPropagation()}
@@ -93,7 +93,7 @@ const ListFC: React.FC = () => {
                     key={item}
                     type="dashed"
                     // onClick={(e) => e.stopPropagation()}
-                    onClick={()=>handleDownload(item)}
+                    onClick={()=>handleDownload(item+'.zip')}
                     // download={`${item}.zip`}
                     // href={getPublicPath(`FC/${item}.zip`)}
                   >
@@ -101,8 +101,8 @@ const ListFC: React.FC = () => {
                   </Button>
                 </div>
                 
-                <a href={`${Info.ossBaseUrl}${item}.gif`} className="agifImg">
-                  <img src={`${Info.ossBaseUrl}${item}.gif`} className="gifImg" alt={item} />
+                <a href={`${Info.ossBaseUrl}FC/gif/${item}.gif`} className="agifImg">
+                  <img src={`${Info.ossBaseUrl}FC/gif/${item}.gif`} className="gifImg" alt={item} />
                 </a>
               </div>
             </List.Item>

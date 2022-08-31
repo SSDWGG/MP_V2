@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/Css键盘.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/切片文字.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/动画开屏.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/彩色流动背景.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/彩色炫酷卡片.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/滑动视差.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/滚动动效.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/滚动响应.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/滚轮响应.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/滚轮视差.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/灯泡字.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/登录.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/看鼠标.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/视觉差.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/轮播.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gif/鼠标跟随.gif" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +284,7 @@
       <workItem from="1658728328973" duration="1772000" />
       <workItem from="1659060483124" duration="3246000" />
       <workItem from="1660960107721" duration="7208000" />
-      <workItem from="1661390019292" duration="19710000" />
+      <workItem from="1661390019292" duration="20596000" />
     </task>
     <servers />
   </component>
