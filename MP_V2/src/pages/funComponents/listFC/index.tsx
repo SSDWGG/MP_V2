@@ -101,7 +101,7 @@ const ListFC: React.FC = () => {
                   </Button>
                 </div>
                 
-                <a href={`${Info.ossBaseUrl}FC/gif/${item}.gif`} className="agifImg">
+                <a  className="agifImg">
                   <img src={`${Info.ossBaseUrl}FC/gif/${item}.gif`} className="gifImg" alt={item} />
                 </a>
               </div>

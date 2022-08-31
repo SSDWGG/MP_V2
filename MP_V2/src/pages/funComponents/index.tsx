@@ -48,15 +48,11 @@ const Main: React.FC = () => {
           <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
         )}
       </a> */}
-      <a href={`${Info.ossBaseUrl}FC/gif/${activeFC}.gif`} className="agifImg">
+      <a  className="agifImg">
         {
         
         loading ? (
-          <> <Spin indicator={antIcon} />
-          <div>{`${Info.ossBaseUrl}FC/gif/${activeFC}.gif`}</div>
-
-          </>
-         
+          <Spin indicator={antIcon} />
         ) : (
           <img src={`${Info.ossBaseUrl}FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
         )}
