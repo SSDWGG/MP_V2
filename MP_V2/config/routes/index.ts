@@ -166,13 +166,14 @@
         path: '/socket/socketTest',
         component: './socket/socketTest',
       },
-      {
-        name: 'room',
-        icon: 'smile',
-        path: '/socket/room',
-        access: 'canAdmin',
-        component: './socket/room',
-      },
+      // 用户内容风险不可控，暂不开发
+      // {
+      //   name: 'room',
+      //   icon: 'smile',
+      //   path: '/socket/room',
+      //   access: 'canAdmin',
+      //   component: './socket/room',
+      // },
       // 匹配不到路径自动跳转404
       {
         component: '404',
