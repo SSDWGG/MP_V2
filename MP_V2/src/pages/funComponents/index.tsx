@@ -34,7 +34,7 @@ const Main: React.FC = () => {
           key={activeFC}
           type="primary"
           // onClick={(e) => e.stopPropagation()}
-          onClick={() => handleDownload(activeFC)}
+          onClick={() => handleDownload(activeFC+'.zip')}
           // download={`${activeFC}.zip`}
           // href={getPublicPath(`FC/${activeFC}.zip`)}
         >
@@ -48,11 +48,13 @@ const Main: React.FC = () => {
           <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
         )}
       </a> */}
-      <a href={`${Info.ossBaseUrl}${activeFC}.gif`} className="agifImg">
-        {loading ? (
+      <a  className="agifImg">
+        {
+        
+        loading ? (
           <Spin indicator={antIcon} />
         ) : (
-          <img src={`${Info.ossBaseUrl}${activeFC}.gif`} className="gifImg" alt={activeFC} />
+          <img src={`${Info.ossBaseUrl}FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
         )}
       </a>
     </div>
@@ -75,14 +77,14 @@ const Main: React.FC = () => {
         <p>文件下载完成后，解压文件，直接打开html文件即可预览和调试</p>
         <p>
           一大波有趣的ui/组件/html/样式即将袭来...（库持续更新中）
-          <Button
+          {/* <Button
             key="downImg"
             onClick={(e) => e.stopPropagation()}
             download="rabbit.jpg"
             href={getPublicPath('rabbit.jpg')}
           >
             下载 站标rabbit图片
-          </Button>
+          </Button> */}
         </p>
         {/* <Card>
           <h3>

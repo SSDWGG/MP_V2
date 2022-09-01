@@ -203,13 +203,13 @@ export function swapElement<T>(list: T[], fromIndex: number, toIndex: number) {
  */
  export function  handleDownload(itemName :string){
   let x=new XMLHttpRequest();
-      x.open("GET", `${Info.ossBaseUrl}${itemName}.zip`, true);
+      x.open("GET", `${Info.ossBaseUrl}${itemName}`, true);
       x.responseType = 'blob';
       x.onload=function(e){
           var url = window.URL.createObjectURL(x.response)
           var a = document.createElement('a');
           a.href = url
-          a.download = `${itemName}.zip`
+          a.download = `${itemName}`
           a.click()
       }
       x.send();

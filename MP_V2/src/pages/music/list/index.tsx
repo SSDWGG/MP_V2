@@ -3,6 +3,9 @@ import { PageContainer } from '@ant-design/pro-layout';
 import PageHeaderContent from '@/components/PageHeaderContent';
 import { Statistic } from 'antd';
 import { useModel } from 'umi';
+import { Info } from '@/util/info';
+
+
 const Music: React.FC = () => {
   const { initialState } = useModel('@@initialState');
 
@@ -34,7 +37,7 @@ const Music: React.FC = () => {
       您的浏览器不支持 audio 元素。
     </audio> */}
     <audio controls>
-      <source src="/musiclist/周杰伦-简单爱.flac" type="audio/mpeg" />
+      <source src={`${Info.ossBaseUrl}musiclist/周杰伦-简单爱.flac`} type="audio/mpeg" />
       您的浏览器不支持 audio 元素。
     </audio>
     {/* <audio controls>
