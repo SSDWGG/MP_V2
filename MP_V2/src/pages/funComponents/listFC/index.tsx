@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, List } from 'antd';
-import { getPublicPath, handleDownload } from '@/common/utils';
+import { handleDownload } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from '../const';
 import { Info } from '@/util/info';

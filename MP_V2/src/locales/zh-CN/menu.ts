@@ -4,6 +4,7 @@ export default {
 
   'menu.toCreate': 'create & show',
 
+  'menu.mpmUploadOSS': '云小叮直传oss工具',
   'menu.todolist': '日程表',
 
   'menu.memorandum': '备忘录',
