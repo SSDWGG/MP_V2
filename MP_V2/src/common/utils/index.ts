@@ -4,7 +4,6 @@ import produce from 'immer';
 import { sampleSize } from 'lodash';
 import { Info } from '@/util/info';
 
-
 export * from './interval';
 export * from './is';
 export const liveRouteReg = /live\/(\w+?)\//;
@@ -130,7 +129,7 @@ export function getLocation(url: string) {
 
 export function isProd(): boolean {
   // console.log(process.env.NODE_ENV);
-  
+
   return process.env.NODE_ENV === 'production';
 }
 export function handleImageUrl(values: any, key: string) {
@@ -149,11 +148,9 @@ export const formatter = {
   },
 };
 export function getPublicPath(path: string) {
-
   // 如果放在服务器nginx根目录下就不需要调整
   return `${isProd() ? '/' : '/'}${path}`;
 }
-
 
 // 毫秒转HH:mm:ss
 export function millisecondFormatDate(ms: number, isMs = false) {
@@ -201,16 +198,60 @@ export function swapElement<T>(list: T[], fromIndex: number, toIndex: number) {
 /**
  * 下载oss中的zip文件
  */
- export function  handleDownload(itemName :string){
-  let x=new XMLHttpRequest();
-      x.open("GET", `${Info.ossBaseUrl}${itemName}`, true);
-      x.responseType = 'blob';
-      x.onload=function(e){
-          var url = window.URL.createObjectURL(x.response)
-          var a = document.createElement('a');
-          a.href = url
-          a.download = `${itemName}`
-          a.click()
-      }
-      x.send();
-  }
+export function handleDownload(itemName: string) {
+  let x = new XMLHttpRequest();
+  x.open('GET', `${Info.ossBaseUrl}FC/${itemName}`, true);
+  x.responseType = 'blob';
+  x.onload = function (e) {
+    var url = window.URL.createObjectURL(x.response);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = `${itemName}`;
+    a.click();
+  };
+  x.send();
+}
+// 富文本转普通文本
+export function editorH5ToNormal(h5Content: string) {
+  let regex = /(<([^>]+)>)/gi;
+  // return h5Content.replace(regex, '').replaceAll('&nbsp;', '');
+  return h5Content.replace(regex, '');
+}
+// pc富文本转小程序富文本
+export function editorH5ToMini(h5Content: string) {
+  /**
+   * 转译标签收集
+   * p -> view
+   *  <p></p>
+   * div -> view
+   *  <div></div>
+   * span -> text
+   *  <span></span>
+   * px -> %
+   * '<p', '</p>', '<div', '<div/>', '<span', '<span/>'
+   */
+  let minDom = {
+    '<p': '<view',
+    '</p>': '</view>',
+    '<div': '<view',
+    '</div>': '</view>',
+    '<span': '<text',
+    '</span>': '</text>',
+    '<img ': '<image mode="widthFix" ',
+    '<strong>': '<text class="strong">',
+    '</strong>': '</text>',
+    '18px': '40rpx',
+    '16px': '34rpx',
+    '14px': '30rpx',
+    '12px': '28rpx',
+    scaleToFill: 'widthFix',
+    '&nbsp;': '<text> </text>',
+    '><source': '',
+    'type="video/mp4"/></video>': 'type="video/mp4"></video>',
+  };
+  let miniContent = h5Content;
+  Object.keys(minDom).forEach((item) => {
+    miniContent = miniContent.replaceAll(item, minDom[item]);
+  });
+  return miniContent;
+}

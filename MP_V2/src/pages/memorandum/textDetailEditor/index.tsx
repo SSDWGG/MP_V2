@@ -12,13 +12,14 @@ import { Info } from '@/util/info';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
+import { editorH5ToNormal } from '@/common/utils';
 
 const TextDetail: React.FC = () => {
   const formRef = useRef<ProFormInstance>();
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
   const [memoCover, setMemoCover] = useState('');
-const maxContentLength = 5000
+  const maxContentLength = 5000;
   // editor 实例
   const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法
   // 编辑器内容
@@ -55,50 +56,6 @@ const maxContentLength = 5000
     const htmlLength = content.replace(regex, '').length;
     setHtmlLength(htmlLength);
   };
-  // 富文本转普通文本
-  const editorH5ToNormal = (h5Content: string) => {
-    let regex = /(<([^>]+)>)/gi;
-    // return h5Content.replace(regex, '').replaceAll('&nbsp;', '');
-    return h5Content.replace(regex, '');
-  };
-  // pc富文本转小程序富文本
-  const editorH5ToMini = (h5Content: string) => {
-    /**
-     * 转译标签收集
-     * p -> view
-     *  <p></p>
-     * div -> view
-     *  <div></div>
-     * span -> text
-     *  <span></span>
-     * px -> %
-     * '<p', '</p>', '<div', '<div/>', '<span', '<span/>'
-     */
-    let minDom = {
-      '<p': '<view',
-      '</p>': '</view>',
-      '<div': '<view',
-      '</div>': '</view>',
-      '<span': '<text',
-      '</span>': '</text>',
-      '<img ': '<image mode="widthFix" ',
-      '<strong>': '<text class="strong">',
-      '</strong>': '</text>',
-      '18px': '40rpx',
-      '16px': '34rpx',
-      '14px': '30rpx',
-      '12px': '28rpx',
-      scaleToFill: 'widthFix',
-      '&nbsp;': '<text> </text>',
-      '><source': '',
-      'type="video/mp4"/></video>': 'type="video/mp4"></video>',
-    };
-    let miniContent = h5Content;
-    Object.keys(minDom).forEach((item) => {
-      miniContent = miniContent.replaceAll(item, minDom[item]);
-    });
-    return miniContent;
-  };
 
   const getRequestMemoData = async () => {
     // 用来做请求和改变时候的判断
@@ -113,15 +70,11 @@ const maxContentLength = 5000
     formRef.current
       ?.validateFieldsReturnFormatValue?.()
       .then(async (values) => {
-
         const content = editorH5ToNormal(html);
-        if( content.length>maxContentLength){
-          message.warning('内容长度超出最大限制')
-          return
+        if (content.length > maxContentLength) {
+          message.warning('内容长度超出最大限制');
+          return;
         }
-       
-
-
         const cover = initialState?.currentUser?.avatar;
         const h5content = html;
         !!memoid
@@ -167,7 +120,6 @@ const maxContentLength = 5000
       )}
     </ButtonGroup>
   );
- 
 
   return (
     <GridContent>
@@ -272,7 +224,6 @@ const maxContentLength = 5000
               <div style={{ marginTop: '15px' }}>3{editorH5ToMini(html)}</div> */}
             </div>
             {formButtonNode}
-           
           </Card>
         </Col>
       </Row>

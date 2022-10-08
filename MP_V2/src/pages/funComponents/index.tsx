@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Spin } from 'antd';
-import { getPublicPath, handleDownload } from '@/common/utils';
+import {  handleDownload } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from './const';
 import { Info } from '@/util/info';
@@ -33,21 +33,11 @@ const Main: React.FC = () => {
         <Button
           key={activeFC}
           type="primary"
-          // onClick={(e) => e.stopPropagation()}
           onClick={() => handleDownload(activeFC+'.zip')}
-          // download={`${activeFC}.zip`}
-          // href={getPublicPath(`FC/${activeFC}.zip`)}
         >
           下载 《{`${activeFC}`}》
         </Button>
       </div>
-      {/* <a href={getPublicPath(`FC/gif/${activeFC}.gif`)} className="agifImg">
-        {loading ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <img src={`/FC/gif/${activeFC}.gif`} className="gifImg" alt={activeFC} />
-        )}
-      </a> */}
       <a  className="agifImg">
         {
         
