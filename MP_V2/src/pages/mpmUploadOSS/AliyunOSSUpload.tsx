@@ -5,6 +5,7 @@ import type { UploadFile } from 'antd/es/upload/interface';
 import { useEffect, useState } from 'react';
 import { useModel } from 'umi';
 
+
 interface OSSDataType {
   dir: string;
   expire: string;
@@ -24,9 +25,9 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   const { initialState } = useModel('@@initialState');
   const { Dragger } = Upload;
 
-  // Mock get OSS api
+
   // https://help.aliyun.com/document_detail/31988.html
-  const mockGetOSSData = () => ({
+  const getOSSData = () => ({
     dir: 'yunxiaoding-mini/system/assets/images/', //路径
     expire: '1577811661', //过期时间
     host: 'https://panshi-on.oss-cn-hangzhou.aliyuncs.com', //bucket
@@ -38,7 +39,7 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
 
   const init = async () => {
     try {
-      const result = await mockGetOSSData();
+      const result = await getOSSData();
       setOSSData(result);
     } catch (error) {
       message.error(error as any);
@@ -56,6 +57,11 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
     // 防抖判断所有进度是否都到达100，到达100，将文件名存储到数据中，等到所有都上传完成再一起抛出提示和复制链接，并存储到消息记录栈中
   };
 
+  const onPreview = (file: UploadFile) => {
+    console.log(file,OSSData);
+    window.open(`${OSSData?.host}/${file.url}`)
+    
+  };
   const onRemove = (file: UploadFile) => {
     const files = (value || []).filter((v) => v.url !== file.url);
 
@@ -88,15 +94,16 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
 
     return file;
   };
+  // directory 暂不支持上传文件夹，会和限定类型冲突
   const uploadProps: UploadProps = {
     name: 'file',
     fileList: value,
     action: OSSData?.host,
-    directory:true,
     multiple:true,
     listType:'picture-card',
     onChange: handleChange,
     onRemove,
+    onPreview,
     data: getExtraData,
     beforeUpload,
     onDrop(e) {
@@ -105,15 +112,14 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   };
 
   return (
-    <Dragger {...uploadProps}>
-      {/* <Button icon={<UploadOutlined />}>Click to Upload</Button> */}
+    <Dragger {...uploadProps} >
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p>yunxiaoding-mini项目组的同学你好，此工具可以帮助你将图片直接上传到oss，并获取到图片地址</p>
+      <p>yunxiaoding-mini项目组的同学你好，此工具将帮助你快捷的把图片直接上传到oss的项目位置，并获取到图片地址</p>
       <p className="ant-upload-text">Click or drag file to this area to upload</p>
       <p className="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+        Support for a singleor bulk upload. Strictly prohibit from uploading company data or other
         band files
       </p>
     </Dragger>

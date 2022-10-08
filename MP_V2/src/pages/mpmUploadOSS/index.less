@@ -1,8 +1,18 @@
 @import '~antd/es/style/themes/default.less';
 
-.wstestroom {
-display: flex;
-justify-content: center;
-align-items: center;
-text-align: center;
+.AliyunOSSUpload {
+  min-width: 400px;
+  overflow: hidden;
+  :global {
+    .ant-upload{
+      height: 200px ;
+      margin-bottom: 20px;
+    }
+    .ant-upload-list{
+      display: flex;   
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
 }
