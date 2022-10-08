@@ -28,7 +28,6 @@ const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
-    console.log(userInfo, 111111);
 
     if (!!userInfo) {
       // 账号密码正确，验证是否在黑名单中（验证操作，最好由后端来做请求拦截验证，而不是前端请求验证，前端的时间获取是不安全的）

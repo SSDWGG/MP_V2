@@ -77,16 +77,10 @@ export async function getInitialState(): Promise<{
   }
 
   const fetchUserInfo = async () => {
-    console.log(11111);
-    
-    const msg = await queryCurrentUser();
-    console.log(msg);
-    
+    const msg = await queryCurrentUser();    
     if (!!msg.data.userid) {
       return msg.data;
     } else {
-      console.log(2222222);
-
       // token无效的去登录页
       message.error('账号不存在');
       history.replace(loginPath);
