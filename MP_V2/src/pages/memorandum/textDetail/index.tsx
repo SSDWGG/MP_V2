@@ -16,13 +16,13 @@ const TextDetail: React.FC = () => {
   const getMemoData = async () => {
     // 用来做请求和改变时候的判断
     const memo = !!memoid ? await getMemoByMemoid(memoid as unknown as number) : {};
-    setMemo(memo as memo);
+     setMemo(memo as memo);
   };
   useEffect(() => {
     getMemoData();
   }, []);
   useEffect(() => {
-   (document.getElementById('h5content') as any) .innerHTML = memo.h5content;
+   (document.getElementById('h5content') as any).innerHTML = memo.h5content;
   });
   return (
     <GridContent>

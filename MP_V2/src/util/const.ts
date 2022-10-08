@@ -71,3 +71,5 @@ export const todoTableType = {
   page: 1,
   sort: 2,
 };
+
+export  const maxContentLength = 5000;
