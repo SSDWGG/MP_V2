@@ -21,7 +21,7 @@ public class JWTUtils {
 
         Calendar instance = Calendar.getInstance();
         // 默认7天过期
-        instance.add(Calendar.MINUTE, 1);
+        instance.add(Calendar.DATE, 7);
 
         //创建jwt builder
         JWTCreator.Builder builder = JWT.create();
