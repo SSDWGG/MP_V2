@@ -9,15 +9,16 @@ import { editorH5ToNormal, getTokenKey } from '@/common/utils';
 import { UploadOutlined } from '@ant-design/icons';
 import './index.less';
 import { Info } from '@/util/info';
-import { maxContentLength } from '@/util/const';
+import { getEditorDefaultValue, maxContentLength } from '@/util/const';
 import { IDomEditor } from '@wangeditor/editor';
 
 const TextDetail: React.FC = () => {
   const { memoid } = useParams<{ memoid: string }>();
   const { initialState } = useModel('@@initialState');
-
   // 编辑器内容
-  const [memo, setMemo] = useState<memo>({} as memo);
+  const [memo, setMemo] = useState<memo>({
+    h5content: getEditorDefaultValue(initialState?.currentUser?.username as string),
+  } as memo);
   const getMemoData = async () => {
     // 用来做请求和改变时候的判断
     const memo = await getMemoByMemoid(memoid as unknown as number);
@@ -30,13 +31,17 @@ const TextDetail: React.FC = () => {
   const onFinish = async () => {
     console.log(memo);
 
+    if (memo.title.length <= 0) {
+      message.warning('请输入标题内容');
+      return;
+    }
     const content = editorH5ToNormal(memo.h5content);
     if (content.length > maxContentLength) {
       message.warning('内容长度超出最大限制');
       return;
     }
     !!memoid
-      ? await updateMemo(memo)
+      ? await updateMemo({ ...memo, content })
       : await addMemo({
           cover: initialState?.currentUser?.avatar as string,
           title: memo.title,
