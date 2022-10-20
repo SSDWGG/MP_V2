@@ -15,7 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
                 .excludePathPatterns(
 //                        登录注册放行
-                        "/v2/user/quickAddUser","/v2/user/login","/v2/user/checkhave",
+                        "/v2/user/quickAddUser","/v2/user/login","/v2/user/checkhave","/v2/user/CurrentUser",
 //                        上传查询放行
                         "/v2/user/avatarUpload","/v2/black/queryByUserid","/v2/memo/memoCoverUpload",
 //                        邮箱验证放行

@@ -15,7 +15,7 @@ public class JWTUtils {
     /**
      * 生成token  header.payload.singature
      */
-    private static final String SING = "XIAOSHUANG";
+    private static final String SING = "RYW";
 
     public static String getToken(Map<String, String> map) {
 

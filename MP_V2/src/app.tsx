@@ -77,13 +77,13 @@ export async function getInitialState(): Promise<{
   }
 
   const fetchUserInfo = async () => {
-    const msg = await queryCurrentUser();
+    const msg = await queryCurrentUser();    
     if (!!msg.data.userid) {
       return msg.data;
     } else {
       // token无效的去登录页
-      history.replace(loginPath);
       message.error('账号不存在');
+      history.replace(loginPath);
       localStorage.removeItem(getTokenKey('ryw'));
       return undefined;
     }
@@ -249,8 +249,10 @@ const responseTokenInterceptors = (response: Response, options: RequestOptionsIn
     location.pathname !== '/user/forget' &&
     location.pathname !== loginPath
   ) {
-    message.warning('账号登录凭证失效或无效，请重新登录');
+    message.warning('账号登录凭证到期或无效，请重新登录');
     history.replace(loginPath);
+    localStorage.removeItem(getTokenKey('ryw'));
+
   }
 
   return response;

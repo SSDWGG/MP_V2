@@ -1,42 +1,39 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useModel } from 'umi';
 import './index.less';
 import { Card } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
+import WangEditor from '@/components/WangEditor';
+import { IDomEditor } from '@wangeditor/editor';
+import { socketEditorDefaultValue } from '@/util/const';
+import { editorH5ToNormal } from '@/common/utils';
 
 const WStestRoom: React.FC = () => {
   const { initialState } = useModel('@@initialState');
-  const [messageValue, setMessageValue] = useState<string>('你好呀~');
+  const [messageValue, setMessageValue] = useState<string>( socketEditorDefaultValue);
 
-  const sendMessage = async() => {
+  const sendMessage = async () => {
+    console.log(messageValue);
+    
     let messageData = {
       userId: initialState?.currentUser?.userid,
-      content: messageValue,
+      content:editorH5ToNormal(messageValue) ,
     };
     if (!!initialState?.socket) {
       initialState?.socket.send(JSON.stringify(messageData));
     } else {
-    await( initialState?.openSocket as any)(initialState?.currentUser?.userid as  number)
-    initialState?.socket.send(JSON.stringify(messageData));
-
+      await (initialState?.openSocket as any)(initialState?.currentUser?.userid as number);
+      initialState?.socket.send(JSON.stringify(messageData));
     }
   };
 
+  const handleChangeEditor = (editor: IDomEditor) => {
+    setMessageValue(editor.getHtml());
+  };
   return (
     <Card className="wstestroom">
-      <p>在此您可以向全体正在使用网站的小伙伴打招呼~</p>
+      <p>此工具可以帮助您向全站在线的的小伙伴进行广播~</p>
+      <WangEditor h5Content={messageValue} onChange={handleChangeEditor} />
 
-      <p>在下方输入您要传达的内容</p>
-      <TextArea
-        maxLength={50}
-        showCount
-        autoSize={{ minRows: 2, maxRows: 5 }}
-        placeholder="请输入您要传递的内容"
-        value={messageValue}
-        onChange={(e) => {
-          setMessageValue(e.target.value);
-        }}
-      />
       <div>
         <a onClick={() => sendMessage()}>发送消息</a>
       </div>

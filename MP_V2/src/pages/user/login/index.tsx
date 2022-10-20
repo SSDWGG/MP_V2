@@ -73,7 +73,7 @@ const Login: React.FC = () => {
 
     if (!!loginRes) {
       localStorage.setItem(token_key, loginRes);
-
+      // 需要先写入initialState才可以用来做调用判断
       await fetchUserInfo();
     } else {
       message.error('登录失败，请重新尝试输入账号密码！');

@@ -55,7 +55,7 @@ export const TodoTypefiltersEnum = [
   },
 ];
 
-export const GetHelloContent  = ()=>{
+export const GetHelloContent = () => {
   let helloContent = '';
   const nowdate = new Date();
   if (nowdate.getHours() >= 5 && nowdate.getHours() < 9) helloContent = `早晨好☕  `;
@@ -64,10 +64,18 @@ export const GetHelloContent  = ()=>{
   if (nowdate.getHours() >= 18 && nowdate.getHours() < 20) helloContent = `傍晚好 ☕ `;
   if (nowdate.getHours() >= 20 && nowdate.getHours() < 23) helloContent = `晚间好 ☕  `;
   if (nowdate.getHours() >= 23 || nowdate.getHours() < 5) helloContent = `夜已深啦 ❤️️ 尽早休息  `;
-  return helloContent
-}
+  return helloContent;
+};
 
 export const todoTableType = {
   page: 1,
   sort: 2,
 };
+
+export const maxContentLength = 5000;
+
+
+export const getEditorDefaultValue = (username:string)=>{
+  return  `<p><br></p><p><br></p><p><br></p><h1 style="text-align: center;">${username} 👣</h1><h1 style="text-align: center;">welcome 👏 </h1><p><br></p><p><br></p><p><br></p>`;
+} 
+export const socketEditorDefaultValue = `<p><br></p><p><br></p><p><br></p><h1 style="text-align: center;"></h1><h1><span style="font-family: Tahoma;">你好呀~</span></h1><p><br></p><p><br></p><p><br></p>`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, List } from 'antd';
-import { getPublicPath, handleDownload } from '@/common/utils';
+import { handleDownload } from '@/common/utils';
 import styles from './index.less';
 import { FCNams } from '../const';
 import { Info } from '@/util/info';
@@ -92,15 +92,11 @@ const ListFC: React.FC = () => {
                   <Button
                     key={item}
                     type="dashed"
-                    // onClick={(e) => e.stopPropagation()}
                     onClick={()=>handleDownload(item+'.zip')}
-                    // download={`${item}.zip`}
-                    // href={getPublicPath(`FC/${item}.zip`)}
                   >
                     下载 《{`${item}`}》
                   </Button>
                 </div>
-                
                 <a  className="agifImg">
                   <img src={`${Info.ossBaseUrl}FC/gif/${item}.gif`} className="gifImg" alt={item} />
                 </a>

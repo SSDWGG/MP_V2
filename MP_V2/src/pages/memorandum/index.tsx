@@ -13,8 +13,6 @@ const Memorandum: React.FC = () => {
 
   const getMemoDate = async () => {
     let resMemo = await getUserAllMemos();
-
-
     if( !!resMemo){  // 收起字段的备忘录排序在末尾
       const before:memo[] = []
       const after:memo[] = []
@@ -25,10 +23,6 @@ const Memorandum: React.FC = () => {
       }else{
       setMemoData([])
     }
-  
-
-
-    // 判断memo>1的情况
     return resMemo;
   };
 

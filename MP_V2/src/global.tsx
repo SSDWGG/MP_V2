@@ -18,6 +18,12 @@ const clearCache = () => {
       .catch((e) => console.log(e));
   }
 };
+const bg3=() =>{
+  let rs = Math.floor(Math.random() * (170 - 100) + 100);
+  let gs = Math.floor(Math.random() * (170 - 100) + 100);
+  let bs = Math.floor(Math.random() * (100 - 90) + 90);
+  return "rgb(" + rs + ',' + gs + ',' + bs + ")";//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
+}
 
 // if pwa is true
 if (pwa) {
@@ -89,3 +95,33 @@ if (pwa) {
 
   clearCache();
 }
+
+let as = ["富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法制", "爱国", "敬业", "诚信", "友善"]
+document.onclick = function (e) {
+    let spans = document.createElement("h6")
+    // span.innerHTML = "<img src="+a[Math.floor(Math.random()*a.length)]+">"
+    spans.innerHTML = as[Math.floor(Math.random() * as.length)]
+    spans.style.position = "absolute"
+    spans.style.color = bg3()
+    spans.style.transition = ".5s"
+    spans.style.left = e.clientX - 10 + "px"
+    spans.style.top = e.clientY -27 + "px"
+    setTimeout(function () {
+        spans.style.opacity = "1"
+        spans.style.transform = "translateY(-50px) scale(1.5)"
+    }, 100)
+    setTimeout(function () {
+        spans.style.opacity = "0"
+        spans.style.transform = "translateY(-200px) scale(0)"
+    }, 500)
+    setTimeout(function () {
+        let chi = document.getElementsByTagName("spans")
+        for (let i = 0; i < chi.length - 1; i++) {
+            if (chi[i].style.opacity == "0") {
+                alert()
+            }
+        }
+    }, 1000)
+    document.body.appendChild(spans)
+}
+// }, 1000);
