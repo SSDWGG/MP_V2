@@ -3,7 +3,7 @@
     path: '/',
     redirect: '/toCreate',
   },
-  // mpm直穿oss专用
+  // mpm直传oss专用
   {
     path: '/mpmUploadOSS',
     name: 'mpmUploadOSS',

@@ -1,9 +1,9 @@
+import { uuid } from '@/util/const';
 import { InboxOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { message, Upload } from 'antd';
 import type { UploadFile } from 'antd/es/upload/interface';
 import { useEffect, useState } from 'react';
-import { useModel } from 'umi';
 
 interface OSSDataType {
   dir: string;
@@ -21,7 +21,6 @@ interface AliyunOSSUploadProps {
 
 const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   const [OSSData, setOSSData] = useState<OSSDataType>();
-  const { initialState } = useModel('@@initialState');
   const { Dragger } = Upload;
 
   // https://help.aliyun.com/document_detail/31988.html
@@ -50,10 +49,7 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
 
   const handleChange: UploadProps['onChange'] = ({ fileList }) => {
     console.log('Aliyun OSS:', fileList);
-    onChange?.([...fileList]);
-    // 多条加载，是非线性的
-    // 防抖判断所有进度是否都到达100，到达100，将文件名存储到数据中，等到所有都上传完成再一起抛出提示和复制链接，并存储到消息记录栈中
-  };
+    onChange?.([...fileList]);};
 
   const onPreview = (file: UploadFile) => {
     const input = document.createElement('input');
@@ -67,6 +63,7 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
    message.success('地址已复制至到剪贴板！');
     // window.open();
   };
+
   const onRemove = (file: UploadFile) => {
     const files = (value || []).filter((v) => v.url !== file.url);
 
@@ -92,8 +89,8 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
     }
 
     // const suffix = file.name.slice(file.name.lastIndexOf('.'));
-    // 使用userid和时间戳的形式避免重复
-    const filename = `${initialState?.currentUser?.userid}-${Date.now()}${file.name}`;
+    // 使用userid和时间戳的形式避免重复 ${initialState?.currentUser?.userid}-
+    const filename = `${uuid()}-${Date.now()}${file.name}`;
     // @ts-ignore   OSSData.host+'/'+
     file.url = OSSData.dir + filename;
 
