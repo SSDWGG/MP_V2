@@ -7,7 +7,7 @@ import ButtonGroup from 'antd/lib/button/button-group';
 import ModalShow from './modalshow';
 import { formatTimesTampDate } from '@/common/utils';
 
-const Music: React.FC = () => {
+const Admin: React.FC = () => {
   const [modalType, setModalType] = useState<number | boolean>(false); //弹窗展示类型
   const [info, setInfo] = useState<user>({} as user); //传递给弹窗的数据默认值
 
@@ -184,4 +184,4 @@ const Music: React.FC = () => {
     </PageContainer>
   );
 };
-export default Music;
+export default Admin;

@@ -9,6 +9,16 @@ import { Info } from '@/util/info';
 const Music: React.FC = () => {
   const { initialState } = useModel('@@initialState');
 
+//   const toggleSound = ()=> {
+//     let music = document.getElementById("bgMusic") as any;//获取ID
+//         console.log(music);
+//     if (!!music&&music.paused) { //判读是否播放
+//         music.paused=false;
+//         music.play(); //没有就播放
+//     }
+
+// }
+// toggleSound()
   return (
     <PageContainer
       header={{
@@ -17,27 +27,15 @@ const Music: React.FC = () => {
       }}
       extraContent={
         <div>
-          <Statistic title="音乐曲库数目" value={`0`} />
+          <Statistic title="音乐曲库数目" value={`1`} />
         </div>
       }
       content={<PageHeaderContent currentUser={initialState?.currentUser as user} />}
     >
       music 开发中...敬请期待
       <div>
-      {/* <audio controls>
-      <source src="/musiclist/hrzj.mp3" type="audio/mpeg" />
-      您的浏览器不支持 audio 元素。
-    </audio>
-    <audio controls>
-      <source src="/musiclist/周杰伦-告白气球.flac" type="audio/mpeg" />
-      您的浏览器不支持 audio 元素。
-    </audio>
-    <audio controls>
-      <source src="/musiclist/周杰伦-轨迹(Live).flac" type="audio/mpeg" />
-      您的浏览器不支持 audio 元素。
-    </audio> */}
-    <audio controls>
-      <source src={`${Info.ossBaseUrl}musiclist/周杰伦-简单爱.flac`} type="audio/mpeg" />
+        {/* 不同浏览器有一些不同的限制自动播放的策略 */}
+    <audio id="bgMusic"  muted autoPlay loop  controls src={`${Info.ossBaseUrl}musiclist/周杰伦-简单爱.flac`}>
       您的浏览器不支持 audio 元素。
     </audio>
     {/* <audio controls>

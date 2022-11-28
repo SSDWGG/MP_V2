@@ -3,13 +3,6 @@
     path: '/',
     redirect: '/toCreate',
   },
-  // mpm直穿oss专用
-  {
-    path: '/mpmUploadOSS',
-    name: 'mpmUploadOSS',
-    icon: 'AlertOutlined',
-    component: './mpmUploadOSS',
-  },
   // show page
   {
     path: '/toCreate',
