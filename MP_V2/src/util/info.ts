@@ -1,4 +1,4 @@
-
+// node 版本请使用 14.18.2
 export const Info = {
   github:"https://github.com/SSDWGG",
   ip: "http://localhost:9050/",

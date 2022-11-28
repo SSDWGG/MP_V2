@@ -5,7 +5,6 @@ import type { UploadFile } from 'antd/es/upload/interface';
 import { useEffect, useState } from 'react';
 import { useModel } from 'umi';
 
-
 interface OSSDataType {
   dir: string;
   expire: string;
@@ -24,7 +23,6 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   const [OSSData, setOSSData] = useState<OSSDataType>();
   const { initialState } = useModel('@@initialState');
   const { Dragger } = Upload;
-
 
   // https://help.aliyun.com/document_detail/31988.html
   const getOSSData = () => ({
@@ -58,9 +56,16 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   };
 
   const onPreview = (file: UploadFile) => {
-    console.log(file,OSSData);
-    window.open(`${OSSData?.host}/${file.url}`)
-    
+    const input = document.createElement('input');
+ 	input.setAttribute('readonly', 'readonly');
+ 	input.setAttribute('value', `${OSSData?.host}/${file.url}`);
+ 	document.body.appendChild(input);
+ 	input.setSelectionRange(0, 9999);
+ 	input.select();
+   document.execCommand('copy');
+ 	document.body.removeChild(input); 
+   message.success('地址已复制至到剪贴板！');
+    // window.open();
   };
   const onRemove = (file: UploadFile) => {
     const files = (value || []).filter((v) => v.url !== file.url);
@@ -99,8 +104,8 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
     name: 'file',
     fileList: value,
     action: OSSData?.host,
-    multiple:true,
-    listType:'picture-card',
+    multiple: true,
+    listType: 'picture-card',
     onChange: handleChange,
     onRemove,
     onPreview,
@@ -112,16 +117,19 @@ const AliyunOSSUpload = ({ value, onChange }: AliyunOSSUploadProps) => {
   };
 
   return (
-    <Dragger {...uploadProps} >
+    <Dragger {...uploadProps}>
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p>yunxiaoding-mini项目组的同学你好，此工具将帮助你快捷的把图片直接上传到oss的项目位置，并获取到图片地址</p>
-      <p className="ant-upload-text">Click or drag file to this area to upload</p>
-      <p className="ant-upload-hint">
-        Support for a singleor bulk upload. Strictly prohibit from uploading company data or other
-        band files
+      <p className="ant-upload-text">yunxiaoding-mini项目组的同学你好</p>
+      <p className="ant-upload-text">
+        此工具将帮助你快捷的把图片直接上传到oss的项目位置，并获取到图片地址
       </p>
+      <p className="ant-upload-text">
+        Click or drag file to this area to upload（点击或者拖拽上传）
+      </p>
+      <p className="ant-upload-text">Support for a singleor bulk upload.（支持单个或批量上传）</p>
+      <p className="ant-upload-text">Click Preview File to copy the file address.（点击预览文件即可复制文件的oss地址）</p>
     </Dragger>
   );
 };
