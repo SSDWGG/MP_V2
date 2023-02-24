@@ -8,7 +8,7 @@
 这是一个多功能集合的项目，该项目主要基于 ant design pro 框架
 
 前台使用 ant design pro 为基础开发
-服务端 使用 springboot 来启服务
+服务端 使用 springboot 来启服务  （将jar包通过java -jar 命令启动）
 
 项目启动方式：
 1.在 mysql 数据库中建立数据库（库名：MP_V2），导入 sql 文件
@@ -50,6 +50,7 @@
 - [x] 用户个账号页面性化配置（头像，信息，系统页面配置等）
 
 
+### TODO
 计划将会开发的功能
 - 音乐播放器功能
 - 一些其他功能
@@ -57,7 +58,7 @@
 
 <br/>
 
-<!-- ### 3.功能模块介绍
+### 3.功能模块介绍
 - [x] 用户注册功能  ，按照表单填写信息即可，用户名这里我用了一个重复性校验。如果用户名已经被使用，会有提示。
 
 - [x] 通过邮箱验证码修改密码功能（html邮件） 默认使用25端口（云服务器厂商需要申请解封该端口）
@@ -99,35 +100,44 @@
 - [x] 趣味组件库功能：提供了大量的作者收录的有趣的html，css动效，codeopen，个人开发者，组件库等公开的组件，提供zip压缩包下载，并使用gif展示每个组件的预览和点击放大预览。库持续更新...
 ![趣味组件库](V2_imgList/FC.png)
 
-<br/> -->
+<br/>
 
 ### 4.部署
 部署的话正常情况应该没什么问题，nginx代理用上，还是很好配置的。因为我用了统一的api头，所以直接上代理就行了。
 
-贴下我的该项目的配置
+贴下本项目的nginx配置
+配置完成后可以直接通过localhost访问本地项目
+
 ```
 server {
-        listen       2231 default_server;   #端口
-         server_name  _;
-        root /home/www/MP_V2/dist;         #文件存储位置
+        listen       *  default_server;
+        server_name  localhost;
+        # 前端dist文件地址，此处是我的地址
+        root       /Users/renshuaiweidemac/Desktop/localhostProject/MP_V2/dist;
 
-         location /v2/{
-        proxy_pass http://119.3.145.125:9050;
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+                #资源访问失败后定向到index.html
+            try_files $uri $uri/ /index.html;
+        }
+        
+        # 请求转发服务
+	      location /v2/{
+        proxy_pass http://localhost:9050;
         proxy_set_header   X-Forwarded-Proto $scheme;
         proxy_set_header   X-Real-IP         $remote_addr;
         }
-        location /{
-               #资源访问失败后定向到index.html
-            try_files $uri $uri/ /index.html;
-        }
+
         error_page 404 /404.html;
             location = /40x.html {
-       }
+        }
+
         error_page 500 502 503 504 /50x.html;
             location = /50x.html {
         }
-
-        }
+    }
 ```
 
 提醒本项目的图片文件的上传是指定上传到服务器的，如果你想部署使用该功能需要根据项目部署的实际路径改一下配置（前端upload组件和后端对应接口一起改下ip和存储地址），或者使用oss资源更加快速方便。

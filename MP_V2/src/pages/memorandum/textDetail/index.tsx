@@ -38,7 +38,7 @@ const TextDetail: React.FC = () => {
             </div>
             <Typography>
               <Title className='title'>
-                <span> title:{memo.title}</span>
+                <span> {memo.title}</span>
 
                 <HighlightTwoTone
                   className="edit-icon"

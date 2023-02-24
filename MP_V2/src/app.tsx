@@ -1,4 +1,4 @@
-import { SettingDrawer, Settings as LayoutSettings } from '@ant-design/pro-layout';
+import {  Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { message, notification } from 'antd';
 import { history, RequestConfig, RunTimeLayoutConfig } from 'umi';
@@ -185,6 +185,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
+  console.log(111111,error);
+  
   const { response, request, data } = error;
   // @ts-ignore
   if (!request || request.options.skipErrorHandler) throw error;
