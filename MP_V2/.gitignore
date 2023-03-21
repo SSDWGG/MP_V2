@@ -38,3 +38,13 @@ screenshot
 .eslintcache
 
 build
+
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.husky/_
+.swc/
+project.private.config.json
