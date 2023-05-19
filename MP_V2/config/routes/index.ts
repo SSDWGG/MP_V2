@@ -136,12 +136,38 @@
         access: 'canAdmin',
         component: './funComponents/whiteTest',
       },
+      // shake kun
+      {
+        name: 'shakeKun',
+        icon: 'smile',
+        path: '/funComponents/shakeKun',
+        // https://pro.ant.design/zh-CN/docs/advanced-menu
+        /**
+         * @name false 时不展示顶栏
+         */
+        headerRender: false,
+        /**
+         * @name false 时不展示页脚
+         */
+        footerRender: false,
+        /**
+         * @name false 时不展示菜单
+         */
+        // menuRender: false,
+        /**
+         * @name false 时不展示菜单顶栏
+         */
+        // menuHeaderRender: false,
+
+        // access: 'canAdmin',
+        component: './funComponents/shakeKun',
+      },
       {
         name: 'horizontalWaterfalls',
         icon: 'smile',
         path: '/funComponents/horizontalWaterfalls',
        
-        access: 'canAdmin',
+        // access: 'canAdmin',
         component: './funComponents/horizontalWaterfalls',
       },
       // 匹配不到路径自动跳转404
