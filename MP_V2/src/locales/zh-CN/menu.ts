@@ -4,7 +4,6 @@ export default {
 
   'menu.toCreate': 'create & show',
 
-  'menu.mpmUploadOSS': '云小叮直传oss工具',
   'menu.todolist': '日程表',
 
   'menu.memorandum': '备忘录',
@@ -33,6 +32,7 @@ export default {
   'menu.funComponents.main': '收藏库',
   'menu.funComponents.listFC': '库列表',
   'menu.funComponents.whiteTest': '测试空页',
+  'menu.funComponents.shakeKun': 'Shake KUN',
   'menu.funComponents.horizontalWaterfalls': '水平瀑布流布局',
 
   'menu.exception.403': '403',

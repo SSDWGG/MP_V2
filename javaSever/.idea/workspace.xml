@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/global.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/global.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/AliyunOSSUpload.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/index.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +72,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/ryw/controller/WS" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -325,6 +332,10 @@
       <workItem from="1677210530950" duration="621000" />
       <workItem from="1677219640332" duration="637000" />
       <workItem from="1677230218424" duration="564000" />
+      <workItem from="1683271269677" duration="58000" />
+      <workItem from="1683789771683" duration="202000" />
+      <workItem from="1683790221919" duration="22000" />
+      <workItem from="1683791123694" duration="1865000" />
     </task>
     <servers />
   </component>

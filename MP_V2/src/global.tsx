@@ -18,6 +18,9 @@ const clearCache = () => {
       .catch((e) => console.log(e));
   }
 };
+
+
+
 const bg3=() =>{
   let rs = Math.floor(Math.random() * (170 - 100) + 100);
   let gs = Math.floor(Math.random() * (170 - 100) + 100);
