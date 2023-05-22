@@ -36,6 +36,7 @@ node 版本 （请使用小于17的node版本，作者使用16.18.1）
 ![趣味组件库](V2_imgList/FC.png)
 ![socket通信](V2_imgList/socketHello.png)
 ![个人设置](V2_imgList/accountSettingBase.png)
+![jntm](V2_imgList/jntm.png)
 
 <br/>
 
