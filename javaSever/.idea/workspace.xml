@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/config/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/global.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/global.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../MP_V2/src/locales/zh-CN/menu.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/AliyunOSSUpload.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/index.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MP_V2/src/pages/mpmUploadOSS/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -336,6 +327,7 @@
       <workItem from="1683789771683" duration="202000" />
       <workItem from="1683790221919" duration="22000" />
       <workItem from="1683791123694" duration="1865000" />
+      <workItem from="1690013802270" duration="40000" />
     </task>
     <servers />
   </component>
