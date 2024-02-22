@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes" />
+    <list default="true" id="5cab4448-e699-425b-83b4-7d320113ca6e" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/MP_V2_Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/MP_V2_Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/InterceptorConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/MyBatisPlusConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/MyBatisPlusConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/WebConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/config/WebSocketConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/MemoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/TodoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/TodoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/UsersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/VerificationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/WebSocketServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/WebSocketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/WS/WebSocketServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/JWTUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/JWTUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/MD5Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/controller/util/MD5Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/entity/Memo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/entity/Memo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/entity/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/entity/Todo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/entity/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/entity/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/hander/MyMateObjectHander.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/hander/MyMateObjectHander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/hander/MyPasswordEncoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/hander/MyPasswordEncoder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/interceptors/JWTInterceptors.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/interceptors/JWTInterceptors.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/mapper/MemoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/mapper/MemoMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/mapper/TodoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/mapper/TodoMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ryw/mapper/UsersMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ryw/mapper/UsersMapper.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +61,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -63,6 +89,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -105,6 +132,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.MP_V2_Application">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FinalprojectApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="finalproject" />
       <extension name="coverage">
@@ -170,12 +208,48 @@
       </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <module name="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <module name="" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -328,6 +402,20 @@
       <workItem from="1683790221919" duration="22000" />
       <workItem from="1683791123694" duration="1865000" />
       <workItem from="1690013802270" duration="40000" />
+      <workItem from="1705287568975" duration="5000" />
+      <workItem from="1705290962637" duration="33000" />
+      <workItem from="1705292478595" duration="1472000" />
+      <workItem from="1705376405114" duration="375000" />
+      <workItem from="1705629441969" duration="62000" />
+      <workItem from="1705888373182" duration="796000" />
+      <workItem from="1705890867853" duration="1363000" />
+      <workItem from="1705973117742" duration="1483000" />
+      <workItem from="1706062752620" duration="631000" />
+      <workItem from="1706232636699" duration="1249000" />
+      <workItem from="1706668001890" duration="2278000" />
+      <workItem from="1708229685010" duration="107000" />
+      <workItem from="1708230624165" duration="1244000" />
+      <workItem from="1708311710520" duration="1218000" />
     </task>
     <servers />
   </component>
@@ -344,12 +432,47 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1170" height="184" key="GridCell.Tab.0.bottom" timestamp="1705376781251">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.0.bottom/0.38.1512.944@0.38.1512.944" timestamp="1705376781251" />
+    <state width="1170" height="184" key="GridCell.Tab.0.center" timestamp="1705376781250">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.0.center/0.38.1512.944@0.38.1512.944" timestamp="1705376781250" />
+    <state width="1170" height="184" key="GridCell.Tab.0.left" timestamp="1705376781250">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.0.left/0.38.1512.944@0.38.1512.944" timestamp="1705376781250" />
+    <state width="1170" height="184" key="GridCell.Tab.0.right" timestamp="1705376781250">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.0.right/0.38.1512.944@0.38.1512.944" timestamp="1705376781250" />
+    <state width="1170" height="184" key="GridCell.Tab.1.bottom" timestamp="1705376781252">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.1.bottom/0.38.1512.944@0.38.1512.944" timestamp="1705376781252" />
+    <state width="1170" height="184" key="GridCell.Tab.1.center" timestamp="1705376781251">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.1.center/0.38.1512.944@0.38.1512.944" timestamp="1705376781251" />
+    <state width="1170" height="184" key="GridCell.Tab.1.left" timestamp="1705376781251">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.1.left/0.38.1512.944@0.38.1512.944" timestamp="1705376781251" />
+    <state width="1170" height="184" key="GridCell.Tab.1.right" timestamp="1705376781252">
+      <screen x="0" y="38" width="1512" height="944" />
+    </state>
+    <state width="1170" height="184" key="GridCell.Tab.1.right/0.38.1512.944@0.38.1512.944" timestamp="1705376781252" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

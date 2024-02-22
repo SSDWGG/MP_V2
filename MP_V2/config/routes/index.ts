@@ -220,29 +220,13 @@
         component: './admin/allUser',
       },
       {
-        component: './404',
-      },
-    ],
-  },
-  // 音乐
-  {
-    name: 'music',
-    icon: 'CheckCircleOutlined',
-    path: '/music',
-    routes: [
-      {
-        path: '/music',
-        redirect: '/music/list',
-      },
-      {
-        name: 'musiclist',
+        path: '/admin/mpmUploadOSS',
+        name: 'mpmUploadOSS',
         icon: 'smile',
-        path: '/music/list',
-        component: './music/list',
+        component: './admin/mpmUploadOSS',
       },
-      // 匹配不到路径自动跳转404
       {
-        component: '404',
+        component: './404',
       },
     ],
   },

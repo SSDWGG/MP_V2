@@ -1,6 +1,7 @@
 export default {
   'menu.admin': '管理员',
   'menu.admin.allUser': '账号管理',
+  'menu.admin.mpmUploadOSS': 'oss图片手动上传',
 
   'menu.toCreate': 'create & show',
 
@@ -14,9 +15,6 @@ export default {
   'menu.socket': 'socket',
   'menu.socket.room': '聊天室',
   'menu.socket.socketTest': '叮一下',
-
-  'menu.music': '音乐播放器',
-  'menu.music.musiclist': '音乐库',
 
   'menu.login': '登录',
   'menu.register': '注册',
