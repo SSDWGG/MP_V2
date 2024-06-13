@@ -20,7 +20,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
                         "/v2/user/avatarUpload","/v2/black/queryByUserid","/v2/memo/memoCoverUpload",
 //                        邮箱验证放行
                         "/v2/code/sendEmail","/v2/code/testCode","/v2/user/updatePasswordByEmail"
-
                 );  // 放行
 //                .excludePathPatterns("/**");  // 放行
     }

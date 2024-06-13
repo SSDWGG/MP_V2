@@ -6,9 +6,6 @@ import { FCNams } from '../const';
 import { Info } from '@/util/info';
 
 const ListFC: React.FC = () => {
-
-
-
   return (
     <>
       <Card className={styles.ListFC}>
