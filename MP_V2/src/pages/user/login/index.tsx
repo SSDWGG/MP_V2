@@ -38,7 +38,7 @@ const Login: React.FC = () => {
         message.success('登录成功！正在为您跳转主页...');
         // refresh(); 切换账号登录，主动刷新intistate内容
         // 接入socket
-        let socket = await openSocket(userInfo.userid);
+        const socket = await openSocket(userInfo.userid);
         await setInitialState((s) => ({
           ...s,
           currentUser: userInfo,
@@ -100,7 +100,7 @@ const Login: React.FC = () => {
     };
     //获得消息事件
     socket.onmessage = function (msg: any) {
-      let data = JSON.parse(msg.data);
+      const data = JSON.parse(msg.data);
       notification.open({
         message: `编号${data.userId.substring(data.userId.length - 4)}向您发来一条新消息~`,
         description: `${data.content}`,
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
           className="login__form"
           form={form}
           onFinish={onFinish}
-          initialValues={{ protocolChecked: false }}
+          initialValues={{ protocolChecked: false,username:"test",password:"Test123456" }}
         >
           <Form.Item
             className="ryw-login-item"
